@@ -5,11 +5,13 @@ summary: "순전파와 역전파의 계산을 통해, 가중치의 최적화 과
 author: Keonhee
 date: '2025-07-29 16:20:00 +0900'
 category: 순전파와 역전파
-thumbnail: /assets/img/posts/propagation1.png
+#thumbnail: /assets/img/posts/propagation1.png
 keywords: 딥러닝
 permalink: /blog/propagation/
 usemathjax: true
 ---
+
+![순전파 역전파 그림]('/assets/img/posts/propagation1.png'){: width="50%"}
 
 초기값:
 <div style="text-align: left;">
