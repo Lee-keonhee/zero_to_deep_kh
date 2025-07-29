@@ -10,8 +10,7 @@ keywords: 딥러닝
 permalink: /blog/propagation/
 usemathjax: true
 ---
-
-![순전파 역전파 그림]('/assets/img/posts/propagation1.png'){: width="50%"}
+<img src="{{'/assets/img/posts/propagation1.png' | relative_url}}" alt="순전파 역전파 그림" width="70%" style="display: block; margin: 0 auto;">
 
 초기값:
 <div style="text-align: left;">
