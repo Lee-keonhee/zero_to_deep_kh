@@ -7,7 +7,7 @@ date: '2025-07-29 16:20:00 +0900'
 category: 순전파와 역전파
 thumbnail: /assets/img/posts/propagation.png
 keywords: 딥러닝
-permalink: zero_to_deep_kh.github.io/blog/propagation/
+permalink: /blog/propagation/
 usemathjax: true
 ---
 
