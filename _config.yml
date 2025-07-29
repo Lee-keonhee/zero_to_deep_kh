@@ -30,7 +30,7 @@ author_bio: 안녕하세요 여기는 제로투딥 AI 공부방 입니다. :D
 author_email: "dlrjsgml0315@gmail.com"
 author_location: Korea
 author_website_url: "https://zero_to_deep.github.io"
-typewrite-text: AI
+typewrite-text: AI의 기초부터 응용까지
 hero_cover_img: sample_cover.jpg # replace this for changing homepage cover (eg. try cover.jpeg). Image should be in /assets/img
 
 ## Experiences
@@ -99,6 +99,8 @@ olvy_widget_type: sidebar
 
 # syntax highlighter
 markdown: kramdown
+kramdown:
+  math_engine: mathjax
 highlighter: rouge
 permalink: pretty
 
