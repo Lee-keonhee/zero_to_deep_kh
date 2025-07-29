@@ -2,7 +2,7 @@
 layout: post
 title:  "순전파/ 역전파 예제로 이해하기"
 summary: "순전파와 역전파의 계산을 통해, 가중치의 최적화 과정 확인"
-author: Keonhee
+author: keonhee
 date: '2025-07-29 16:20:00 +0900'
 category: 순전파와 역전파
 #thumbnail: /assets/img/posts/propagation1.png

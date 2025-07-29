@@ -1,5 +1,5 @@
 ---
-name: Keonhee
+name: keonhee
 username: keonhee
 bio: "Hi I a Keonhee, an AI Engineer based in Korea."
 site: http://johndoe.com
