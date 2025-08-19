@@ -10,15 +10,6 @@ keywords: 딥러닝
 permalink: /blog/Development of CNN/
 usemathjax: true
 ---
-<img src="{{'/assets/img/posts/propagation1.png' | relative_url}}" alt="순전파 역전파 그림" width="70%" style="display: block; margin: 0 auto;">
-
-초기값:
-<div style="text-align: left;">
-\( X = \begin{pmatrix} x_1 & x_2 \end{pmatrix} = \begin{pmatrix} 0.5 & 0.3 \end{pmatrix},\quad W = \begin{pmatrix} w_1 & w_2 \\ w_3 & w_4 \\ w_5 & w_6 \end{pmatrix} = \begin{pmatrix} 0.3 & 0.2 \\ 0.2 & 0.3 \\ 0.4 & 0.5 \end{pmatrix},\quad y_1 = 0.7 \)
-</div>
-
-<br>
-
 <hr class="thick-hr">
 
 ### CNN
@@ -43,8 +34,9 @@ CNN은 MLP와 달리 이미지의 특성을 효율적으로 다루기 위해 다
 - 이미지를 1차원으로 평탄화하지 않고 직접 처리함에 따라 픽셀 간의 공간적 관계를 보존하면서 특징 맵(Feature Map)을 생성합니다.
 2. 풀링 계층 (Pooling Layer)
 - 합성곱 계층에서 생성된 특징 맵의 **크기(차원)**를 줄여 모델의 복잡도와 연산량을 감소시킵니다.
-- 특징의 대략적인 위치 정보를 유지하면서 미세한 위치 변화에도 강건한(강한) 변화 불변성을 확보하여 모델의 일반화 성능을 향상시킵니다.
-- 이 외에도 CNN은 여러 계층을 깊게 쌓아 올림으로써 저수준의 특징부터 고수준의 의미 있는 특징까지 계층적으로 학습할 수 있는 능력을 갖추게 됩니다.
+- 특징의 대략적인 위치 정보를 유지하면서 미세한 위치 변화에도 강건한(강한) 변화 불변성을 확보하여 모델의 일반화 성능을 향상시킵니다. 
+
+이 외에도 CNN은 여러 계층을 깊게 쌓아 올림으로써 저수준의 특징부터 고수준의 의미 있는 특징까지 계층적으로 학습할 수 있는 능력을 갖추게 됩니다.
 
 
 #### 가중합 계산
