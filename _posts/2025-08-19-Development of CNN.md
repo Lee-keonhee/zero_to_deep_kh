@@ -40,6 +40,7 @@ CNN 모델은 크게 두 부분으로 구성이 됩니다.
 해당 부분은 주로 여러 개의 Convolutional Layer와 Max Pooling Layer가 반복적되는 형태로 되어있으며, Batch Normalization Layer가 들어가기도 합니다.
 보통 이미지의 저수준부터 고수준까지의 특징을 추출하는 역할을 합니다.
 <br>
+<br>
 - 컨볼루션 레이어 (Convolutional Layer)
   * 역할 
   이미지에서 선, 모서리, 질감 등과 같은 다양한 **특징**들을 추출합니다. 이미지의 공간 정보를 보존하면서 특징을 학습하는 것이 강점입니다.
@@ -50,6 +51,7 @@ CNN 모델은 크게 두 부분으로 구성이 됩니다.
   * 특징
   Convolutional Layer의 경우, **Convolutional layer**, **Batch Normalization**, **Activation Function**을 포함하는 경우가 많으며, 각각 특징 추출, 출력 정규화 및 학습 안정화, 비선형성 부여의 역할을 가지고 있습니다.
 <br>
+<br>
 - 풀링 레이어 (Pooling Layer)
   * 역할
   특징 맵의 크기를 줄여(다운샘플링) 계산량을 줄이고, 과적합을 방지하며, 모델이 이미지의 미세한 변화에 덜 민감해지도록(변이 불변성) 만듭니다.
@@ -57,13 +59,16 @@ CNN 모델은 크게 두 부분으로 구성이 됩니다.
   주로 **Max Pooling**을 사용해 특정 영역의 가장 큰 값을 선택하여 특징을 압축합니다.
   * 결과물
   크기가 줄어든 새로운 특징 맵을 생성합니다.
+<br>
   <br>
 2. 분류기(Classifier)
 분류기에서는 이미 얻어진 Feature Map을 **Flatten**하여 1차원의 배열로 만들어, 기존의 MLP와 활성화함수를 이용하여 이미지를 분류합니다.
 <br>
+<br>
 - 플래튼 레이어 (Flatten Layer)
   * 역할
   특징 추출 부분에서 생성된 2차원 또는 3차원 특징 맵 데이터를 완전 연결 계층에 입력하기 위해 1차원 배열(벡터)로 변환합니다.
+<br>
 <br>
 - 완전 연결 계층 (Fully Connected Layer, Multi Layer Perceptron, FCL, MLP)
   * 역할
