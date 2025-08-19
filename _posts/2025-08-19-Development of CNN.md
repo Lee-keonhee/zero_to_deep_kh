@@ -32,7 +32,7 @@ usemathjax: true
 #### CNN 모델
 이러한 기존의 MLP의 문제점을 해결하기 위해 개발된 모델이 CNN입니다. CNN(Convolutional Neural Network)은 Convolutional Filter를 이용하여 합성곱 연산을 활용한 딥러닝 모델입니다.
 
-<img src="{{"/assets/img/posts/cnn_model_1.png" | relative_url }}" width="600" height="400" alt="CNN 모델">
+<img src="{{"/assets/img/posts/cnn_model_1.png" | relative_url }}" width="600" height="400" alt="CNN 모델" style="display: block; margin: 0 auto;>
 
 CNN은 MLP와 달리 이미지의 특성을 효율적으로 다루기 위해 다음과 같은 구성 요소들을 도입하여 이미지의 공간적 정보를 유지하면서 특징을 추출하는 방식을 사용합니다.
 CNN 모델은 크게 두 부분으로 구성이 됩니다.
