@@ -7,7 +7,7 @@ date: '2025-08-19 12:20:00 +0900'
 category: Deeplearning, CNN
 #thumbnail: /assets/img/posts/propagation1.png
 keywords: 딥러닝
-permalink: /blog/Development of CNN/
+permalink: /blog/Development_of_CNN/
 usemathjax: true
 ---
 <hr class="thick-hr">
