@@ -110,8 +110,9 @@ CNN 모델은 크게 두 부분으로 구성이 됩니다.
 ### AlexNet (2012)
  LeNet이 MNIST 손글씨 데이터를 기준으로 높은 정확도를 보였지만, 복잡한 이미지 데이터를 다루기에는 부족하였습니다. 이러한 문제점을 해결하기 위해 AlexNet이 등장하였습니다.
 AlexNet의 구조는 다음과 같습니다.
-<img src="{{"/assets/img/posts/alexnet.png" | relative_url }}" width="400" height="300" alt="alexnet 모델">
-<img src="{{"/assets/img/posts/alexnet1.png" | relative_url }}" width="400" height="300" alt="alexnet 모델">
+<br>
+<img src="{{"/assets/img/posts/alexnet.png" | relative_url }}" width="500" height="300" alt="alexnet 모델">
+<img src="{{"/assets/img/posts/alexnet1.png" | relative_url }}" width="350" height="300" alt="alexnet 모델">
 
 이러한 AlexNet은 다음과 같은 특징이 있습니다.
 - 깊은 네트워크
