@@ -112,8 +112,8 @@ CNN 모델은 크게 두 부분으로 구성이 됩니다.
 AlexNet의 구조는 다음과 같습니다.
 <br>
 <div style="display: flex; justify-content: center; gap: 20px;">
-  <img src="{{'/assets/img/posts/alexnet.png' | relative_url }}" alt="alexnet 모델" width="300">
-  <img src="{{'/assets/img/posts/alexnet1.png' | relative_url }}" alt="alexnet 모델" width="300">
+  <img src="{{'/assets/img/posts/alexnet.png' | relative_url }}" alt="alexnet 모델" width="500">
+  <img src="{{'/assets/img/posts/alexnet1.png' | relative_url }}" alt="alexnet 모델" width="400">
 </div>
 <br>
 이러한 AlexNet은 다음과 같은 특징이 있습니다.
@@ -139,3 +139,4 @@ AlexNet의 구조는 다음과 같습니다.
 
 AlexNet은 대규모 데이터셋과 GPU의 병렬연산을 통해 복잡한 이미지 데이터를 처리하는 데에 뛰어난 성능을 보일 수 있음을 증명했습니다.
 
+### VGGNet
