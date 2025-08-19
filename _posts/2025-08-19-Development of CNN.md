@@ -16,6 +16,7 @@ usemathjax: true
 
 <hr class="thick-hr">
 
+#### MLP의 한계점
 전통적인 MLP(Multi Layer Perceptron)의 경우, 여러 층의 퍼셉트론을 통해 비선형 문제를 해결할 수 있었지만, 이미지나 영상을 처리하기 위해서 몇 가지 문제점이 있었습니다. 
 <br>
 <br>
