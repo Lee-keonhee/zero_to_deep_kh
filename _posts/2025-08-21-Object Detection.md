@@ -29,20 +29,20 @@ usemathjax: true
 2. 2단계 - 후보 영역 분류 및 바운딩 박스 정제 (Classification and Refinement) : 후보 영역(RoI)에 어떤 객체가 있는지 분류하고 박스를 더욱 정확하게 확정합니다.
 
 #### 2-stage 객체 탐지의 종류
-| 모델            | 단계 | 내용 |
-|-----------------|------|------|
+| 모델            | 단계 | 내용                                                      |
+|-----------------|------|---------------------------------------------------------|
 | **R-CNN**       | 1단계 | 선택적 탐색(Selective Search) 알고리즘으로 후보 영역 추출, 각 후보를 CNN에 통과 |
-|                 | 2단계 | SVM으로 분류 + Regressor로 바운딩 박스 조정 |
-|                 | 한계  | 각 후보마다 CNN 수행 → 속도 매우 느림 |
-| **Fast R-CNN**  | 1단계 | 전체 이미지를 CNN 1번 통과 → 후보 영역 추출, ROI Pooling으로 고정 크기 특징맵 |
-|                 | 2단계 | 분류 + 바운딩 박스 회귀 동시 수행 |
-|                 | 한계  | 후보 영역 추출이 여전히 Selective Search라 느림 |
-| **Faster R-CNN**| 1단계 | RPN(Region Proposal Network)으로 후보 직접 제안 |
-|                 | 2단계 | ROI Pooling 후 분류 + 박스 refine |
-|                 | 한계  | 작은 객체 취약, 원스테이지보다 느림 |
-| **Mask R-CNN**  | 1단계 | Faster R-CNN과 동일, RPN 사용 |
-|                 | 2단계 | ROI Align 적용 → 분류 + 박스 회귀 + 마스크 예측 |
-|                 | 한계  | 인스턴스 분할 추가 → 계산량 증가, 속도 더 느림 |
+|                 | 2단계 | SVM으로 분류 + Regressor로 바운딩 박스 조정                         |
+|                 | 한계  | 각 후보마다 CNN 수행 → 속도 매우 느림                                |
+| **Fast R-CNN**  | 1단계 | 전체 이미지를 CNN 1번 통과 → 후보 영역 추출, ROI Pooling으로 고정 크기 특징맵   |
+|                 | 2단계 | 분류 + 바운딩 박스 회귀 동시 수행                                    |
+|                 | 한계  | 후보 영역 추출이 여전히 Selective Search라 느림                      |
+| **Faster R-CNN**| 1단계 | RPN(Region Proposal Network)으로 후보 직접 제안                 |
+|                 | 2단계 | ROI Pooling 후 분류 + 박스 refine                            |
+|                 | 한계  | 작은 객체 취약, 원스테이지보다 느림                                    |
+| **Mask R-CNN**  | 1단계 | Faster R-CNN과 동일, RPN 사용                                |
+|                 | 2단계 | ROI Align 적용 → 분류 + 박스 회귀 + 마스크 예측                      |
+|                 | 한계  | 인스턴스 분할 추가 → 계산량 증가, 속도 더 느림                            |
 
 
 ### Faster R-CNN
