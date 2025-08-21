@@ -24,7 +24,7 @@ usemathjax: true
 <img src="{{"/assets/img/posts/classification_objectdetection.jpg" | relative_url }}" width="600" height="400" alt="객체 탐지와 분류" style="display: block; margin: 0 auto;">
 
 이처럼 Object Detection은 물체의 위치를 Bounding box를 통해 **위치를 파악**하고 그 물체가 어떤 물체인지 **분류**를 할 수 있습니다. 또한, Object Detection은 Object의 수에 따라서 하나의 물체를 찾는 **Single-object Detection**과 여러 물체를 찾는 **Multi-object Detection**이 있습니다.
-<img src="{{"/assets/img/posts/objectdetection.png" | relative_url }}" width="600" height="400" alt="다중 객체 탐지" style="display: block; margin: 0 auto;">
+<img src="{{"/assets/img/posts/object_detection.png" | relative_url }}" width="600" height="400" alt="다중 객체 탐지" style="display: block; margin: 0 auto;">
 
 객체 탐지는 수행 방식에 따라 크게 두가지로 나눌 수 있습니다.
 1. 1-stage Object Detection
@@ -33,6 +33,7 @@ usemathjax: true
 2. 2-stage Object Detection
 2-stage Object Detection의 경우, Region proposal을 수행한 이후 Classification을 수행합니다. 순차적으로 수행함에 따라, 속도가 느리지만 정확도가 뛰어나다는 장점이 있습니다.
 
+이 중 먼저 연구가 진행이 되었던 2-stage object detection에 대해서 알아보겠습니다.
 <hr class="thin-hr">
 
 ### 2-stage object detecion
