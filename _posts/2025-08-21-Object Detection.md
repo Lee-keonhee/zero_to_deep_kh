@@ -33,7 +33,15 @@ usemathjax: true
 2. 2-stage Object Detection
 2-stage Object Detection의 경우, Region proposal을 수행한 이후 Classification을 수행합니다. 순차적으로 수행함에 따라, 속도가 느리지만 정확도가 뛰어나다는 장점이 있습니다.
 
+| 특징 | 1-스테이지 객체 탐지 (One-stage Object Detection) | 2-스테이지 객체 탐지 (Two-stage Object Detection) |
+|---|---|---|
+| **핵심 동작** | Region proposal (영역 제안)과 Classification (분류)을 동시에 수행 | Region proposal (영역 제안)을 수행한 이후 Classification (분류)을 순차적으로 수행 |
+| **장점** | 속도가 빠르며, 실시간 탐지에 유리 | 정확도가 뛰어나며, 특히 작은 객체 탐지에 강점 |
+| **단점** | 초기에는 정확도가 2-스테이지에 비해 다소 낮았음 (최근에는 많이 개선) | 속도가 느리며, 실시간 탐지에 적용하기 어려울 수 있음 |
+| **대표 모델** | - YOLO (You Only Look Once) 계열<br/>- SSD (Single Shot MultiBox Detector) | - R-CNN (Region-based CNN)<br/>- Fast R-CNN<br/>- Faster R-CNN<br/>- Mask R-CNN |
+
 이 중 먼저 연구가 진행이 되었던 2-stage object detection에 대해서 알아보겠습니다.
+
 <hr class="thin-hr">
 
 ### 2-stage object detecion
