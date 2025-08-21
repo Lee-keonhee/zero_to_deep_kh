@@ -18,6 +18,20 @@ usemathjax: true
 
 이전 시간에는, CNN과 CNN 기반의 여러 모델에 대해서 공부하고 이를 통해, 이미지의 분류를 하는 법을 알아보았습니다. 이번 시간에는, backbone 모델(데이터에서 유용한 특징을 추출하는 역할을 담당하는 네트워크)에서 추출된 Feature map을 이용하여 이미지의 객체를 탐색하는 Object Detection에 대해서 알아보겠습니다.
 
+#### 객체탐지(Object Detection)란
+객체 탐지는 컴퓨터 비전 기술의 세부 분야중 하나로써 주어진 이미지내 사용자가 관심 있는 객체를 탐지하는 기술입니다. 이전의 분류 모델들과 비교를 해보겠습니다.
+인공지능 모델이 그림 좌측의 강아지 사진을 강아지라고 판별한다면 해당 모델은 이미지 분류 모델 입니다. 하지만 우측 사진 처럼 물체가 있는 위치를 탐지함과 동시에 해당 물체가 강아지라고 분류 한다면 해당 모델은 객체 탐지 모델입니다.
+<img src="{{"/assets/img/posts/classification_objectdetection.jpg" | relative_url }}" width="600" height="400" alt="객체 탐지와 분류" style="display: block; margin: 0 auto;">
+
+이처럼 Object Detection은 물체의 위치를 Bounding box를 통해 **위치를 파악**하고 그 물체가 어떤 물체인지 **분류**를 할 수 있습니다. 또한, Object Detection은 Object의 수에 따라서 하나의 물체를 찾는 **Single-object Detection**과 여러 물체를 찾는 **Multi-object Detection**이 있습니다.
+<img src="{{"/assets/img/posts/objectdetection.png" | relative_url }}" width="600" height="400" alt="다중 객체 탐지" style="display: block; margin: 0 auto;">
+
+객체 탐지는 수행 방식에 따라 크게 두가지로 나눌 수 있습니다.
+1. 1-stage Object Detection
+1-stage Object Detection의 경우, Region proposal과 Classification을 동시에 수행합니다. 동시에 수행함에 따라, 속도가 빠르다는 장점이 있지만 정확도가 좋지 않다는 특징이 있습니다.
+<br>
+2. 2-stage Object Detection
+2-stage Object Detection의 경우, Region proposal을 수행한 이후 Classification을 수행합니다. 순차적으로 수행함에 따라, 속도가 느리지만 정확도가 뛰어나다는 장점이 있습니다.
 
 <hr class="thin-hr">
 
