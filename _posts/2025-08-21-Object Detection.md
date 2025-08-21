@@ -70,7 +70,9 @@ usemathjax: true
 
 
 ### Faster R-CNN
-여러 2스테이지 객체탐지 모델 중 가장 보편적으로 사용 되는 Faster R-CNN에 대해서 조금 더 알아보도록 하자.
+
+2단계 객체탐지 모델 중 가장 보편적으로 사용되는 Faster R-CNN에 대해서 조금 더 알아보도록 하겠습니다.
+
 
 #### 1단계 : 객체 후보 영역 제안(Region Proposal)
 
