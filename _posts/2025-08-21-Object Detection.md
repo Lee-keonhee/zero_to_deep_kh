@@ -108,7 +108,7 @@ IOU는 $$IOU = \frac{두 박스의 교집합 면적}{두 박스의 합집합 면
 
 ※ NMS란 무엇인가?
 Non-Maximum Suppression의 약자로,
-
+111
 #### 2단계: 후보 영역 분류 및 바운딩 박스 정제 (Classification and Refinement)
 이 단계의 목표는 **후보 영역에 어떤 객체가 있는지 분류하고 박스를 더욱 정확하게 확정하는 것'**입니다.
 1. ROI 풀링 (Region of Interest Pooling):
