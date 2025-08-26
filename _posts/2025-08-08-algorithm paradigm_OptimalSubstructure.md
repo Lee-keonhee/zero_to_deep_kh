@@ -20,7 +20,7 @@ Dynamic Programming - 한번 계산한 결과를 재활용하는 방식
 
 
 ### 중복되는 부분 문제 vs 중복되지 않는 부분문제
-
+중복 + 최적 구분구조 - Dynamic Programming은 두 가지 방법이 있음 - Memmoization, Tabulation
 
 ### Memmoization
 종복된 계산은 한번만 계산 후 메모함. Top-down 방식
@@ -67,7 +67,7 @@ def fib_tab(n):
     return table[n]
 ```
 
-하지만 피보나치 수를 계산하려면, 이전 두개의 숫자만 알면됨.
+하지만 피보나치 수를 계산하려면, 이전 두개의 숫자만 알면됨. 
 
 ```python
 def fib_opt(n):
@@ -78,6 +78,11 @@ def fib_opt(n):
     return current
 
 ```
+해당 방식을 통해, 공간 복잡도가 O(n)에서 O(1)로 감소함.
+
+### Tabulation과 Memmoization
+Tabulation의 경우, 아래부터 하나하나 다 계산하는 방식. 모든 계산을 다 해야함.
+Memmoization은 필요한 계산만 하게됨.
 
 최대 이득을 계산하는 문제
 ***Memoization***
