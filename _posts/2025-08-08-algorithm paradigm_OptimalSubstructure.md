@@ -7,7 +7,7 @@ date: '2025-08-08 12:20:00 +0900'
 category: 코테
 #thumbnail: /assets/img/posts/propagation1.png
 keywords: 알고리즘
-permalink: /blog/algorithm paradigm/
+permalink: /blog/AlgorithmParadigm/DynamicProgramming
 usemathjax: true
 ---
 

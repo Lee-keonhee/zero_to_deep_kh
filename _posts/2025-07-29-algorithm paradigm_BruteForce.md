@@ -1,13 +1,13 @@
 ---
 layout: post
 title:  "알고리즘 패러다임 - Brute Force"
-summary: "Brute Foce의 소개 및 예시"
+summary: "Brute Force의 소개 및 예시"
 author: keonhee
 date: '2025-07-29 16:20:00 +0900'
 category: 코테
 #thumbnail: /assets/img/posts/propagation1.png
 keywords: 알고리즘
-permalink: /blog/algorithm paradigm/
+permalink: /blog/AlgorithmParadigm/BruteForce
 usemathjax: true
 ---
 
