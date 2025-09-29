@@ -49,6 +49,7 @@ usemathjax: true
 - 스팸 메일 필터링
 - 뉴스 기사 주제 분류 (정치, 경제, 스포츠 등)
 - 고객 문의 자동 분류
+<br>
 
 ### 2. 감성 분석 (Sentiment Analysis)
 텍스트에 담긴 감정이나 의견을 분석하는 작업
@@ -57,6 +58,7 @@ usemathjax: true
 - 제품 리뷰의 긍정/부정 판단
 - 소셜 미디어 여론 분석
 - 고객 만족도 평가
+<br>
 
 ### 3. 기계 번역 (Machine Translation)
 한 언어를 다른 언어로 자동 번역하는 작업
@@ -77,6 +79,7 @@ usemathjax: true
 - 뉴스 기사 요약
 - 학술 논문 초록 생성
 - 회의록 자동 요약
+<br>
 
 ### 5. 질의응답 (Question Answering, QA)
 질문에 대한 정확한 답변을 제공하는 작업
@@ -85,6 +88,7 @@ usemathjax: true
 - 문서 기반 질의응답 (예: "이 계약서의 유효기간은?")
 - 챗봇 고객 상담
 - 검색 엔진의 직접 답변 기능
+<br>
 
 ### 6. 자연어 생성 (Natural Language Generation, NLG)
 주어진 데이터나 맥락을 기반으로 자연스러운 텍스트를 생성하는 작업
@@ -93,6 +97,7 @@ usemathjax: true
 - 자동 보고서 작성
 - 대화형 AI 챗봇
 - 상품 설명 자동 생성
+<br>
 
 ### 7. 정보 추출 (Information Extraction)
 비구조화된 텍스트에서 구조화된 정보를 추출하는 작업
@@ -114,6 +119,8 @@ usemathjax: true
 
 <img src="{{"/assets/img/posts/overview_of_NLP_2.png" | relative_url }}" width="600" height="400" alt="정보 추출 예시" style="display: block; margin: 0 auto;">
 
+<br>
+
 ### 8. 음성 인식 및 변환
 음성과 텍스트 간 상호 변환
 
@@ -125,6 +132,7 @@ usemathjax: true
 <hr class="thin-hr">
 
 ## 자연어 처리의 주요 단계
+<br>
 
 ### 1단계: 데이터 수집
 다양한 소스로부터 텍스트 데이터를 수집합니다.
@@ -134,6 +142,7 @@ usemathjax: true
 - 공개 데이터셋 활용
 - API를 통한 데이터 수집
 - 데이터베이스 쿼리
+<br>
 
 ### 2단계: 데이터 전처리
 원시 텍스트를 분석에 적합한 형태로 정제합니다.
@@ -156,6 +165,7 @@ usemathjax: true
 - **어간 추출/표제어 추출**
   - 단어를 기본 형태로 변환
   - 예: "running", "runs" → "run"
+<br>
 
 ### 3단계: 텍스트의 수치화 (임베딩)
 컴퓨터가 처리할 수 있도록 텍스트를 숫자 벡터로 변환합니다.
@@ -165,6 +175,7 @@ usemathjax: true
 - TF-IDF
 - Word2Vec, GloVe
 - BERT, GPT 등의 사전학습 모델
+<br>
 
 ### 4단계: 모델 학습 및 평가
 과제 목적에 맞는 머신러닝/딥러닝 모델을 학습시킵니다.
@@ -174,9 +185,11 @@ usemathjax: true
 - 모델 아키텍처 선택
 - 하이퍼파라미터 튜닝
 - 성능 평가 및 개선
+<br>
 
 ### 5단계: 모델 배포 및 응용
 학습된 모델을 실제 서비스나 제품에 적용합니다.
+<br>
 
 ### 전체 프로세스 예시
 
@@ -209,6 +222,8 @@ usemathjax: true
 
 <img src="{{"/assets/img/posts/overview_of_NLP_5.png" | relative_url }}" width="600" height="400" alt="규칙 기반 예시 2" style="display: block; margin: 0 auto;">
 
+<br>
+
 ### 2. 전통적 표현 방식
 
 단어의 **출현 빈도**를 기반으로 텍스트를 벡터화하는 방법입니다.
@@ -223,6 +238,7 @@ usemathjax: true
 - **원-핫 인코딩**: 단어를 이진 벡터로 표현
 - **Bag of Words (BoW)**: 단어 출현 빈도로 문서 표현
 - **TF-IDF**: 단어의 중요도를 반영한 가중치
+<br>
 
 ### 3. 임베딩 방식
 
@@ -237,6 +253,7 @@ usemathjax: true
 - **Word2Vec** (CBOW, Skip-gram)
 - **GloVe** (Global Vectors)
 - **FastText** (하위 단어 기반)
+<br>
 
 ### 4. 신경망 모델 기반 방식
 
@@ -258,6 +275,7 @@ usemathjax: true
 - **Seq2Seq**: 기계 번역, 요약
 - **Transformer**: 현대 NLP의 핵심 아키텍처
 - **BERT, GPT, T5**: 사전학습 언어 모델
+<br>
 
 <hr class="thin-hr">
 
@@ -287,6 +305,7 @@ usemathjax: true
 2. 너는 **웃으며 걸어가는** 나에게 인사했다
 
 → 어떤 구가 어디에 수식되는지에 따라 의미가 달라집니다.
+<br>
 
 ### 2. 패러프레이징: 다른 표현, 같은 의미
 
@@ -298,6 +317,7 @@ usemathjax: true
 - "1시에 비행기가 이륙합니다"
 
 → 표면적 형태는 다르지만 의미는 동일합니다. 이러한 **패러프레이징(Paraphrasing)** 된 문장들이 같은 의미임을 컴퓨터가 인식하기는 매우 어렵습니다.
+<br>
 
 ### 3. 단어 간 의미적 관계
 
@@ -351,6 +371,7 @@ usemathjax: true
 - 어간 추출이 복잡함
 - 형태소 분석기의 정확도가 중요
 - 접사/조사 조합의 다양성으로 인한 처리 어려움
+<br>
 
 ### 2. 자유로운 어순
 
@@ -368,6 +389,7 @@ usemathjax: true
 - 다음 단어 예측이 어려움
 - 고정된 문법 규칙 적용 곤란
 - 문장 구조 파싱의 복잡성
+<br>
 
 ### 3. 띄어쓰기 문제
 
