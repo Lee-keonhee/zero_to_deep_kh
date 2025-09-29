@@ -91,3 +91,29 @@ $$\text{IDF}(t) = \log\left(\frac{\text{전체 문서 수}}{\text{단어 } t \te
 - 특정 문서에만 많이 등장하는 단어에 가중치를 높힘
 - 문서 분류, 검색 엔진 등에 효과적
 
+```python
+import os
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+corpus = [
+    "I love natural language processing",
+    "I love deep learning",
+    "자연어 처리는 대단하다"
+    ]
+
+vectorizer = TfidfVectorizer()
+Tf_matrix = vectorizer.fit_transform(corpus)
+
+# print(Tf_matrix)
+df = pd.DataFrame(Tf_matrix.toarray(),columns=vectorizer.get_feature_names_out())
+print(df.head())
+```
+
+```python
+#출력
+|    |deep  | language | learning | love | natural | processing | 대단하다 | 자연어  | 처리는 |
+|----|------|----------|----------|------|---------|------------|---------|--------|-------|
+|0   |  0   |     1    |     0    |  1   |    1    |      1     |    0    |    0   |   0   |
+|1   |   1  |     0    |    1     |  1   |    0    |      0     |    0    |    0   |   0   |
+|2   |  0   |     0    |    0     |  0   |    0    |      0     |    1    |    1   |   1   |
+```

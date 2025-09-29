@@ -28,6 +28,7 @@ usemathjax: true
 
 - 원문 예시: Oh, Hi hello. Nice to meet you!!!
 - 수정 후: Oh Hi hello Nice to meet you (특수문자, 2칸이상의 공백, tab, 줄 바꿈 등 제거)
+
 ```python
 import re
 
@@ -42,11 +43,12 @@ rtext = re.sub(r'\s+', ' ', rtext)
 
 - 원문 예시: Oh, Hi hello. Nice to meet you.
 - 수정 후: oh, hi hello. nice to meet you.
+
 ```python
 text =  'Oh, Hi hello. Nice to meet you.'
 rtext = str.lower(text)
-
 ```
+
 #### C. 불필요한 단어 제거 (Stopword Removal)
 분석에 기여하지 않는 단어(감탄사, 관사, 전치사 등)나 지나치게 중복되는 단어를 제거하여 노이즈를 줄입니다.
 
@@ -58,6 +60,8 @@ rtext = str.lower(text)
 - 중복 단어 제거:
   - 원문: hello hello nice to meet you
   - 수정 후: hello nice to meet you
+
+
 
 ### 2. 토큰화 (Tokenization)
 주어진 텍스트를 모델이 처리할 수 있는 가장 작은 의미 단위인 **토큰(Token)** 으로 나누는 과정입니다.
