@@ -85,3 +85,9 @@ $$\text{TF-IDF}(t, d) = \text{TF}(t, d) \times \text{IDF}(t)$$
 $$\text{TF}(t, d) = \frac{\text{문서 } d \text{에서 단어 } t \text{의 출현 횟수}}{\text{문서 } d \text{의 총 단어 수}}$$
 
 $$\text{IDF}(t) = \log\left(\frac{\text{전체 문서 수}}{\text{단어 } t \text{를 포함하는 문서 수}}\right)$$
+
+특징 :
+- 자주 등장하지만 많은 문서에 공통적으로 많이 나타나는 단어(```the```, ```is```)의 가중치는 낮춤
+- 특정 문서에만 많이 등장하는 단어에 가중치를 높힘
+- 문서 분류, 검색 엔진 등에 효과적
+
