@@ -13,10 +13,10 @@ usemathjax: true
 <hr class="thick-hr">
 
 # 자연어 처리 개요
-<hr class="thick-hr">
+<hr class="thin-hr">
 
 ## 자연어 처리란?
-
+<hr class="thin-hr">
 언어는 크게 **인공어**와 **자연어**로 구분됩니다.
 
 - **인공어(Artificial Language)**: 특정 목적을 위해 인위적으로 설계된 언어입니다. 대표적으로 사람과 컴퓨터 간 소통을 위한 프로그래밍 언어(Python, Java 등)가 있습니다.
@@ -40,7 +40,7 @@ usemathjax: true
 <hr class="thin-hr">
 
 ## 주요 자연어 처리 Task
-<br>
+<hr class="thin-hr">
 
 ### 1. 텍스트 분류 (Text Classification)
 텍스트를 사전에 정의된 카테고리로 분류하는 작업
@@ -132,7 +132,7 @@ usemathjax: true
 <hr class="thin-hr">
 
 ## 자연어 처리의 주요 단계
-<br>
+<hr class="thin-hr">
 
 ### 1단계: 데이터 수집
 다양한 소스로부터 텍스트 데이터를 수집합니다.
@@ -198,6 +198,7 @@ usemathjax: true
 <hr class="thin-hr">
 
 ## 자연어 처리 접근 방법
+<hr class="thin-hr">
 
 ### 1. 규칙 기반 접근법 (Rule-Based Approach)
 
@@ -281,6 +282,7 @@ usemathjax: true
 
 
 ## 자연어 처리가 어려운 이유
+<hr class="thin-hr">
 
 컴퓨터가 인간의 언어를 이해하는 것은 본질적으로 어려운 문제입니다. 주요 난제들을 살펴보겠습니다.
 
@@ -343,6 +345,7 @@ usemathjax: true
 
 
 ## 한국어 자연어 처리의 추가 난제
+<hr class="thin-hr">
 
 한국어는 영어에 비해 자연어 처리가 특히 어렵습니다. 한국어만의 고유한 특성들을 살펴보겠습니다.
 
