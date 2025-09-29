@@ -1,11 +1,11 @@
 ---
 layout: post
 title:  "자연어 처리 개요(Natural Language Processing)"
-summary: "객체 탐지의 기본과 1-stage, 2-stage object detection"
+summary: "자연어 처리에 대한 설명"
 author: keonhee
 date: '2025-09-27 19:00:00 +0900'
 category: Deeplearning, NLP
-#thumbnail: /assets/img/posts/propagation1.png
+thumbnail: /assets/img/posts/overview_of_NLP_1.png
 keywords: 딥러닝
 permalink: /blog/Overview_of_NLP/
 usemathjax: true
