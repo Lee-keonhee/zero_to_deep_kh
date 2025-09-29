@@ -48,6 +48,7 @@ bird = [0,0,1]
 - 단어의 순서 정보 무시
 - 각 문서를 어휘 크기만큼의 벡터로 표현
 - 해당 단어의 출현 횟수를 벡터값으로 사용
+
 ```python
 from sklearn.feature_extraction.text import CountVectorizer
 
@@ -64,8 +65,8 @@ bow_matrix = vectorizer.fit_transform(corpus)
 import pandas as pd
 df = pd.DataFrame(bow_matrix.toarray(), columns=vectorizer.get_feature_names_out())
 df.head()
-
 ```
+
 ```md
 #출력
 |    |deep  | language | learning | love | natural | processing | 대단하다 | 자연어  | 처리는 |
