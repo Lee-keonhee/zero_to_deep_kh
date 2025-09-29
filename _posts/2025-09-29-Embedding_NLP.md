@@ -7,7 +7,7 @@ date: '2025-09-29 15:00:00 +0900'
 category: Deeplearning, NLP
 #thumbnail: /assets/img/posts/propagation1.png
 keywords: 딥러닝
-permalink: /blog/Preprocessing_NLP/
+permalink: /blog/Embedding_NL/
 usemathjax: true
 ---
 <hr class="thick-hr">
