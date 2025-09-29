@@ -10,7 +10,10 @@ keywords: 딥러닝
 permalink: /blog/Overview_of_NLP/
 usemathjax: true
 ---
+<hr class="thick-hr">
+
 # 자연어 처리 개요
+<hr class="thick-hr">
 
 ## 자연어 처리란?
 
@@ -34,9 +37,10 @@ usemathjax: true
 - **자연어 이해(NLU; Natural Language Understanding)**: 텍스트의 의미를 파악
 - **자연어 생성(NLG; Natural Language Generation)**: 새로운 텍스트를 생성
 
----
+<hr class="thin-hr">
 
 ## 주요 자연어 처리 Task
+<br>
 
 ### 1. 텍스트 분류 (Text Classification)
 텍스트를 사전에 정의된 카테고리로 분류하는 작업
@@ -118,7 +122,7 @@ usemathjax: true
 - 음성 자막 생성
 - 오디오북 제작 (TTS: Text-to-Speech)
 
----
+<hr class="thin-hr">
 
 ## 자연어 처리의 주요 단계
 
@@ -178,7 +182,7 @@ usemathjax: true
 
 <img src="{{"/assets/img/posts/overview_of_NLP_3.png" | relative_url }}" width="600" height="400" alt="자연어 처리 단계 예시" style="display: block; margin: 0 auto;">
 
----
+<hr class="thin-hr">
 
 ## 자연어 처리 접근 방법
 
@@ -255,7 +259,8 @@ usemathjax: true
 - **Transformer**: 현대 NLP의 핵심 아키텍처
 - **BERT, GPT, T5**: 사전학습 언어 모델
 
----
+<hr class="thin-hr">
+
 
 ## 자연어 처리가 어려운 이유
 
@@ -314,7 +319,8 @@ usemathjax: true
 - 상하위 관계: 동물 ⊃ 개
 - 부분-전체 관계: 손 ⊂ 신체
 
----
+<hr class="thin-hr">
+
 
 ## 한국어 자연어 처리의 추가 난제
 
@@ -384,7 +390,7 @@ usemathjax: true
 - 자동 띄어쓰기 교정이 필요
 - 띄어쓰기 교정 자체가 어려운 NLP 문제
 
----
+<hr class="thin-hr">
 
 ## 학습 방향
 
