@@ -219,9 +219,9 @@ usemathjax: true
 - 정규표현식을 이용한 이메일 주소 추출
 - 사전 기반 형태소 분석
 
-<img src="{{"/assets/img/posts/overview_of_NLP_4.png" | relative_url }}" width="800" height="400" alt="규칙 기반 예시 1" style="display: block; margin: 0 auto;">
+<img src="{{"/assets/img/posts/overview_of_NLP_4.png" | relative_url }}" width="900" height="400" alt="규칙 기반 예시 1" style="display: block; margin: 0 auto;">
 
-<img src="{{"/assets/img/posts/overview_of_NLP_5.png" | relative_url }}" width="700" height="400" alt="규칙 기반 예시 2" style="display: block; margin: 0 auto;">
+<img src="{{"/assets/img/posts/overview_of_NLP_5.png" | relative_url }}" width="700" height="300" alt="규칙 기반 예시 2" style="display: block; margin: 0 auto;">
 
 <br>
 
