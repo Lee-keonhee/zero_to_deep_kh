@@ -111,9 +111,60 @@ print(df.head())
 
 ```python
 #출력
-|    |deep  | language | learning | love | natural | processing | 대단하다 | 자연어  | 처리는 |
-|----|------|----------|----------|------|---------|------------|---------|--------|-------|
-|0   |  0   |     1    |     0    |  1   |    1    |      1     |    0    |    0   |   0   |
-|1   |   1  |     0    |    1     |  1   |    0    |      0     |    0    |    0   |   0   |
-|2   |  0   |     0    |    0     |  0   |    0    |      0     |    1    |    1   |   1   |
+|    |  deep  | language | learning |  love | natural | processing | 대단하다 | 자연어  | 처리는 |
+|----|--------|----------|----------|-------|---------|------------|---------|--------|-------|
+|0   |  0     | 0.528635 |     0    |0.40204| 0.528635|  0.528635  |    0    |    0   |   0   |
+|1   |0.622766|     0    | 0.622766 |0.47363|    0    |      0     |    0    |    0   |   0   |
+|2   |  0     |     0    |    0     |  0    |    0    |      0     |  0.5773 | 0.57735|0.57735|
+```
+
+<hr class="thick-hr">
+
+### 2.신경망 기반 임베딩
+<hr class="thin-hr">
+
+#### A. Word2Vec
+단어의 의미적 유사성을 벡터 공간에 표현하는 획기적인 방법
+핵심 아이디어: 비슷한 맥락에서 사용되는 단어는 비슷한 의미를 가진다.
+학습방식
+1. CBOW(Continuous Bag of Words)
+   - 주변 단어들로부터 중심 단어 예측
+   - 속도가 빠름
+   - 작은 데이터셋에서 효과적
+2. Skip-gram
+   - 중심 단어로부터 주변단어 예측
+   - 더 정확한 임베딩
+   - 희귀 단어 처리에 유리
+
+```python
+from gensim.models import Word2Vec
+from nltk.tokenize import word_tokenize
+
+# 문장 데이터 준비
+sentences = [
+    "I love natural language processing",
+    "Deep learning is amazing",
+    "Natural language processing uses deep learning"
+]
+
+# 토큰화
+tokenized_sentences = [word_tokenize(sent.lower()) for sent in sentences]
+
+# Word2Vec 모델 학습
+model = Word2Vec(
+    sentences=tokenized_sentences,
+    vector_size=100,  # 임베딩 차원
+    window=5,         # 컨텍스트 윈도우 크기
+    min_count=1,      # 최소 단어 빈도
+    sg=1              # 1: Skip-gram, 0: CBOW
+)
+
+# 단어 벡터 확인
+print("'language' 벡터 차원:", model.wv['language'].shape)
+print("\n'language'와 유사한 단어들:")
+print(model.wv.most_similar('language', topn=3))
+
+# 단어 간 유사도
+similarity = model.wv.similarity('natural', 'language')
+print(f"\n'natural'과 'language'의 유사도: {similarity:.4f}")
 ```
