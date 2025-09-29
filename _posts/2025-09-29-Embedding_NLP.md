@@ -67,7 +67,7 @@ df = pd.DataFrame(bow_matrix.toarray(), columns=vectorizer.get_feature_names_out
 df.head()
 ```
 
-```md
+```python
 #출력
 |    |deep  | language | learning | love | natural | processing | 대단하다 | 자연어  | 처리는 |
 |----|------|----------|----------|------|---------|------------|---------|--------|-------|
