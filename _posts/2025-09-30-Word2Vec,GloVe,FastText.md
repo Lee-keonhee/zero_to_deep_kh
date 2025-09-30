@@ -272,3 +272,109 @@ class GloVeModel(nn.Module):
         
         return prediction
 ```
+
+4. Glove 학습
+
+```python
+# 가중치 함수 f(x) 정의
+def weighting_function(x, x_max=X_max, alpha=alpha):
+    # x/x_max의 alpha 승, 단 x가 x_max보다 크면 1
+    return torch.min(torch.ones_like(x), (x / x_max) ** alpha)
+
+# 모델 인스턴스화
+model = GloVeModel(VOCAB_SIZE, EMBEDDING_DIM)
+optimizer = optim.Adagrad(model.parameters(), lr=0.05) # GloVe는 보통 Adagrad를 사용
+
+num_epochs = 100
+log_X = torch.log(X_tensor) # 미리 log(X_ij) 계산
+
+for epoch in range(1, num_epochs + 1):
+    optimizer.zero_grad()
+    
+    # 1. 모델 예측 (w_i^T * w_j + b_i + b_j)
+    predictions = model(I_tensor, J_tensor)
+    
+    # 2. 손실 항 계산 (예측 값 - log(X_ij))
+    loss_term = predictions - log_X
+    
+    # 3. 가중치 함수 계산 (f(X_ij))
+    weights = weighting_function(X_tensor)
+    
+    # 4. 최종 GloVe 손실 계산 (Weighted Squared Error)
+    loss = (weights * (loss_term ** 2)).mean()
+    
+    # 5. 역전파 및 최적화
+    loss.backward()
+    optimizer.step()
+    
+    if epoch % 10 == 0:
+        print(f"Epoch {epoch}/{num_epochs}, Loss: {loss.item():.4f}")# 가중치 함수 f(x) 정의
+def weighting_function(x, x_max=X_max, alpha=alpha):
+    # x/x_max의 alpha 승, 단 x가 x_max보다 크면 1
+    return torch.min(torch.ones_like(x), (x / x_max) ** alpha)
+
+# 모델 인스턴스화
+model = GloVeModel(VOCAB_SIZE, EMBEDDING_DIM)
+optimizer = optim.Adagrad(model.parameters(), lr=0.05) # GloVe는 보통 Adagrad를 사용
+
+num_epochs = 100
+log_X = torch.log(X_tensor) # 미리 log(X_ij) 계산
+
+for epoch in range(1, num_epochs + 1):
+    optimizer.zero_grad()
+    
+    # 1. 모델 예측 (w_i^T * w_j + b_i + b_j)
+    predictions = model(I_tensor, J_tensor)
+    
+    # 2. 손실 항 계산 (예측 값 - log(X_ij))
+    loss_term = predictions - log_X
+    
+    # 3. 가중치 함수 계산 (f(X_ij))
+    weights = weighting_function(X_tensor)
+    
+    # 4. 최종 GloVe 손실 계산 (Weighted Squared Error)
+    loss = (weights * (loss_term ** 2)).mean()
+    
+    # 5. 역전파 및 최적화
+    loss.backward()
+    optimizer.step()
+    
+    if epoch % 10 == 0:
+        print(f"Epoch {epoch}/{num_epochs}, Loss: {loss.item():.4f}")
+```
+
+5. 모델 활용: 최종 임베딩 추출
+
+```python
+# 최종 임베딩 행렬: (W + W_tilde) / 2
+final_embeddings_tensor = (model.wi.weight.data + model.wj.weight.data) / 2
+
+print("\n--- 학습 완료 후 최종 임베딩 확인 ---")
+
+# 특정 단어의 임베딩 확인
+word = "natural"
+word_index = word_to_ix[word]
+
+# Numpy로 변환하여 출력
+embedding_vector = final_embeddings_tensor[word_index].cpu().numpy()
+
+print(f"단어 '{word}'의 최종 임베딩 벡터 (처음 5차원):")
+print(embedding_vector[:5])
+
+# 임베딩 유사성 확인 (예시)
+word1 = "i"
+word2 = "love"
+
+# 단어 인덱스
+idx1 = word_to_ix[word1]
+idx2 = word_to_ix[word2]
+
+# 임베딩 벡터
+vec1 = final_embeddings_tensor[idx1]
+vec2 = final_embeddings_tensor[idx2]
+
+# 코사인 유사도 계산
+cosine_similarity = torch.nn.functional.cosine_similarity(vec1.unsqueeze(0), vec2.unsqueeze(0))
+
+print(f"\n'{word1}'와 '{word2}'의 코사인 유사도: {cosine_similarity.item():.4f}")
+```
