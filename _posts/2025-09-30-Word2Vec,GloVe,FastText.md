@@ -154,7 +154,7 @@ $$
 - $$f(X_{ij})$$ : 가중치 함수
 
 ### GloVe 학습 과정
-1. 기본 설정
+#### 1. 기본 설정
 
 ```python
 import torch
@@ -189,7 +189,7 @@ alpha = 0.75 # 가중치 함수 f(x)에서 사용하는 하이퍼파라미터
 print(f"단어 사전 크기: {VOCAB_SIZE}")
 ```
 
-2. 동시 등창 행렬(co-occurence matrix) 구성
+#### 2. 동시 등창 행렬(co-occurence matrix) 구성
 
 ```python
 # 2. 동시 등장 행렬 X 생성
@@ -231,7 +231,7 @@ J_tensor = torch.tensor(J, dtype=torch.long)
 print(f"학습에 사용할 동시 등장 쌍 개수: {len(X_tensor)}")
 ```
 
-3. Glove모델 정의
+#### 3. Glove모델 정의
 
 ```python
 class GloVeModel(nn.Module):
@@ -273,7 +273,7 @@ class GloVeModel(nn.Module):
         return prediction
 ```
 
-4. Glove 학습
+#### 4. Glove 학습
 
 ```python
 # 가중치 함수 f(x) 정의
@@ -343,7 +343,7 @@ for epoch in range(1, num_epochs + 1):
         print(f"Epoch {epoch}/{num_epochs}, Loss: {loss.item():.4f}")
 ```
 
-5. 모델 활용: 최종 임베딩 추출
+#### 5. 모델 활용: 최종 임베딩 추출
 
 ```python
 # 최종 임베딩 행렬: (W + W_tilde) / 2
