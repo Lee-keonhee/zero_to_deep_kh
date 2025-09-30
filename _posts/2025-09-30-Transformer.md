@@ -4,7 +4,7 @@ title:  "Transformer 분석"
 summary: "Transformer 모델 분석 및 정리"
 author: keonhee
 date: '2025-09-30 10:00:00 +0900'
-category: Deeplearning, NLP
+category: Deeplearning, Transformer,NLP
 #thumbnail: /assets/img/posts/propagation1.png
 keywords: 딥러닝
 permalink: /blog/Transformer/
