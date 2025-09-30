@@ -41,7 +41,7 @@ layout: default
                 {% if page == paginator.page %}
              <li class="disabled pagination-link"><span><b>{{ page }}</b></span></li>
                 {% elsif page == 1 %}
-                  <li class="pagination-link"><a href="/blog">{{ page }}</a></li>
+                  <li class="pagination-link"><a href="{{site.url}}{{site.baseurl}}/blog">{{ page }}</a></li>
                 {% else %}
                   <li class="pagination-link"><a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a></li>
                 {% endif %}
