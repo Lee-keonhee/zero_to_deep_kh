@@ -3,7 +3,7 @@ layout: post
 title:  "자연어 분류 - BiLSTM"
 summary: "BiLSTM을 활용하여 텍스트 분류하기"
 author: keonhee
-date: '2025-09-30 12:00:00 +0900'
+date: '2025-09-30 13:00:00 +0900'
 category: Deeplearning, NLP
 #thumbnail: /assets/img/posts/propagation1.png
 keywords: 딥러닝

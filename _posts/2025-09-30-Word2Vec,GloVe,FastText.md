@@ -3,7 +3,7 @@ layout: post
 title:  "분산 표현 기반 임베딩"
 summary: "Word2Vec, GloVe, FastText 임베딩 방법과 활용 코드"
 author: keonhee
-date: '2025-09-30 10:00:00 +0900'
+date: '2025-09-30 09:00:00 +0900'
 category: Deeplearning, NLP
 #thumbnail: /assets/img/posts/propagation1.png
 keywords: 딥러닝

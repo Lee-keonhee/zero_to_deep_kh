@@ -3,7 +3,7 @@ layout: post
 title:  "자연어 임베딩(Embedding_NL)"
 summary: "자연어 기본 임베딩방법"
 author: keonhee
-date: '2025-09-29 15:00:00 +0900'
+date: '2025-09-29 09:00:00 +0900'
 category: Deeplearning, NLP
 #thumbnail: /assets/img/posts/propagation1.png
 keywords: 딥러닝
