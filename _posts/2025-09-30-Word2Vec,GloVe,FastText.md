@@ -155,6 +155,7 @@ $$
 
 ### GloVe 학습 과정
 1. 기본 설정
+
 ```python
 import torch
 import torch.nn as nn
