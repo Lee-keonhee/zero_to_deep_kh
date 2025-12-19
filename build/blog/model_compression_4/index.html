@@ -1,0 +1,457 @@
+<!DOCTYPE html> <html lang=" en "><head> <meta charset="utf-8" /> <title> 모델 경량화 구현 - ZtoD </title> <meta http-equip="X-UA-Compatible" content="IE=edge" /> <meta name="viewport" content="width=device-width, initial-scale=1" /> <meta name="description" content="모델 경량화 구현(TF-Lite, Torch ao, ONNX)- 모델 경량화 구현"> <meta name="keywords" content="모델 경량화 구현, ZtoD, 경량화,경량화, 양자화"/> <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" /> <meta content="" property="fb:app_id" /> <meta content="ZtoD" property="og:site_name" /> <meta content="모델 경량화 구현" property="og:title" /> <meta content="article" property="og:type" /> <meta content="모델 경량화 구현(TF-Lite, Torch ao, ONNX)" property="og:description" /> <meta content="http://localhost:4000/blog/model_compression_4/" property="og:url" /> <meta content="2025-12-04T10:00:00+09:00" property="article:published_time" /> <meta content="http://localhost:4000/about/" property="article:author" /> <meta content="http://localhost:4000/assets/img/posts/overview_of_NLP_1.png" property="og:image" /> <meta content="경량화" property="article:section" /> <!-- Twitter Cards --> <meta name="twitter:card" content="summary" /> <meta name="twitter:site" content="@" /> <meta name="twitter:creator" content="@" /> <meta name="twitter:title" content="모델 경량화 구현" /> <meta name="twitter:url" content="http://localhost:4000/blog/model_compression_4/" /> <meta name="twitter:description" content="모델 경량화 구현(TF-Lite, Torch ao, ONNX)" /> <link rel="stylesheet" href="http://localhost:4000/zero_to_deep_kh/assets/css/main.css" /> <!-- <link rel="stylesheet" href="http://localhost:4000/zero_to_deep_kh/assets/css/custom-style.css" /> --> <link rel="stylesheet" href="http://localhost:4000/zero_to_deep_kh/assets/bower_components/lightgallery/dist/css/lightgallery.min.css" /> <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.0-beta.3/default/snipcart.css" /> <link rel="stylesheet" href="http://localhost:4000/zero_to_deep_kh/assets/bower_components/bootstrap/dist/css/bootstrap.min.css" /> <link rel="stylesheet" href="http://localhost:4000/zero_to_deep_kh/assets/bower_components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css" /> <link rel="stylesheet" href="http://localhost:4000/zero_to_deep_kh/assets/bower_components/icono/dist/icono.min.css" /> <!-- Fonts--> <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet" /> <!-- Favicon --> <link rel="icon" href="http://localhost:4000/zero_to_deep_kh/assets/img/favicon.ico" type="image/gif" sizes="16x16" /> <script> var base_url = 'http://localhost:4000/zero_to_deep_kh' ; </script> <!-- Jquery --> <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh" crossorigin="anonymous" ></script> <!-- <script src="http://localhost:4000/zero_to_deep_kh/assets/bower_components/jquery/dist/jquery.min.js"></script> --> <script src="http://localhost:4000/zero_to_deep_kh/assets/js/mode-switcher.js"></script> <script src="http://localhost:4000/zero_to_deep_kh/assets/bower_components/jquery.easing/jquery.easing.min.js"></script> <script src="http://localhost:4000/zero_to_deep_kh/assets/bower_components/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <script src="http://localhost:4000/zero_to_deep_kh/assets/bower_components/jquery-mousewheel/jquery.mousewheel.min.js"></script> <script src="http://localhost:4000/zero_to_deep_kh/assets/bower_components/ghosthunter/dist/jquery.ghostHunter.min.js"></script> <script src="http://localhost:4000/zero_to_deep_kh/assets/bower_components/lightgallery/dist/js/lightgallery-all.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/picturefill/3.0.2/picturefill.min.js"></script> <script src="http://localhost:4000/zero_to_deep_kh/assets/bower_components/imagesloaded/imagesloaded.pkgd.min.js"></script> <script src="http://localhost:4000/zero_to_deep_kh/assets/bower_components/nanobar/nanobar.min.js"></script> <script src="http://localhost:4000/zero_to_deep_kh/assets/bower_components/typewrite/dist/typewrite.min.js"></script> <script src="http://localhost:4000/zero_to_deep_kh/assets/js/search.js"></script> <script src="http://localhost:4000/zero_to_deep_kh/assets/js/on-scroll-progress.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script> <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script> <!-- for Mathjax support --> <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "AMS" } } }); </script> <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> <!-- Github Button --> <script async defer src="https://buttons.github.io/buttons.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous" ></script> <!-- &lt;!&ndash; (you can remove the below scripts but do buy me a coffee to show some support :) &ndash;&gt;--> <!--&lt;!&ndash; Maker widget &ndash;&gt;--> <!-- <script>--> <!-- (function(d, h, m) {--> <!-- var js,--> <!-- fjs = d.getElementsByTagName(h)[0];--> <!-- if (d.getElementById(m)) {--> <!-- return;--> <!-- }--> <!-- js = d.createElement(h);--> <!-- js.id = m;--> <!-- js.onload = function() {--> <!-- window.makerWidgetComInit({--> <!-- position: "left",--> <!-- widget: "ofeeof264otl2l5g-zspk40eq2gaomj2n-higi2qphmveubksi"--> <!-- });--> <!-- };--> <!-- js.src = "https://makerwidget.com/js/embed.js";--> <!-- fjs.parentNode.insertBefore(js, fjs);--> <!-- })(document, "script", "dhm");--> <!-- </script>--> <!-- &lt;!&ndash; buy me a coffeee &ndash;&gt;--> <!-- <script--> <!-- data-name="BMC-Widget"--> <!-- src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js"--> <!-- data-id="sujaykundu"--> <!-- data-description="Support me on Buy me a coffee!"--> <!-- data-message=""--> <!-- data-color="#FF813F"--> <!-- data-position="right"--> <!-- data-x_margin="10"--> <!-- data-y_margin="10"--> <!-- ></script>--> <!-- &lt;!&ndash;[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]&ndash;&gt;--> <!-- &lt;!&ndash;[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]&ndash;&gt;--> <!-- &lt;!&ndash;[if IE 8]> <html class="no-js lt-ie9"> <![endif]&ndash;&gt;--> <!-- &lt;!&ndash;[if gt IE 8]>&lt;!&ndash;> <html class="no-js"> &lt;!&ndash;<![endif]&ndash;&gt;--> <!--</head>--> <body> <nav class="navbar navbar-expand-lg fixed-top navbar-dark" id="topNav"> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" > <span class="icono-hamburger" id="navbar-hamburger"> </span> </button> <a class="navbar-brand" href="/zero_to_deep_kh/">ZtoD</a> <div class="collapse navbar-collapse" id="navbarNav"> <ul class="navbar-nav"> <li class="nav-item"> <a class="nav-link" href="http://localhost:4000/zero_to_deep_kh/" >Home</a > </li> <li class="nav-item"> <a class="nav-link" href="http://localhost:4000/zero_to_deep_kh/about" >About</a > </li> <li class="nav-item"> <a class="nav-link" href="http://localhost:4000/zero_to_deep_kh/blog" >Blog</a > </li> </ul> </div> <ul class="nav justify-content-end"> <li class="nav-item" style="margin-top:5px;"> <input class="nav-link switch theme-toggle" type="checkbox" name="checkbox" /> </li> </ul> </nav> <div id="progress-bar"></div> <div class="main-containerR"> <div class="row justify-content-center" id="blog-post-container"> <div class="col-lg-10"><article class="card" itemscope itemtype="http://schema.org/BlogPosting"> <div class="card-header"> <h1 class="post-title" itemprop="name headline">모델 경량화 구현</h1> <h4 class="post-meta">모델 경량화 구현(TF-Lite, Torch ao, ONNX)</h4> <p class="post-summary"> Posted by : <span itemprop="author" itemscope itemtype="http://schema.org/Person"> <span itemprop="name"><a href="http://localhost:4000/zero_to_deep_kh/blog/authors/keonhee">keonhee</a></span> </span > on <time datetime="2025-12-04 10:00:00 +0900" itemprop="datePublished" >Dec 4, 2025</time > </p> <span class="disqus-comment-count" data-disqus-identifier="/blog/model_compression_4/" ></span> <div class="post-categories"> Category : <a href="/zero_to_deep_kh/blog/categories/경량화" >경량화</a > </div> </div> <div class="card-body" itemprop="articleBody"> <img class="card-img-top" src="http://localhost:4000/zero_to_deep_kh/assets/img/posts/overview_of_NLP_1.png" alt="" /> <br /> <br /> <h1 id="플랫폼-별-모델-경량화">플랫폼 별 모델 경량화</h1> <h3 id="구현-양자화-플랫폼"><strong>구현 양자화 플랫폼</strong></h3> <ul> <li>TF-Lite <ul> <li>모바일 및 엣지 장치를 위한 TF의 경량 버전, tensorflow 모델에서 쉽게 양자화 가능</li> <li>동적 범위 양자화, 전체 정수 양자화, float16 양자화, 양자화 미세조정 등을 지원</li> </ul> </li> <li>Torch ao <ul> <li>pytorch의 고급 최적화 라이브러리의 일부, 파이토치 모델을 여러 방식으로 양자화</li> <li>FX/ pt2e 워크 플로우를 통해 PTQ,QAT, 동적, 가중치 전용(woq) 양자화 등을 지원</li> </ul> </li> <li>ONNX <ul> <li>프레임워크 간 모델 교환을 위한 표준 포맷</li> <li>다양한 런타임, 하드웨어로 손쉬운 배포</li> <li>onnxruntime-quantization으로 정적(QDQ/QLinear), 동적 양자화 및 float16 다운캐스트 지원</li> </ul> </li> </ul> <h2 id="tensorflowkeras-모델-경량화--">**TensorFlow(Keras) 모델 경량화 **</h2> <p>TensorFlow 자체로 개발한 Keras 모델은 TensorFlow에서 제공하는 TF-Lite 플랫폼으로 변환을 통해 양자화가 가능합니다.</p> <h3 id="모델-생성--">**모델 생성 **</h3> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>먼저 간단한 이미지 분류 케라스 모델을 생성합니다. ```python import tensorflow as tf from tensorflow.keras import layers
+</code></pre></div></div> <h1 id="mobilenetv3small-모델-활용">MobileNetV3Small 모델 활용</h1> <p>base_model = tf.keras.applications.MobileNetV3Small(input_shape=(img_height,img_width,3),<br /> include_top=False,<br /> weights=’imagenet’)</p> <p>global_pooling = layers.GlobalMaxPooling2D() #(3)<br /> bn = layers.BatchNormalization()<br /> dr = layers.Dropout(0.3)<br /> classifier = layers.Dense(4)<br /> softmax = layers.Softmax()</p> <p>inp = tf.keras.Input((img_height,img_width,3))</p> <h1 id="x--rescaleinp">x = rescale(inp)</h1> <p>x = base_model(inp)<br /> x = global_pooling(x)<br /> x = bn(x)<br /> x = dr(x)<br /> x = classifier(x)<br /> out = softmax(x)<br /> model = tf.keras.Model(inp, out, name = ‘MobileNet’)</p> <p>model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0005),<br /> loss=tf.keras.losses.SparseCategoricalCrossentropy(),<br /> metrics=[‘accuracy’])</p> <p>checkpoint_path = “./checkpoint_tf/model.weights.h5”<br /> cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path,<br /> save_weights_only=True,<br /> save_best_only = True,<br /> verbose=1)<br /> model.summary()<br /> history = model.fit(train_dataset, epochs=5, validation_data = val_ds, callbacks=[cp_callback])</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+- 출력 결과
+</code></pre></div></div> <p>Model: “MobileNet”</p> <p>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓ ┃ Layer (type) ┃ Output Shape ┃ Param # ┃ ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩ │ input_layer_2 (InputLayer) │ (None, 224, 224, 3) │ 0 │ ├─────────────────────────────────┼────────────────────────┼───────────────┤ │ MobileNetV3Small (Functional) │ (None, 7, 7, 576) │ 939,120 │ ├─────────────────────────────────┼────────────────────────┼───────────────┤ │ global_max_pooling2d │ (None, 576) │ 0 │ │ (GlobalMaxPooling2D) │ │ │ ├─────────────────────────────────┼────────────────────────┼───────────────┤ │ batch_normalization │ (None, 576) │ 2,304 │ │ (BatchNormalization) │ │ │ ├─────────────────────────────────┼────────────────────────┼───────────────┤ │ dropout (Dropout) │ (None, 576) │ 0 │ ├─────────────────────────────────┼────────────────────────┼───────────────┤ │ dense (Dense) │ (None, 4) │ 2,308 │ ├─────────────────────────────────┼────────────────────────┼───────────────┤ │ softmax (Softmax) │ (None, 4) │ 0 │ └─────────────────────────────────┴────────────────────────┴───────────────┘ Total params: 943,732 (3.60 MB)</p> <p>Trainable params: 930,468 (3.55 MB)</p> <p>Non-trainable params: 13,264 (51.81 KB)</p> <ul> <li>accuracy: 0.9813 - loss: 0.0550 - val_accuracy: 0.9811 - val_loss: 0.0736</li> </ul> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+### **모델 저장**  
+텐서플로우는 크게 3가지의 파일 형식으로 모델을 저장합니다.  
+  
+- `.h5` : 모델의 가중치와 모델 구조를 저장하는 데 사용되는 HDF5 형식, 레거시 형식으로 간주되지만 여전히 널리 사용  
+- `.keras` : 모델의 구조, 가중치, 훈련 구성(optimizer, loss 등)을 포함하며 HDF5보다 더 유연하고 확장 가능한 형식  
+- `.pb`: SavedModel 형식으로, 모델의 그래프와 가중치를 포함하며 TensorFlow Serving, TFLite, TensorFlow.js 등 다양한 환경에서 모델을 배포하고 실행하는 데 사용되는 표준 형식
+
+해당 과정에서는 단순히 TensorFlow 모델로 저장
+
+
+## 텐서 라이트 경량화
+
+텐서플로우 프레임워크로 구성되는 케라스 모델은 대표 경량화 플랫폼인 TF-Lite와의 연동성이 좋습니다.  텐서플로우의 `lite` 모듈을 활용하면 케라스 모델을 쉽게 TF-Lite 모델로 양자화 변환이 가능합니다.  
+  
+- lite 모듈의 `TFLiteConverter` 객체를 통해 기존 모델을 변환기에 탑재  
+- `convert()` 함수를 통해 변환시작, 기본 변환시 양자화 없이 플랫폼만 변환
+
+```python
+import tensorflow as tf  
+from tensorflow import lite  
+from google.colab import files  
+  
+# 저장된 모델 로드  
+model = tf.keras.models.load_model(f'{m_path}/{name}.keras')  
+  
+# 케라스 모델로 부터 TF-Lite 모델로 변환  
+converter = lite.TFLiteConverter.from_keras_model(model)  
+  
+# 양자화 없이 모델 변환  
+tflite_model = converter.convert()  
+  
+# .tflite 파일로 저장  
+with open(f'{m_path}/{name}.tflite', 'wb') as f:  
+    f.write(tflite_model)
+</code></pre></div></div> <h3 id="동적-양자화-적용">동적 양자화 적용</h3> <p>TF-Lite는 기본적으로 <u>동적 양자화 변환</u>을 지원합니다.</p> <ul> <li>TF-Lite 변환 시 가중치가 8비트 정수로 양자화 되는 기본 옵션 <code class="language-plaintext highlighter-rouge">Optimize.DEFAULT </code>설정</li> <li>양자화된 모델을 사용할땐, 부동 소수로 역 양자화 하여 연산 (입력은 float)- 양자화 되는 가중치의 타입을 <code class="language-plaintext highlighter-rouge">supported_types</code> 옵션으로 조정 가능</li> </ul> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">tensorflow</span> <span class="k">as</span> <span class="n">tf</span>  
+<span class="kn">from</span> <span class="n">tensorflow</span> <span class="kn">import</span> <span class="n">lite</span>  
+<span class="kn">from</span> <span class="n">google.colab</span> <span class="kn">import</span> <span class="n">files</span>  
+  
+<span class="c1"># 저장된 모델 로드  
+</span><span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">models</span><span class="p">.</span><span class="nf">load_model</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">m_path</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">.keras</span><span class="sh">'</span><span class="p">)</span>  
+  
+<span class="c1"># 케라스 모델로 부터 TF-Lite 모델로 변환  
+</span><span class="n">converter</span> <span class="o">=</span> <span class="n">lite</span><span class="p">.</span><span class="n">TFLiteConverter</span><span class="p">.</span><span class="nf">from_keras_model</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>  
+  
+<span class="c1"># 양자화 없이 모델 변환  
+</span><span class="n">tflite_model</span> <span class="o">=</span> <span class="n">converter</span><span class="p">.</span><span class="nf">convert</span><span class="p">()</span>  
+  
+<span class="c1"># .tflite 파일로 저장  
+</span><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">m_path</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">.tflite</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">wb</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>  
+    <span class="n">f</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">tflite_model</span><span class="p">)</span>
+</code></pre></div></div> <h4 id="동적-양자화-적용-1">동적 양자화 적용</h4> <p>TF-Lite는 기본적으로 동적 양자화 변환을 지원합니다.</p> <ul> <li>TF-Lite 변환 시 가중치가 8비트 정수로 양자화 되는 기본 옵션 <code class="language-plaintext highlighter-rouge">Optimize.DEFAULT </code>설정</li> <li>양자화된 모델을 사용할땐, 부동 소수로 역 양자화 하여 연산 (입력은 float)</li> <li>양자화 되는 가중치의 타입을 <code class="language-plaintext highlighter-rouge">supported_types</code> 옵션으로 조정 가능</li> </ul> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">models</span><span class="p">.</span><span class="nf">load_model</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">m_path</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">.keras</span><span class="sh">'</span><span class="p">)</span>  
+<span class="n">converter</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">lite</span><span class="p">.</span><span class="n">TFLiteConverter</span><span class="p">.</span><span class="nf">from_keras_model</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>  
+  
+<span class="c1"># 기본 학습후 동적 양자화  
+</span><span class="n">converter</span><span class="p">.</span><span class="n">optimizations</span> <span class="o">=</span> <span class="p">[</span><span class="n">tf</span><span class="p">.</span><span class="n">lite</span><span class="p">.</span><span class="n">Optimize</span><span class="p">.</span><span class="n">DEFAULT</span><span class="p">]</span>  
+<span class="c1"># 양자화 타입 변경  
+# converter.target_spec.supported_types = [tf.float16]  
+</span>  
+<span class="c1"># 모델 변환  
+</span><span class="n">tflite_model</span> <span class="o">=</span> <span class="n">converter</span><span class="p">.</span><span class="nf">convert</span><span class="p">()</span>  
+  
+<span class="c1"># Save the model.  
+</span><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">m_path</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">_dq.tflite</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">wb</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>  
+    <span class="n">f</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">tflite_model</span><span class="p">)</span>
+</code></pre></div></div> <h4 id="정적-양자화-적용">정적 양자화 적용</h4> <p>정적 양자화를 위해선 Calibration(보정)을 위한 데이터세트가 필요합니다.</p> <ul> <li>활성화 값까지 전부 양자화를 진행하기 위해서는 실제 데이터가 입력됬을때의 범위를 보정</li> <li>보정을 위한 대표 데이터 세트를 <code class="language-plaintext highlighter-rouge">representative_dataset</code> 에 입력</li> </ul> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 보정을 위한 데이터세트 제공 함수  
+</span><span class="k">def</span> <span class="nf">representative_dataset</span><span class="p">():</span>  
+    <span class="c1"># 모델의 입력 레이어 이름  
+</span>    <span class="n">input_name</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">inputs</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">name</span>  
+    <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">val_ds</span><span class="p">.</span><span class="nf">take</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>  
+        <span class="c1"># 입력 레이어 이름과 이미지 데이터를 매핑하는 딕셔너리 형태로 yield.        yield {input_name: data[0]}  
+</span>  
+  
+<span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">models</span><span class="p">.</span><span class="nf">load_model</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">m_path</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">.keras</span><span class="sh">'</span><span class="p">)</span>  
+  
+<span class="n">converter</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">lite</span><span class="p">.</span><span class="n">TFLiteConverter</span><span class="p">.</span><span class="nf">from_keras_model</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>  
+<span class="n">converter</span><span class="p">.</span><span class="n">optimizations</span> <span class="o">=</span> <span class="p">[</span><span class="n">tf</span><span class="p">.</span><span class="n">lite</span><span class="p">.</span><span class="n">Optimize</span><span class="p">.</span><span class="n">DEFAULT</span><span class="p">]</span>  
+  
+<span class="c1"># 데이터세트 제공 함수를 입력  
+</span><span class="n">converter</span><span class="p">.</span><span class="n">representative_dataset</span> <span class="o">=</span> <span class="n">representative_dataset</span>  
+  
+<span class="c1"># # 입출력의 타입까지 INT8로 고정  
+# converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]  
+# converter.inference_input_type  = tf.int8  
+# converter.inference_output_type = tf.int8  
+</span>  
+<span class="c1"># 연산자 옵션 (최신 모델에서 활용)  
+</span><span class="n">converter</span><span class="p">.</span><span class="n">target_spec</span><span class="p">.</span><span class="n">supported_ops</span> <span class="o">=</span> <span class="p">[</span>  
+    <span class="n">tf</span><span class="p">.</span><span class="n">lite</span><span class="p">.</span><span class="n">OpsSet</span><span class="p">.</span><span class="n">TFLITE_BUILTINS</span><span class="p">,</span> <span class="c1"># enable LiteRT ops.  
+</span>    <span class="n">tf</span><span class="p">.</span><span class="n">lite</span><span class="p">.</span><span class="n">OpsSet</span><span class="p">.</span><span class="n">SELECT_TF_OPS</span>    <span class="c1"># enable TensorFlow ops.  
+</span><span class="p">]</span>  
+  
+<span class="c1"># 최신 변환 로직과 최적화 기법을 적용 (최신 모델에서 활용)  
+</span><span class="n">converter</span><span class="p">.</span><span class="n">experimental_new_converter</span> <span class="o">=</span> <span class="bp">True</span>  
+  
+<span class="n">tflite_quant_model</span> <span class="o">=</span> <span class="n">converter</span><span class="p">.</span><span class="nf">convert</span><span class="p">()</span>  
+  
+<span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">m_path</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">_sq.tflite</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">wb</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>  
+    <span class="n">f</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">tflite_quant_model</span><span class="p">)</span>
+</code></pre></div></div> <h2 id="파이토치-모델-경량화">파이토치 모델 경량화</h2> <p>파이토치 모델은 내부적으로 양자화 가능한 <code class="language-plaintext highlighter-rouge">torch ao</code> 모듈을 활용하거나, <code class="language-plaintext highlighter-rouge">ONNX</code> 플랫폼을 활용하여 양자화 가능합니다.</p> <ul> <li> <p><code class="language-plaintext highlighter-rouge">torch ao</code>: PyTorch의 공식 양자화 API 및 기능 모음으로, 주로 PyTorch 환경 내에서 모델을 학습, 변환, 실행하는 데 사용</p> </li> <li> <p><code class="language-plaintext highlighter-rouge">onnx</code>: 서로 다른 딥러닝 프레임워크 간에 모델을 이동시킬 수 있도록 설계된 개방형 표준 포맷으로 양자화 변환을 지원</p> </li> </ul> <h3 id="모델-생성">모델 생성</h3> <p>파이토치를 활용하여 간단한 이미지 분류 모델이 존재한다고 가정하자.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">os</span>
+<span class="kn">import</span> <span class="n">torch</span>
+<span class="kn">import</span> 
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">m_path</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">.pt</span><span class="sh">'</span><span class="p">,</span> <span class="n">weights_only</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">print_size_of_model</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>  
+    <span class="n">torch</span><span class="p">.</span><span class="nf">save</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="nf">state_dict</span><span class="p">(),</span> <span class="sh">"</span><span class="s">temp.pt</span><span class="sh">"</span><span class="p">)</span>  
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Size (MB):</span><span class="sh">"</span><span class="p">,</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">getsize</span><span class="p">(</span><span class="sh">"</span><span class="s">temp.pt</span><span class="sh">"</span><span class="p">)</span><span class="o">/</span><span class="mf">1e6</span><span class="p">)</span>  
+    <span class="n">os</span><span class="p">.</span><span class="nf">remove</span><span class="p">(</span><span class="sh">"</span><span class="s">temp.pt</span><span class="sh">"</span><span class="p">)</span>
+
+</code></pre></div></div> <h4 id="동적-양자화-eager-mode">동적 양자화 (Eager Mode)</h4> <p>동적 양자화는 Eager Mode Quantization 방식을 적용하여 간단하게 구현 가능하지만, 주로 일반 nn.Linear 모듈에만 호환이 되므로 CNN 구조의 모델에서는 효율성이 떨어집니다.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">torch.ao.quantization</span> <span class="kn">import</span> <span class="n">quantize_dynamic</span>  
+<span class="kn">from</span> <span class="n">torch</span> <span class="kn">import</span> <span class="n">nn</span>  
+<span class="kn">import</span> <span class="n">time</span>  
+  
+<span class="n">model</span><span class="p">.</span><span class="nf">to</span><span class="p">(</span><span class="sh">'</span><span class="s">cpu</span><span class="sh">'</span><span class="p">)</span>  
+  
+<span class="n">qmodel</span> <span class="o">=</span> <span class="nf">quantize_dynamic</span><span class="p">(</span>  
+    <span class="n">model</span><span class="p">,</span>  
+    <span class="p">{</span><span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">,</span> <span class="n">nn</span><span class="p">.</span><span class="n">Conv2d</span><span class="p">},</span>        <span class="c1"># 동적 양자화는 주로 선형레이어에만 적용  
+</span>    <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="n">qint8</span>              <span class="c1"># 가중치 int8, 활성은 런타임에 동적 스케일링 
+</span><span class="p">)</span>                                  <span class="c1"># qint는 양자화 시에만 사용
+</span><span class="nf">print</span><span class="p">(</span><span class="n">qmodel</span><span class="p">)</span>      <span class="c1"># nn.quantized.dynamic.Linear 로 바뀐 것 확인
+</span></code></pre></div></div> <blockquote> <p>Conv2dNormActivation 과 같은 복합 모듈은 양자화 적용이 안됨</p> </blockquote> <h4 id="동적-양자화-torchao">동적 양자화 (torchao)</h4> <p>torchao 모듈의 quantize_ 함수를 활용하여 가중치를 직접 동적 양자화가 가능합니다. 해당 방법 또한 기본 토치 모듈에만 적용이 되므로 복합 모듈를 가진 구조에서는 효율성이 떨어집니다.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">torchao.quantization</span> <span class="kn">import</span> <span class="n">quantize_</span><span class="p">,</span> <span class="n">Int8DynamicActivationInt8WeightConfig</span>  
+<span class="kn">import</span> <span class="n">copy</span>  
+  
+<span class="n">model_dq</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="nf">deepcopy</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>  
+<span class="nf">quantize_</span><span class="p">(</span><span class="n">model_dq</span><span class="p">,</span> <span class="nc">Int8DynamicActivationInt8WeightConfig</span><span class="p">())</span>  
+<span class="nf">print</span><span class="p">(</span><span class="n">model_dq</span><span class="p">)</span>
+</code></pre></div></div> <blockquote> <p>Linear 모듈의 weight가 LinearActivationQuantizedTensor로 변환</p> </blockquote> <h4 id="정적-양자화-fx-graph">정적 양자화 (FX Graph)</h4> <p>FX Graph Mode Quantization 방식을 활용하면 추적을 통한 그래프를 생성해 컨볼루션, 활성화 모듈 및 여려 모듈이 합쳐진 복합 모듈도 파악해 양자화가 가능합니다.</p> <p>이때 정적 양자화를 위해선 켈리브레이션 과정을 추가합니다.</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>백엔드 엔진 설정 -&gt; QConfig(양자화 옵션) 설정 -&gt; prepare_fx (양자화 준비)  
+-&gt; 캘리브레이션 (관측기를 통해 범위 측정) -&gt; convert_fx (최종 양자 변환)
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">torch</span><span class="p">,</span> <span class="n">torchvision</span>  
+<span class="kn">from</span> <span class="n">torch.ao.quantization</span> <span class="kn">import</span> <span class="n">QConfigMapping</span><span class="p">,</span> <span class="n">get_default_qconfig</span>  
+<span class="kn">from</span> <span class="n">torch.ao.quantization.quantize_fx</span> <span class="kn">import</span> <span class="n">prepare_fx</span><span class="p">,</span> <span class="n">convert_fx</span>  
+  
+<span class="n">model</span><span class="p">.</span><span class="nf">to</span><span class="p">(</span><span class="sh">'</span><span class="s">cpu</span><span class="sh">'</span><span class="p">).</span><span class="nf">eval</span><span class="p">()</span>  
+  
+<span class="c1"># 백엔진 설정 (x86/서버면 x86, 모바일/ARM이면 qnnpack)torch.backends.quantized.engine = "x86"  
+</span>  
+<span class="n">example</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">)</span>  
+  
+<span class="c1"># QConfig (전역 동일하게 주는 게 안전)  
+</span><span class="n">qconfig</span> <span class="o">=</span> <span class="nf">get_default_qconfig</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">backends</span><span class="p">.</span><span class="n">quantized</span><span class="p">.</span><span class="n">engine</span><span class="p">)</span>  
+<span class="n">qmap</span> <span class="o">=</span> <span class="nc">QConfigMapping</span><span class="p">().</span><span class="nf">set_global</span><span class="p">(</span><span class="n">qconfig</span><span class="p">)</span>  
+  
+<span class="c1"># 준비(관측기 삽입 + 모듈 융합 + 추적 그래프 생성)  
+</span><span class="n">prepared</span> <span class="o">=</span> <span class="nf">prepare_fx</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">qmap</span><span class="p">,</span> <span class="n">example</span><span class="p">)</span>  
+  
+<span class="c1"># 캘리브레이션 (대표 데이터 몇 배치 통과)  
+</span><span class="k">with</span> <span class="n">torch</span><span class="p">.</span><span class="nf">inference_mode</span><span class="p">():</span>  
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>  
+        <span class="k">for</span> <span class="n">images</span><span class="p">,</span> <span class="n">labels</span> <span class="ow">in</span> <span class="n">val_loader</span><span class="p">:</span>  
+            <span class="n">outputs</span> <span class="o">=</span> <span class="nf">prepared</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>  
+  
+<span class="c1"># 변환  
+</span><span class="n">fx_model</span> <span class="o">=</span> <span class="nf">convert_fx</span><span class="p">(</span><span class="n">prepared</span><span class="p">)</span>  
+<span class="nf">print</span><span class="p">(</span><span class="n">fx_model</span><span class="p">)</span>
+</code></pre></div></div> <blockquote> <p>복합 모듈 또한 양자화가 된것을 확인 하지만, 모바일넷과 같이 복잡한 연산(Depthwise Conv, ReLU6)을 포함하는 모델은 FX Graph 방식에서도 성능저하가 크게 일어날 수 있습니다.</p> </blockquote> <h4 id="정적-양자화-pt2e">정적 양자화 (PT2E)</h4> <p>torchao 모듈에 있는 pt2e는 pytorch의 내보내기 기반으로 양자화를 수행하는 방법으로 최근에 활발하게 개발이 되고있어, 복합 모듈과 복잡한 연산에서의 성능도 보장합니다.</p> <p>기존 FX에서 그래프 추적 방식과는 다르게 Python 바이트코드 레벨에서 분석하여 구조를 파악하여, 더 복잡한 Python 제어 흐름을 효과적으로 처리할 수 있게 해줍니다.</p> <p>pt2e는 대표적으로 X86, XNNPACK, XPU, OpenVINO 등의 백엔드 엔진을 사용합니다.</p> <blockquote> <p>XNNPACK을 사용하기 위해선 executorch 모듈이 설치되어있어야 합니다. XNNPACK은 모바일넷과 같이 복잡한 CNN 구조에 최적화 되어있습니다.</p> </blockquote> <p>torch.export 모델(ExportedProgram) 생성 -&gt; 백엔드 준비 -&gt; prepare_pt2e (양자화 준비)<br /> -&gt; 캘리브레이션 -&gt; convert_pt2e (최종 양자화)</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">torchao.quantization.pt2e.quantize_pt2e</span> <span class="kn">import</span> <span class="n">prepare_pt2e</span><span class="p">,</span> <span class="n">convert_pt2e</span>  
+<span class="kn">from</span> <span class="n">executorch.backends.xnnpack.quantizer.xnnpack_quantizer</span> <span class="kn">import</span> <span class="p">(</span>  
+  <span class="n">get_symmetric_quantization_config</span><span class="p">,</span>  
+  <span class="n">XNNPACKQuantizer</span><span class="p">,</span>  
+<span class="p">)</span>  
+<span class="kn">from</span> <span class="n">torch.export</span> <span class="kn">import</span> <span class="n">Dim</span>  
+  
+  
+<span class="n">model</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">m_path</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">.pt</span><span class="sh">'</span><span class="p">,</span> <span class="n">weights_only</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>  
+  
+<span class="n">model</span><span class="p">.</span><span class="nf">to</span><span class="p">(</span><span class="sh">'</span><span class="s">cpu</span><span class="sh">'</span><span class="p">).</span><span class="nf">eval</span><span class="p">()</span>  
+  
+<span class="c1"># 동적배치 처리시 더미 입력 배치가 2이상  
+</span><span class="n">example_input</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="sh">'</span><span class="s">cpu</span><span class="sh">'</span><span class="p">)</span>  
+  
+<span class="c1"># export (ExportedProgram는 일반 GraphModule에 비해 많은 정보를 담음)  
+</span>  
+<span class="n">dynamic_shapes</span> <span class="o">=</span> <span class="p">{</span><span class="sh">"</span><span class="s">x</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="nc">Dim</span><span class="p">(</span><span class="sh">"</span><span class="s">batch</span><span class="sh">"</span><span class="p">)}}</span> <span class="c1"># 동적 배치 처리  
+</span><span class="n">export_model</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">export</span><span class="p">.</span><span class="nf">export</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="p">(</span><span class="n">example_input</span><span class="p">,),</span>  
+                                   <span class="n">dynamic_shapes</span><span class="o">=</span><span class="n">dynamic_shapes</span><span class="p">,</span>  
+                                   <span class="n">strict</span><span class="o">=</span><span class="bp">True</span> <span class="c1"># 엄격 모드 활성화(TorchDynamo)  
+</span>                                   <span class="p">).</span><span class="nf">module</span><span class="p">()</span>  
+  
+<span class="c1"># 양자화를 위한 백엔드 준비  
+# depthwise 아키텍처에서는 per-channel 옵션을 활성화 하여 qconfig 세팅  
+</span><span class="n">qconfig</span> <span class="o">=</span> <span class="nf">get_symmetric_quantization_config</span><span class="p">(</span>  
+    <span class="n">is_per_channel</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>  <span class="c1"># 가중치 per-channel quantization)  
+</span><span class="n">quantizer</span> <span class="o">=</span> <span class="nc">XNNPACKQuantizer</span><span class="p">().</span><span class="nf">set_global</span><span class="p">(</span><span class="n">qconfig</span><span class="p">)</span>  
+  
+<span class="c1"># export 모델과 백엔드를 입력하여 양자화 준비  
+</span><span class="n">pt2e_model</span> <span class="o">=</span> <span class="nf">prepare_pt2e</span><span class="p">(</span><span class="n">export_model</span><span class="p">,</span> <span class="n">quantizer</span><span class="p">)</span>  
+  
+<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">prepare =&gt; calibration</span><span class="sh">'</span><span class="p">)</span>  
+<span class="c1"># 캘리브레이션 (대표 데이터 몇 배치 통과)  
+</span><span class="k">with</span> <span class="n">torch</span><span class="p">.</span><span class="nf">inference_mode</span><span class="p">():</span>  
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>  
+        <span class="k">for</span> <span class="n">images</span><span class="p">,</span> <span class="n">labels</span> <span class="ow">in</span> <span class="n">val_loader</span><span class="p">:</span>  
+            <span class="n">outputs</span> <span class="o">=</span> <span class="nf">pt2e_model</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>  
+  
+<span class="c1"># 최종 양자화 변환  
+</span><span class="n">pt2e_model</span> <span class="o">=</span> <span class="nf">convert_pt2e</span><span class="p">(</span><span class="n">pt2e_model</span><span class="p">)</span>
+</code></pre></div></div> <blockquote> <p>Depthwise Convolution은 각 채널의 가중치(필터)가 독립적으로 학습되므로, 채널별로 범위을 책정하는 양자화 방식을 적용 실제 pt2e는 양자화를 위한 제로포인트와 스케일을 구축하지만, 기존 가중치 타입은 Float32 타입으로 유지하고 실제 런타임에서 양자화를 수행합니다.</p> </blockquote> <h3 id="executorch-내보내기">ExecuTorch 내보내기</h3> <p><code class="language-plaintext highlighter-rouge">torch ao</code> 의 pt2e 양자화는 다양한 최신 아키텍처 모델에서도 양자화가 잘 진행되지만, 실질적으로 INT8 타입등으로 바뀐 가중치를 가지지 않습니다.</p> <p>ExecuTorch는 모바일 및 엣지 등의 장치에서 토치모델의 온디바이스 배포를 위한 런타임 라이브러리로, pt2e 모델을 직접 양자화 하여 저장하고 런타임을 구성할 수 있습니다.</p> <ul> <li><code class="language-plaintext highlighter-rouge">torch.export</code>로 내보내진 모델을 <a href="https://docs.pytorch.org/executorch/stable/backends-overview.html">다양한 백엔드</a> 설정과 함께 <code class="language-plaintext highlighter-rouge">.pte</code> 파일로 변환</li> <li>pt2e로 양자화 정보를 가진 모델은 변환시 가중치가 양자화 되어 INT8등의 양자 타입으로 저장</li> </ul> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">from</span> <span class="n">executorch.backends.xnnpack.partition.xnnpack_partitioner</span> <span class="kn">import</span> <span class="n">XnnpackPartitioner</span>  
+<span class="kn">from</span> <span class="n">executorch.exir</span> <span class="kn">import</span> <span class="n">to_edge_transform_and_lower</span>  
+<span class="kn">from</span> <span class="n">torch.export</span> <span class="kn">import</span> <span class="n">Dim</span><span class="p">,</span> <span class="n">export</span>  
+  
+<span class="c1"># 동적 배치를 위한 예시 입력은 2개 이상 샘플로  
+</span><span class="n">inputs</span> <span class="o">=</span> <span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">224</span><span class="p">,</span><span class="mi">224</span><span class="p">),)</span>  
+  
+<span class="c1"># 동적 배치  
+</span><span class="n">dynamic_shapes</span> <span class="o">=</span> <span class="p">{</span><span class="sh">"</span><span class="s">x</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="nc">Dim</span><span class="p">(</span><span class="sh">"</span><span class="s">batch</span><span class="sh">"</span><span class="p">)}}</span>  
+  
+<span class="c1"># 파이토치 내보내기  
+</span><span class="n">exported_program</span> <span class="o">=</span> <span class="nf">export</span><span class="p">(</span><span class="n">pt2e_model</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">dynamic_shapes</span><span class="o">=</span> <span class="n">dynamic_shapes</span><span class="p">)</span>  
+  
+<span class="c1"># export 된 모델을 백엔드 설정과 함께 executorch로 변환  
+</span><span class="n">executorch_program</span> <span class="o">=</span> <span class="nf">to_edge_transform_and_lower</span><span class="p">(</span>  
+    <span class="n">exported_program</span><span class="p">,</span>  
+    <span class="n">partitioner</span> <span class="o">=</span> <span class="p">[</span><span class="nc">XnnpackPartitioner</span><span class="p">()]</span>  
+<span class="p">).</span><span class="nf">to_executorch</span><span class="p">()</span>  
+  
+<span class="c1"># pte 파일로 저장  
+</span><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">m_path</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">_pt2e.pte</span><span class="sh">'</span><span class="p">,</span> <span class="sh">"</span><span class="s">wb</span><span class="sh">"</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>  
+    <span class="nb">file</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">executorch_program</span><span class="p">.</span><span class="nb">buffer</span><span class="p">)</span>
+</code></pre></div></div> <h2 id="onnx로-변환">ONNX로 변환</h2> <p>ONNX는 다양한 딥러닝 프레임워크간 변환 뿐만 아니라, 다양한 프레임워크의 모델을 통합하여 독립적인 배포 환경을 구축할 수 있는 플랫폼 입니다.</p> <p>Pytorch, Tensorflow 등 프레임워크로 구성한 각각의 모델을 ONNX 런타임 환경에서 실행 가능한 <code class="language-plaintext highlighter-rouge">.onnx</code> 파일로 변환할 수 있으며, 변환된 onnx 모델을 독자적으로 양자화 하는 기능도 제공합니다.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">onnx</span> <span class="n">onnxscript</span>
+</code></pre></div></div> <h3 id="파이토치-onnx-내보내기">파이토치 ONNX 내보내기</h3> <p>파이토치는 내부적으로 <code class="language-plaintext highlighter-rouge">onnx</code> 모듈을 제공하고 <code class="language-plaintext highlighter-rouge">export()</code> 함수를 통해 쉽게 ONNX 모델로 저장 가능합니다</p> <ul> <li><code class="language-plaintext highlighter-rouge">onnx</code> 모듈 설치</li> <li>모델에 입력될 더미 데이터 생성</li> <li>모델과 더미 데이터를 <code class="language-plaintext highlighter-rouge">export()</code> 함수에 입력</li> </ul> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">torch</span>  
+<span class="kn">from</span> <span class="n">torch.export</span> <span class="kn">import</span> <span class="n">Dim</span><span class="p">,</span> <span class="n">export</span>  
+  
+<span class="c1"># 동적 배치를 위한 예시 입력은 2개 이상 샘플로  
+</span><span class="n">inputs</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">224</span><span class="p">,</span><span class="mi">224</span><span class="p">)</span>  
+  
+<span class="c1"># 동적 배치  
+</span><span class="n">dynamic_shapes</span> <span class="o">=</span> <span class="p">{</span><span class="sh">"</span><span class="s">x</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="nc">Dim</span><span class="p">(</span><span class="sh">"</span><span class="s">batch</span><span class="sh">"</span><span class="p">)}}</span>  
+  
+<span class="c1"># 모델을 평가 모드로 설정  
+</span><span class="n">model</span><span class="p">.</span><span class="nf">eval</span><span class="p">().</span><span class="nf">to</span><span class="p">(</span><span class="sh">'</span><span class="s">cpu</span><span class="sh">'</span><span class="p">)</span>  
+  
+<span class="c1"># PyTorch 모델을 ONNX 형식으로 변환 및 저장  
+</span><span class="n">torch</span><span class="p">.</span><span class="n">onnx</span><span class="p">.</span><span class="nf">export</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>   <span class="c1"># 파이토치 모델  
+</span>                  <span class="n">inputs</span><span class="p">,</span>              <span class="c1"># 더미 입력 데이터  
+</span>                  <span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">m_path</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">.onnx</span><span class="sh">'</span><span class="p">,</span>     <span class="c1"># 모델 출력 경로  
+</span>                  <span class="n">opset_version</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span>         <span class="c1"># onnx opset 버전  
+</span>                  <span class="n">input_names</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">x</span><span class="sh">"</span><span class="p">],</span>  
+                  <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">],</span>  
+                  <span class="n">dynamic_axes</span><span class="o">=</span><span class="p">{</span>  
+                      <span class="sh">"</span><span class="s">x</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="sh">"</span><span class="s">batch</span><span class="sh">"</span><span class="p">},</span>  
+                      <span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="sh">'</span><span class="s">batch</span><span class="sh">'</span><span class="p">},</span>  
+                      <span class="p">},</span>  
+                  <span class="p">)</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">onnx</span>  
+<span class="n">onnx_path</span> <span class="o">=</span> <span class="sh">"</span><span class="s">model/torch_flower.onnx</span><span class="sh">"</span>  
+<span class="n">onnx_model</span> <span class="o">=</span> <span class="n">onnx</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="n">onnx_path</span><span class="p">)</span>  
+<span class="n">graph</span> <span class="o">=</span> <span class="n">onnx_model</span><span class="p">.</span><span class="n">graph</span>  
+  
+<span class="c1"># 변환된 onnx 모델의 가중치 타입을 출력  
+</span><span class="k">for</span> <span class="n">initializer</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">.</span><span class="n">initializer</span><span class="p">:</span>  
+    <span class="n">dtype</span> <span class="o">=</span> <span class="n">onnx</span><span class="p">.</span><span class="n">TensorProto</span><span class="p">.</span><span class="n">DataType</span><span class="p">.</span><span class="nc">Name</span><span class="p">(</span><span class="n">initializer</span><span class="p">.</span><span class="n">data_type</span><span class="p">)</span>  
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Name: </span><span class="si">{</span><span class="n">initializer</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">, Data Type: </span><span class="si">{</span><span class="n">dtype</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div> <h3 id="onnx에서-양자화">ONNX에서 양자화</h3> <p>onnx로 변환된 모델은 <code class="language-plaintext highlighter-rouge">onnxruntime</code> 모듈에 포함된 <code class="language-plaintext highlighter-rouge">quantization</code> 모듈에서 양자화가 가능합니다.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">onnxruntime</span>
+</code></pre></div></div> <h4 id="동적-양자화">동적 양자화</h4> <p><code class="language-plaintext highlighter-rouge">quantize_dynamic</code> 함수를 통해 가중치에 대해 기본적인 동적 양자화가 가능합니다.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">onnxruntime</span>  
+<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>  
+<span class="n">onnx_path</span> <span class="o">=</span> <span class="sh">"</span><span class="s">model/torch_flower.onnx</span><span class="sh">"</span>  
+  
+<span class="c1"># InferenceSession 생성 (기본 CPU)ort_session = onnxruntime.InferenceSession(onnx_path)  
+</span>  
+<span class="c1"># # providers를 제공하여 CUDA 설정 가능  
+# onnxruntime.InferenceSession(onnx_path,  
+#                              providers=['CUDAExecutionProvider', 'CPUExecutionProvider'])  
+</span>  
+<span class="c1"># 입출력 서명 가져오기  
+</span><span class="nf">print</span><span class="p">(</span><span class="n">ort_session</span><span class="p">.</span><span class="nf">get_inputs</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>  
+<span class="nf">print</span><span class="p">(</span><span class="n">ort_session</span><span class="p">.</span><span class="nf">get_outputs</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>  
+  
+  
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">).</span><span class="nf">astype</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">float32</span><span class="p">)</span>  
+<span class="n">y</span> <span class="o">=</span> <span class="n">ort_session</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="p">{</span><span class="sh">'</span><span class="s">x</span><span class="sh">'</span><span class="p">:</span> <span class="n">x</span><span class="p">})[</span><span class="mi">0</span><span class="p">]</span>  
+<span class="nf">print</span><span class="p">(</span><span class="n">y</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>   <span class="c1"># (2, 4) 나오면 성공
+</span></code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">onnx</span>  
+<span class="kn">from</span> <span class="n">onnxruntime.quantization</span> <span class="kn">import</span> <span class="n">quantize_dynamic</span><span class="p">,</span> <span class="n">QuantType</span>  
+<span class="kn">from</span> <span class="n">onnxruntime.quantization.shape_inference</span> <span class="kn">import</span> <span class="n">quant_pre_process</span>  
+<span class="kn">import</span> <span class="n">os</span>  
+  
+<span class="c1"># 이전에 저장한 FLOAT 타입 ONNX 모델 경로  
+</span><span class="n">name</span> <span class="o">=</span> <span class="sh">'</span><span class="s">onnx_flower</span><span class="sh">'</span>  
+<span class="n">onnx_model_path</span> <span class="o">=</span> <span class="sh">'</span><span class="s">model/torch_flower.onnx</span><span class="sh">'</span>  
+  
+<span class="c1"># 양자화된 모델을 저장할 경로  
+</span><span class="n">quantized_model_path</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">m_path</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">_dq.onnx</span><span class="sh">'</span>  
+  
+<span class="c1"># 동적 양자화 수행 (가중치만 INT8로 양자화)  
+</span><span class="nf">quantize_dynamic</span><span class="p">(</span>  
+    <span class="n">onnx_model_path</span><span class="p">,</span>  
+    <span class="n">quantized_model_path</span><span class="p">,</span>  
+    <span class="n">weight_type</span><span class="o">=</span><span class="n">QuantType</span><span class="p">.</span><span class="n">QInt8</span><span class="p">,</span> <span class="c1"># 가중치를 INT8로 양자화  
+</span><span class="p">)</span>  
+  
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Quantized model saved to: </span><span class="si">{</span><span class="n">quantized_model_path</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  
+  
+<span class="c1"># 양자화된 모델 파일 크기 확인  
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Original model size: </span><span class="si">{</span><span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">getsize</span><span class="p">(</span><span class="n">onnx_model_path</span><span class="p">)</span><span class="o">/</span><span class="mf">1e6</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s"> MB</span><span class="sh">"</span><span class="p">)</span>  
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Quantized model size: </span><span class="si">{</span><span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">getsize</span><span class="p">(</span><span class="n">quantized_model_path</span><span class="p">)</span><span class="o">/</span><span class="mf">1e6</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s"> MB</span><span class="sh">"</span><span class="p">)</span>  
+  
+<span class="c1"># 저장된 동적 양자화 모델의 가중치 타입 확인  
+</span><span class="n">onnx_model_static</span> <span class="o">=</span> <span class="n">onnx</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="n">quantized_model_path</span><span class="p">)</span>  
+<span class="n">graph_static</span> <span class="o">=</span> <span class="n">onnx_model_static</span><span class="p">.</span><span class="n">graph</span>  
+  
+<span class="k">for</span> <span class="n">initializer</span> <span class="ow">in</span> <span class="n">graph_static</span><span class="p">.</span><span class="n">initializer</span><span class="p">:</span>  
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Name: </span><span class="si">{</span><span class="n">initializer</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">, Data Type: </span><span class="si">{</span><span class="n">onnx</span><span class="p">.</span><span class="n">TensorProto</span><span class="p">.</span><span class="n">DataType</span><span class="p">.</span><span class="nc">Name</span><span class="p">(</span><span class="n">initializer</span><span class="p">.</span><span class="n">data_type</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div> <h4 id="정적-양자화">정적 양자화</h4> <p><code class="language-plaintext highlighter-rouge">quantize_static</code> 함수와 <code class="language-plaintext highlighter-rouge">CalibrationDataReader</code>을 구축하여 활성화까지 정적 양자화 가능합니다.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">onnx</span>  
+<span class="kn">import</span> <span class="n">onnxruntime</span>  
+<span class="kn">from</span> <span class="n">onnxruntime.quantization</span> <span class="kn">import</span> <span class="n">quantize_static</span><span class="p">,</span> <span class="n">QuantType</span>  
+<span class="kn">import</span> <span class="n">os</span>  
+<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>  
+<span class="kn">import</span> <span class="n">torch</span>  
+  
+<span class="c1"># Calibration Data Reader 클래스 정의  
+</span><span class="k">class</span> <span class="nc">DataReader</span><span class="p">(</span><span class="n">onnxruntime</span><span class="p">.</span><span class="n">quantization</span><span class="p">.</span><span class="n">CalibrationDataReader</span><span class="p">):</span>  
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">data_loader</span><span class="p">):</span>  
+        <span class="n">self</span><span class="p">.</span><span class="n">data_loader</span> <span class="o">=</span> <span class="n">data_loader</span>  
+        <span class="n">self</span><span class="p">.</span><span class="n">enum_data_loader</span> <span class="o">=</span> <span class="nf">iter</span><span class="p">(</span><span class="n">data_loader</span><span class="p">)</span>  
+  
+    <span class="k">def</span> <span class="nf">get_next</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>  
+        <span class="k">try</span><span class="p">:</span>  
+            <span class="c1"># ONNX Runtime은 NumPy 배열을 입력으로 받습니다.  
+</span>            <span class="n">images</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="nf">next</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">enum_data_loader</span><span class="p">)</span>  
+            <span class="n">input_feed</span> <span class="o">=</span> <span class="p">{</span><span class="sh">"</span><span class="s">x</span><span class="sh">"</span><span class="p">:</span> <span class="n">images</span><span class="p">.</span><span class="nf">numpy</span><span class="p">()}</span>  
+            <span class="k">return</span> <span class="n">input_feed</span>  
+        <span class="k">except</span> <span class="nb">StopIteration</span><span class="p">:</span>  
+            <span class="k">return</span> <span class="bp">None</span>  
+  
+<span class="c1"># 이전에 저장한 FLOAT 타입 ONNX 모델 경로  
+</span><span class="n">onnx_model_path</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">m_path</span><span class="si">}</span><span class="s">/torch_flower.onnx</span><span class="sh">'</span>  
+  
+<span class="c1"># 양자화된 모델을 저장할 경로  
+</span><span class="n">quantized_model_path_static</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">m_path</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">_sq.onnx</span><span class="sh">'</span>  
+  
+<span class="c1"># Calibration Data Reader 인스턴스 생성  
+</span><span class="n">data_reader</span> <span class="o">=</span> <span class="nc">DataReader</span><span class="p">(</span><span class="n">val_loader</span><span class="p">)</span>  
+  
+  
+<span class="c1"># 정적 양자화 수행  
+</span><span class="nf">quantize_static</span><span class="p">(</span>  
+    <span class="n">onnx_model_path</span><span class="p">,</span>  
+    <span class="n">quantized_model_path_static</span><span class="p">,</span>  
+    <span class="n">data_reader</span><span class="p">,</span>  <span class="c1"># CalibrationDataReader  
+</span>    <span class="n">weight_type</span><span class="o">=</span><span class="n">QuantType</span><span class="p">.</span><span class="n">QInt8</span><span class="p">,</span> <span class="c1"># 가중치를 INT8로 양자화  
+</span>    <span class="n">activation_type</span><span class="o">=</span><span class="n">QuantType</span><span class="p">.</span><span class="n">QInt8</span> <span class="c1"># 활성화를 INT8로 양자화  
+</span><span class="p">)</span>  
+  
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Statically quantized model saved to: </span><span class="si">{</span><span class="n">quantized_model_path_static</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  
+  
+<span class="c1"># 양자화된 모델 파일 크기 확인 (선택 사항)  
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Original model size: </span><span class="si">{</span><span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">getsize</span><span class="p">(</span><span class="n">onnx_model_path</span><span class="p">)</span><span class="o">/</span><span class="mf">1e6</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s"> MB</span><span class="sh">"</span><span class="p">)</span>  
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Statically quantized model size: </span><span class="si">{</span><span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">getsize</span><span class="p">(</span><span class="n">quantized_model_path_static</span><span class="p">)</span><span class="o">/</span><span class="mf">1e6</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s"> MB</span><span class="sh">"</span><span class="p">)</span>  
+  
+<span class="c1"># 저장된 정적 양자화 모델의 가중치 타입 확인  
+</span><span class="n">onnx_model_static</span> <span class="o">=</span> <span class="n">onnx</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="n">quantized_model_path_static</span><span class="p">)</span>  
+<span class="n">graph_static</span> <span class="o">=</span> <span class="n">onnx_model_static</span><span class="p">.</span><span class="n">graph</span>  
+  
+<span class="k">for</span> <span class="n">initializer</span> <span class="ow">in</span> <span class="n">graph_static</span><span class="p">.</span><span class="n">initializer</span><span class="p">:</span>  
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Name: </span><span class="si">{</span><span class="n">initializer</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">, Data Type: </span><span class="si">{</span><span class="n">onnx</span><span class="p">.</span><span class="n">TensorProto</span><span class="p">.</span><span class="n">DataType</span><span class="p">.</span><span class="nc">Name</span><span class="p">(</span><span class="n">initializer</span><span class="p">.</span><span class="n">data_type</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div> <blockquote> <p>ONNX 양자화는 모바일넷 같은 복잡한 구조((ReLU6, depthwise conv)를 가진 모델에서 성능저하가 크다</p> </blockquote> <h3 id="onnx-모델을-tensorrt로">ONNX 모델을 TensorRT로</h3> <p>tensorrt 라이브러리를 활용하여 onnx로부터 그래프를 파싱하는 방식으로 onnx -&gt; tensorrt 변환이 가능합니다.</p> <p>이때 컴퓨터 환경의 CUDA 버전에 맞게 tensorrt를 설치해야 하며, 다음 경로구성과 같이 onnx 파일의 부모 경로에 onnx.data 파일이 구성되어야 합니다.</p> <p><strong>ONNX 경로 구성</strong></p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>current-working-directory    
+├── model    
+│   └── model.onnx    
+└── model.onnx.data
+</code></pre></div></div> <p><code class="language-plaintext highlighter-rouge">!pip install tensorrt-cu12</code></p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">tensorrt</span> <span class="k">as</span> <span class="n">trt</span>  
+<span class="kn">import</span> <span class="n">os</span>  
+  
+<span class="n">m_path</span> <span class="o">=</span> <span class="sh">'</span><span class="s">model</span><span class="sh">'</span>  
+<span class="n">name</span> <span class="o">=</span> <span class="sh">'</span><span class="s">torch_flower</span><span class="sh">'</span>  
+  
+<span class="n">onnx_file_path</span><span class="o">=</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">m_path</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">.onnx</span><span class="sh">'</span>  
+<span class="n">engine_file_path</span><span class="o">=</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">m_path</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">.plan</span><span class="sh">'</span>  
+  
+<span class="c1"># 로거 생성 (TensorRT 메시지 출력)  
+</span><span class="n">TRT_LOGGER</span> <span class="o">=</span> <span class="n">trt</span><span class="p">.</span><span class="nc">Logger</span><span class="p">(</span><span class="n">trt</span><span class="p">.</span><span class="n">Logger</span><span class="p">.</span><span class="n">VERBOSE</span><span class="p">)</span>  
+<span class="c1"># 명시적 배치 설정  
+</span><span class="n">EXPLICIT_BATCH</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="nb">int</span><span class="p">)(</span><span class="n">trt</span><span class="p">.</span><span class="n">NetworkDefinitionCreationFlag</span><span class="p">.</span><span class="n">EXPLICIT_BATCH</span><span class="p">)</span>  
+  
+<span class="c1"># 빌더 및 네트워크 생성  
+</span><span class="n">builder</span> <span class="o">=</span> <span class="n">trt</span><span class="p">.</span><span class="nc">Builder</span><span class="p">(</span><span class="n">TRT_LOGGER</span><span class="p">)</span>  
+<span class="n">network</span> <span class="o">=</span> <span class="n">builder</span><span class="p">.</span><span class="nf">create_network</span><span class="p">(</span><span class="n">EXPLICIT_BATCH</span><span class="p">)</span>  
+  
+<span class="c1"># 빌더 config 생성  
+</span><span class="n">config</span> <span class="o">=</span> <span class="n">builder</span><span class="p">.</span><span class="nf">create_builder_config</span><span class="p">()</span>  
+  
+<span class="c1"># 워크스페이스 메모리 설정 (GPU 메모리 사용량 제한)  
+</span><span class="n">max_workspace_size_gb</span> <span class="o">=</span> <span class="mi">16</span>  
+<span class="n">config</span><span class="p">.</span><span class="nf">set_memory_pool_limit</span><span class="p">(</span><span class="n">trt</span><span class="p">.</span><span class="n">MemoryPoolType</span><span class="p">.</span><span class="n">WORKSPACE</span><span class="p">,</span> <span class="n">max_workspace_size_gb</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">30</span><span class="p">))</span>  
+  
+<span class="c1"># FP16 경량화 가능  
+</span><span class="n">config</span><span class="p">.</span><span class="nf">set_flag</span><span class="p">(</span><span class="n">trt</span><span class="p">.</span><span class="n">BuilderFlag</span><span class="p">.</span><span class="n">FP16</span><span class="p">)</span>  
+  
+<span class="c1"># ONNX 파서 생성  
+</span><span class="n">parser</span> <span class="o">=</span> <span class="n">trt</span><span class="p">.</span><span class="nc">OnnxParser</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="n">TRT_LOGGER</span><span class="p">)</span>  
+  
+<span class="c1"># 모델 파싱  
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">🔨 ONNX 파일 로드 및 파싱 시작: </span><span class="si">{</span><span class="n">onnx_file_path</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  
+<span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="n">onnx_file_path</span><span class="p">,</span> <span class="sh">'</span><span class="s">rb</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>  
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">parser</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="nf">read</span><span class="p">()):</span>  
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">❌ ONNX 파싱 오류:</span><span class="sh">"</span><span class="p">)</span>  
+        <span class="k">for</span> <span class="n">error</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">parser</span><span class="p">.</span><span class="n">num_errors</span><span class="p">):</span>  
+            <span class="nf">print</span><span class="p">(</span><span class="n">parser</span><span class="p">.</span><span class="nf">get_error</span><span class="p">(</span><span class="n">error</span><span class="p">))</span>  
+  
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">✅ ONNX 파싱 완료.</span><span class="sh">"</span><span class="p">)</span>  
+  
+<span class="c1"># 동적 배치 설정  
+</span><span class="n">profile</span> <span class="o">=</span> <span class="n">builder</span><span class="p">.</span><span class="nf">create_optimization_profile</span><span class="p">()</span>  
+  
+<span class="c1"># 입력 텐서의 최소, 최적, 최대 크기 정의  
+</span><span class="n">min_shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">)</span>  
+<span class="n">opt_shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">)</span>  
+<span class="n">max_shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">)</span>  
+  
+<span class="c1"># set_shape(입력 이름, 최소 크기, 최적 크기, 최대 크기)  
+</span><span class="n">profile</span><span class="p">.</span><span class="nf">set_shape</span><span class="p">(</span>  
+    <span class="sh">'</span><span class="s">x</span><span class="sh">'</span><span class="p">,</span>  
+    <span class="n">min_shape</span><span class="p">,</span>  
+    <span class="n">opt_shape</span><span class="p">,</span>  
+    <span class="n">max_shape</span>  
+<span class="p">)</span>  
+  
+<span class="c1"># 설정된 프로파일을 빌더 config에 추가  
+</span><span class="n">config</span><span class="p">.</span><span class="nf">add_optimization_profile</span><span class="p">(</span><span class="n">profile</span><span class="p">)</span>  
+  
+<span class="c1"># 최종 엔진 구축 및 컴파일  
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">TensorRT 엔진 구축 및 최적화 시작...</span><span class="sh">"</span><span class="p">)</span>  
+<span class="n">serialized_engine</span> <span class="o">=</span> <span class="n">builder</span><span class="p">.</span><span class="nf">build_serialized_network</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>  
+  
+<span class="k">if</span> <span class="n">serialized_engine</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>  
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">엔진 구축 실패.</span><span class="sh">"</span><span class="p">)</span>  
+<span class="k">else</span><span class="p">:</span>  
+    <span class="c1"># 엔진을 파일로 저장 (바이트 직렬화)  
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">엔진 직렬화 및 저장: </span><span class="si">{</span><span class="n">engine_file_path</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  
+    <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="n">engine_file_path</span><span class="p">,</span> <span class="sh">"</span><span class="s">wb</span><span class="sh">"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>  
+        <span class="n">f</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">serialized_engine</span><span class="p">)</span>
+</code></pre></div></div> <h3 id="onnx-모델을-텐서-라이트로">ONNX 모델을 텐서 라이트로</h3> <p>ONNX 모델은 <code class="language-plaintext highlighter-rouge">onnx2tf</code> 모듈을 통해 TF-Lite 형식으로 변환이 가능합니다. 이를 통해 TF-Lite의 양자화 기법을 적용시킬수 있습니다.</p> <p><strong>onnx2tf</strong></p> <ul> <li>ONNX 모델을 텐서 모델(SavedModel)로 변경하위한 onnx의 서브 모듈</li> <li>텐서 형식 뿐만 아니라 float16, int8 형식의 tflite 형식을 바로 생성 가능</li> <li>변환한 텐서 모델로 부터 직접 TF-Lite로 변경 가능</li> </ul> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>!pip install onnx2tf onnx_graphsurgeon onnxslim sng4onnx ai_edge_litert
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># onnx 모델을 .pb 모델 및 .tflite 모델로 변환
+</span><span class="err">!</span><span class="n">onnx2tf</span> <span class="o">-</span><span class="n">i</span> <span class="n">model</span><span class="o">/</span><span class="n">flower</span><span class="p">.</span><span class="n">onnx</span>
+</code></pre></div></div> <h2 id="허깅페이스-llm-양자화">허깅페이스 LLM 양자화</h2> <p>LLM 모델의 양자화는 허깅페이스 라이브러리를 활용하면 쉽게 양자화가 가능합니다.</p> <p><code class="language-plaintext highlighter-rouge">AutoModel</code>을 만들때 <code class="language-plaintext highlighter-rouge">quantization_config</code> 인자에 다양한 <a href="https://huggingface.co/docs/transformers/quantization/overview">양자화 엔진</a>을 제공하여 양자화된 모델을 가져올 수 있습니다.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">huggingface_hub</span> <span class="kn">import</span> <span class="n">notebook_login</span>  
+<span class="nf">notebook_login</span><span class="p">()</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">torch</span>  
+<span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">TorchAoConfig</span><span class="p">,</span> <span class="n">AutoModelForCausalLM</span><span class="p">,</span> <span class="n">AutoTokenizer</span>  
+<span class="kn">from</span> <span class="n">torchao.quantization</span> <span class="kn">import</span> <span class="n">Int8WeightOnlyConfig</span>  
+  
+<span class="n">quant_config</span> <span class="o">=</span> <span class="nc">Int8WeightOnlyConfig</span><span class="p">()</span>  
+<span class="n">quantization_config</span> <span class="o">=</span> <span class="nc">TorchAoConfig</span><span class="p">(</span><span class="n">quant_type</span><span class="o">=</span><span class="n">quant_config</span><span class="p">)</span>  
+  
+<span class="c1"># Load and quantize the model  
+</span><span class="n">quantized_model</span> <span class="o">=</span> <span class="n">AutoModelForCausalLM</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span>  
+    <span class="sh">"</span><span class="s">meta-llama/Llama-3.2-1B</span><span class="sh">"</span><span class="p">,</span>  
+    <span class="n">dtype</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span><span class="p">,</span>  
+    <span class="n">device_map</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span><span class="p">,</span>  
+    <span class="n">quantization_config</span><span class="o">=</span><span class="n">quantization_config</span>  
+<span class="p">)</span>  
+  
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span><span class="sh">"</span><span class="s">meta-llama/Llama-3.2-1B</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div> <br /><!--&lt;!&ndash; Load Facebook SDK for JavaScript &ndash;&gt;--> <!--<div id="fb-root"></div>--> <!--<script>--> <!-- (function(d, s, id) {--> <!-- var js,--> <!-- fjs = d.getElementsByTagName(s)[0];--> <!-- if (d.getElementById(id)) return;--> <!-- js = d.createElement(s);--> <!-- js.id = id;--> <!-- js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";--> <!-- fjs.parentNode.insertBefore(js, fjs);--> <!-- })(document, "script", "facebook-jssdk");--> <!--</script>--> <!-- <script--> <!-- async--> <!-- src="https://platform.twitter.com/widgets.js"--> <!-- charset="utf-8"--> <!--&gt;</script>--> <!--<div class="share-page">--> <!-- <p class="share-text">Share this on &rarr;</p>--> <!-- <a--> <!-- href="https://twitter.com/share?ref_src=twsrc%5Etfw"--> <!-- class="twitter-share-button"--> <!-- data-size="large"--> <!-- data-show-count="false"--> <!-- style="margin-top:5px;"--> <!-- >Tweet</a--> <!-- >--> <!-- <a--> <!-- class="fb-share-button"--> <!-- data-href="http://localhost:4000/blog/model_compression_4/"--> <!-- data-size="large"--> <!-- data-layout="button"--> <!-- >Share</a>--> <!--</div>--><!-- Author box --> </div> <div class="comments"> <script src="https://giscus.app/client.js" data-repo="sujaykundu777/devlopr-jekyll" data-repo-id="MDEwOlJlcG9zaXRvcnkxMzk1NzQ1NTY=" data-category="General" data-category-id="MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMyODk4MTky" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async> </script> </div><!-- Incomment incase you want to use Disqus <div id="disqus_thread"></div> --> </article> <script> var disqus_config = function () { this.page.url = "http://localhost:4000/blog/model_compression_4/"; /* Replace PAGE_URL with your page's canonical URL variable */ this.page.identifier = "/blog/모델 경량화 구현해보기"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */ }; (function () { /* DON'T EDIT BELOW THIS LINE */ var d = document, s = d.createElement('script'); s.src = 'https://.disqus.com/embed.js'; s.setAttribute('data-timestamp', +new Date()); (d.head || d.body).appendChild(s); })(); </script> <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a> </noscript></div> </div> <div class="row"> <div class="col-md-4"> <div class="card"> <div class="card-header">About Keonhee</div> <div class="card-body"> <p class="author_bio">안녕하세요 여기는 제로투딥 AI 공부방 입니다. :D</p><!-- Place this tag where you want the github button to render. --> <a class="github-button" href="https://github.com/Lee-keonhee/zero_to_deep_kh.github.io" data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star sujaykundu777/devlopr-jekyll on GitHub">Star</a> </div> </div> </div> <div class="col-md-4"> <div class="card"> <div class="card-header">Categories</div> <div class="card-body text-dark"> <!-- --> <!-- <div id="#프레임워크"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/프레임워크">프레임워크</a>--> <!-- </li>--> <!-- <a name="프레임워크"></a>--> <!-- --> <!-- <div id="#딥러닝기초"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/딥러닝기초">딥러닝기초</a>--> <!-- </li>--> <!-- <a name="딥러닝기초"></a>--> <!-- --> <!-- <div id="#잡동사니"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/잡동사니">잡동사니</a>--> <!-- </li>--> <!-- <a name="잡동사니"></a>--> <!-- --> <!-- <div id="#순전파_역전파"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/순전파_역전파">순전파_역전파</a>--> <!-- </li>--> <!-- <a name="순전파_역전파"></a>--> <!-- --> <!-- <div id="#코테"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/코테">코테</a>--> <!-- </li>--> <!-- <a name="코테"></a>--> <!-- --> <!-- <div id="#Deeplearning, CNN"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/Deeplearning, CNN">Deeplearning, CNN</a>--> <!-- </li>--> <!-- <a name="Deeplearning, CNN"></a>--> <!-- --> <!-- <div id="#Deeplearning, Object detection"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/Deeplearning, Object detection">Deeplearning, Object detection</a>--> <!-- </li>--> <!-- <a name="Deeplearning, Object detection"></a>--> <!-- --> <!-- <div id="#Deeplearning, NLP"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/Deeplearning, NLP">Deeplearning, NLP</a>--> <!-- </li>--> <!-- <a name="Deeplearning, NLP"></a>--> <!-- --> <!-- <div id="#Deeplearning, Transformer,NLP"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/Deeplearning, Transformer,NLP">Deeplearning, Transformer,NLP</a>--> <!-- </li>--> <!-- <a name="Deeplearning, Transformer,NLP"></a>--> <!-- --> <!-- <div id="#Deeplearning, NLP, RAG"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/Deeplearning, NLP, RAG">Deeplearning, NLP, RAG</a>--> <!-- </li>--> <!-- <a name="Deeplearning, NLP, RAG"></a>--> <!-- --> <!-- <div id="#Docker"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/Docker">Docker</a>--> <!-- </li>--> <!-- <a name="Docker"></a>--> <!-- --> <!-- <div id="#경량화"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/경량화">경량화</a>--> <!-- </li>--> <!-- <a name="경량화"></a>--> <!-- --> <!-- <div id="#웹 프레임워크"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/웹 프레임워크">웹 프레임워크</a>--> <!-- </li>--> <!-- <a name="웹 프레임워크"></a>--> <!-- --> <!-- <div id="#MCP"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/MCP">MCP</a>--> <!-- </li>--> <!-- <a name="MCP"></a>--> <!-- --> <!-- <div id="#FastAPI"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/FastAPI">FastAPI</a>--> <!-- </li>--> <!-- <a name="FastAPI"></a>--> <!-- --> <!-- <div id="#LLM"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/LLM">LLM</a>--> <!-- </li>--> <!-- <a name="LLM"></a>--> <!-- --> <ul> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/프레임워크">프레임워크</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/딥러닝기초">딥러닝기초</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/잡동사니">잡동사니</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/순전파_역전파">순전파_역전파</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/코테">코테</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/Deeplearning, CNN">Deeplearning, CNN</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/Deeplearning, Object detection">Deeplearning, Object detection</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/Deeplearning, NLP">Deeplearning, NLP</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/Deeplearning, Transformer,NLP">Deeplearning, Transformer,NLP</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/Deeplearning, NLP, RAG">Deeplearning, NLP, RAG</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/Docker">Docker</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/경량화">경량화</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/웹 프레임워크">웹 프레임워크</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/MCP">MCP</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/FastAPI">FastAPI</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/LLM">LLM</a> </li> </ul></div> </div> </div> <div class="col-md-4"> <div class="card"> <div class="card-header">Useful Links</div> <div class="card-body text-dark"> <li> <a href="http://localhost:4000/zero_to_deep_kh/">Home</a> </li> <li> <a href="http://localhost:4000/zero_to_deep_kh/about">About</a> </li> <li> <a href="http://localhost:4000/zero_to_deep_kh/blog">Blog</a> </li> </div> </div> </div> </div> </div> <div class="col-lg-12" id="newsletter_footer"><!--&lt;!&ndash; Mailchimp Newletters &ndash;&gt;--> <!--<form action=""method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>--> <!--<div id="mc_embed_signup_scroll_footer">--> <!-- <label for="mce-EMAIL_footer"> Signup for Weekly Email Newsletters :D</label>--> <!-- <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL_footer" placeholder="email address" required>--> <!-- &lt;!&ndash; real people should not fill this in and expect good things - do not remove this or risk form bot signups&ndash;&gt;--> <!-- <div style="position: absolute; left: -5000px;" aria-hidden="true">--> <!-- <input type="text" name="b_50bab1c85eae24ecfb0f68361_3a2dd721d0" tabindex="-1" value="">--> <!-- </div><br />--> <!-- <div class="clear">--> <!-- <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe_footer" class="btn btn-lg btn-success">--> <!-- </div>--> <!--</div>--> </div><footer> <p> Powered by<a href="https://github.com/sujaykundu777/devlopr-jekyll"> devlopr jekyll</a>. Hosted with <a href="https://pages.github.com">Github Pages</a>. Subscribe via <a href="/zero_to_deep_kh /feed.xml ">RSS</a> </p> </footer> <script> var options = { classname: 'progressline', id: 'my-id' }; var nanobar = new Nanobar( options ); nanobar.go( 30 ); nanobar.go( 76 ); nanobar.go(100); </script> <div hidden id="snipcart" data-api-key="Y2I1NTAyNWYtMTNkMy00ODg0LWE4NDItNTZhYzUxNzJkZTI5NjM3MDI4NTUzNzYyMjQ4NzU0"></div> <script src="https://cdn.snipcart.com/themes/v3.0.0-beta.3/default/snipcart.js" defer></script> <script> if (window.netlifyIdentity) { window.netlifyIdentity.on("init", user => { if (!user) { window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; }); } }); } </script> </body> </html>

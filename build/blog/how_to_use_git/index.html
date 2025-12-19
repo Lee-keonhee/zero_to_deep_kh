@@ -1,0 +1,263 @@
+<!DOCTYPE html> <html lang=" en "><head> <meta charset="utf-8" /> <title> git 사용 방법 정리 - ZtoD </title> <meta http-equip="X-UA-Compatible" content="IE=edge" /> <meta name="viewport" content="width=device-width, initial-scale=1" /> <meta name="description" content="git 사용법 기초- git 사용 방법 정리"> <meta name="keywords" content="git 사용 방법 정리, ZtoD, Deeplearning, NLP, RAG,딥러닝"/> <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" /> <meta content="" property="fb:app_id" /> <meta content="ZtoD" property="og:site_name" /> <meta content="git 사용 방법 정리" property="og:title" /> <meta content="article" property="og:type" /> <meta content="git 사용법 기초" property="og:description" /> <meta content="http://localhost:4000/blog/how_to_use_git/" property="og:url" /> <meta content="2025-11-25T09:00:00+09:00" property="article:published_time" /> <meta content="http://localhost:4000/about/" property="article:author" /> <meta content="http://localhost:4000/assets/img/posts/overview_of_NLP_1.png" property="og:image" /> <meta content="Deeplearning, NLP, RAG" property="article:section" /> <!-- Twitter Cards --> <meta name="twitter:card" content="summary" /> <meta name="twitter:site" content="@" /> <meta name="twitter:creator" content="@" /> <meta name="twitter:title" content="git 사용 방법 정리" /> <meta name="twitter:url" content="http://localhost:4000/blog/how_to_use_git/" /> <meta name="twitter:description" content="git 사용법 기초" /> <link rel="stylesheet" href="http://localhost:4000/zero_to_deep_kh/assets/css/main.css" /> <!-- <link rel="stylesheet" href="http://localhost:4000/zero_to_deep_kh/assets/css/custom-style.css" /> --> <link rel="stylesheet" href="http://localhost:4000/zero_to_deep_kh/assets/bower_components/lightgallery/dist/css/lightgallery.min.css" /> <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.0-beta.3/default/snipcart.css" /> <link rel="stylesheet" href="http://localhost:4000/zero_to_deep_kh/assets/bower_components/bootstrap/dist/css/bootstrap.min.css" /> <link rel="stylesheet" href="http://localhost:4000/zero_to_deep_kh/assets/bower_components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css" /> <link rel="stylesheet" href="http://localhost:4000/zero_to_deep_kh/assets/bower_components/icono/dist/icono.min.css" /> <!-- Fonts--> <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet" /> <!-- Favicon --> <link rel="icon" href="http://localhost:4000/zero_to_deep_kh/assets/img/favicon.ico" type="image/gif" sizes="16x16" /> <script> var base_url = 'http://localhost:4000/zero_to_deep_kh' ; </script> <!-- Jquery --> <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh" crossorigin="anonymous" ></script> <!-- <script src="http://localhost:4000/zero_to_deep_kh/assets/bower_components/jquery/dist/jquery.min.js"></script> --> <script src="http://localhost:4000/zero_to_deep_kh/assets/js/mode-switcher.js"></script> <script src="http://localhost:4000/zero_to_deep_kh/assets/bower_components/jquery.easing/jquery.easing.min.js"></script> <script src="http://localhost:4000/zero_to_deep_kh/assets/bower_components/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <script src="http://localhost:4000/zero_to_deep_kh/assets/bower_components/jquery-mousewheel/jquery.mousewheel.min.js"></script> <script src="http://localhost:4000/zero_to_deep_kh/assets/bower_components/ghosthunter/dist/jquery.ghostHunter.min.js"></script> <script src="http://localhost:4000/zero_to_deep_kh/assets/bower_components/lightgallery/dist/js/lightgallery-all.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/picturefill/3.0.2/picturefill.min.js"></script> <script src="http://localhost:4000/zero_to_deep_kh/assets/bower_components/imagesloaded/imagesloaded.pkgd.min.js"></script> <script src="http://localhost:4000/zero_to_deep_kh/assets/bower_components/nanobar/nanobar.min.js"></script> <script src="http://localhost:4000/zero_to_deep_kh/assets/bower_components/typewrite/dist/typewrite.min.js"></script> <script src="http://localhost:4000/zero_to_deep_kh/assets/js/search.js"></script> <script src="http://localhost:4000/zero_to_deep_kh/assets/js/on-scroll-progress.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script> <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script> <!-- for Mathjax support --> <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "AMS" } } }); </script> <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> <!-- Github Button --> <script async defer src="https://buttons.github.io/buttons.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous" ></script> <!-- &lt;!&ndash; (you can remove the below scripts but do buy me a coffee to show some support :) &ndash;&gt;--> <!--&lt;!&ndash; Maker widget &ndash;&gt;--> <!-- <script>--> <!-- (function(d, h, m) {--> <!-- var js,--> <!-- fjs = d.getElementsByTagName(h)[0];--> <!-- if (d.getElementById(m)) {--> <!-- return;--> <!-- }--> <!-- js = d.createElement(h);--> <!-- js.id = m;--> <!-- js.onload = function() {--> <!-- window.makerWidgetComInit({--> <!-- position: "left",--> <!-- widget: "ofeeof264otl2l5g-zspk40eq2gaomj2n-higi2qphmveubksi"--> <!-- });--> <!-- };--> <!-- js.src = "https://makerwidget.com/js/embed.js";--> <!-- fjs.parentNode.insertBefore(js, fjs);--> <!-- })(document, "script", "dhm");--> <!-- </script>--> <!-- &lt;!&ndash; buy me a coffeee &ndash;&gt;--> <!-- <script--> <!-- data-name="BMC-Widget"--> <!-- src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js"--> <!-- data-id="sujaykundu"--> <!-- data-description="Support me on Buy me a coffee!"--> <!-- data-message=""--> <!-- data-color="#FF813F"--> <!-- data-position="right"--> <!-- data-x_margin="10"--> <!-- data-y_margin="10"--> <!-- ></script>--> <!-- &lt;!&ndash;[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]&ndash;&gt;--> <!-- &lt;!&ndash;[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]&ndash;&gt;--> <!-- &lt;!&ndash;[if IE 8]> <html class="no-js lt-ie9"> <![endif]&ndash;&gt;--> <!-- &lt;!&ndash;[if gt IE 8]>&lt;!&ndash;> <html class="no-js"> &lt;!&ndash;<![endif]&ndash;&gt;--> <!--</head>--> <body> <nav class="navbar navbar-expand-lg fixed-top navbar-dark" id="topNav"> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" > <span class="icono-hamburger" id="navbar-hamburger"> </span> </button> <a class="navbar-brand" href="/zero_to_deep_kh/">ZtoD</a> <div class="collapse navbar-collapse" id="navbarNav"> <ul class="navbar-nav"> <li class="nav-item"> <a class="nav-link" href="http://localhost:4000/zero_to_deep_kh/" >Home</a > </li> <li class="nav-item"> <a class="nav-link" href="http://localhost:4000/zero_to_deep_kh/about" >About</a > </li> <li class="nav-item"> <a class="nav-link" href="http://localhost:4000/zero_to_deep_kh/blog" >Blog</a > </li> </ul> </div> <ul class="nav justify-content-end"> <li class="nav-item" style="margin-top:5px;"> <input class="nav-link switch theme-toggle" type="checkbox" name="checkbox" /> </li> </ul> </nav> <div id="progress-bar"></div> <div class="main-containerR"> <div class="row justify-content-center" id="blog-post-container"> <div class="col-lg-10"><article class="card" itemscope itemtype="http://schema.org/BlogPosting"> <div class="card-header"> <h1 class="post-title" itemprop="name headline">git 사용 방법 정리</h1> <h4 class="post-meta">git 사용법 기초</h4> <p class="post-summary"> Posted by : <span itemprop="author" itemscope itemtype="http://schema.org/Person"> <span itemprop="name"><a href="http://localhost:4000/zero_to_deep_kh/blog/authors/keonhee">keonhee</a></span> </span > on <time datetime="2025-11-25 09:00:00 +0900" itemprop="datePublished" >Nov 25, 2025</time > </p> <span class="disqus-comment-count" data-disqus-identifier="/blog/how_to_use_git/" ></span> <div class="post-categories"> Category : <a href="/zero_to_deep_kh/blog/categories/Deeplearning, NLP, RAG" >Deeplearning, NLP, RAG</a > </div> </div> <div class="card-body" itemprop="articleBody"> <img class="card-img-top" src="http://localhost:4000/zero_to_deep_kh/assets/img/posts/overview_of_NLP_1.png" alt="" /> <br /> <br /> <h1 id="git-완벽-가이드">Git 완벽 가이드</h1> <h2 id="목차">목차</h2> <ol> <li><a href="#git이란">Git이란?</a></li> <li><a href="#git-기본-개념">Git 기본 개념</a></li> <li><a href="#git-설치-및-초기-설정">Git 설치 및 초기 설정</a></li> <li><a href="#git-기본-명령어">Git 기본 명령어</a></li> <li><a href="#git-워크플로우">Git 워크플로우</a></li> <li><a href="#브랜치-관리">브랜치 관리</a></li> <li><a href="#충돌-해결">충돌 해결</a></li> <li><a href="#유용한-팁">유용한 팁</a></li> </ol> <hr /> <h2 id="git이란">Git이란?</h2> <p><strong>Git</strong>은 분산 버전 관리 시스템(Version Control System)입니다.</p> <h3 id="git을-사용하는-이유">Git을 사용하는 이유</h3> <ul> <li>코드 변경 이력 추적</li> <li>여러 사람과 협업 가능</li> <li>실수해도 이전 버전으로 복구 가능</li> <li>여러 기능을 동시에 개발 가능 (브랜치)</li> </ul> <hr /> <h2 id="git-기본-개념">Git 기본 개념</h2> <h3 id="저장소-repository">저장소 (Repository)</h3> <ul> <li><strong>로컬 저장소</strong>: 내 컴퓨터에 있는 Git 저장소</li> <li><strong>원격 저장소</strong>: GitHub, GitLab 등에 있는 온라인 저장소</li> </ul> <h3 id="작업-영역">작업 영역</h3> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Working Directory (작업 디렉토리)
+    ↓ git add
+Staging Area (스테이징 영역)
+    ↓ git commit
+Local Repository (로컬 저장소)
+    ↓ git push
+Remote Repository (원격 저장소)
+</code></pre></div></div> <h3 id="주요-용어">주요 용어</h3> <ul> <li><strong>commit</strong>: 변경사항을 저장소에 기록</li> <li><strong>push</strong>: 로컬 저장소의 변경사항을 원격 저장소로 업로드</li> <li><strong>pull</strong>: 원격 저장소의 변경사항을 로컬로 다운로드</li> <li><strong>clone</strong>: 원격 저장소를 로컬로 복제</li> <li><strong>branch</strong>: 독립적인 작업 공간</li> <li><strong>merge</strong>: 브랜치를 합치기</li> </ul> <hr /> <h2 id="git-설치-및-초기-설정">Git 설치 및 초기 설정</h2> <h3 id="설치-확인">설치 확인</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git <span class="nt">--version</span>
+</code></pre></div></div> <h3 id="사용자-정보-설정">사용자 정보 설정</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 이름 설정</span>
+git config <span class="nt">--global</span> user.name <span class="s2">"Your Name"</span>
+
+<span class="c"># 이메일 설정</span>
+git config <span class="nt">--global</span> user.email <span class="s2">"your.email@example.com"</span>
+
+<span class="c"># 설정 확인</span>
+git config <span class="nt">--list</span>
+</code></pre></div></div> <h3 id="기본-에디터-설정-선택사항">기본 에디터 설정 (선택사항)</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config <span class="nt">--global</span> core.editor <span class="s2">"code"</span>  <span class="c"># VS Code</span>
+git config <span class="nt">--global</span> core.editor <span class="s2">"vim"</span>   <span class="c"># Vim</span>
+</code></pre></div></div> <hr /> <h2 id="git-기본-명령어">Git 기본 명령어</h2> <h3 id="저장소-생성-및-복제">저장소 생성 및 복제</h3> <h4 id="새-저장소-생성">새 저장소 생성</h4> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git init
+</code></pre></div></div> <ul> <li>현재 디렉토리를 Git 저장소로 초기화</li> </ul> <h4 id="원격-저장소-복제">원격 저장소 복제</h4> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone &lt;repository-URL&gt;
+</code></pre></div></div> <ul> <li>원격 저장소를 로컬로 복제</li> </ul> <h3 id="기본-작업-명령어">기본 작업 명령어</h3> <h4 id="상태-확인">상태 확인</h4> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git status
+</code></pre></div></div> <ul> <li>현재 작업 상태 확인 (변경된 파일, 스테이징된 파일 등)</li> </ul> <h4 id="변경사항-추가-스테이징">변경사항 추가 (스테이징)</h4> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add &lt;파일명&gt;          <span class="c"># 특정 파일만 추가</span>
+git add <span class="nb">.</span>                <span class="c"># 모든 변경사항 추가</span>
+git add <span class="k">*</span>.js             <span class="c"># 특정 확장자 파일만 추가</span>
+</code></pre></div></div> <h4 id="커밋">커밋</h4> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git commit <span class="nt">-m</span> <span class="s2">"커밋 메시지"</span>
+</code></pre></div></div> <ul> <li>스테이징된 변경사항을 로컬 저장소에 기록</li> </ul> <h4 id="커밋-이력-확인">커밋 이력 확인</h4> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log                  <span class="c"># 전체 로그</span>
+git log <span class="nt">--oneline</span>        <span class="c"># 한 줄로 간단히</span>
+git log <span class="nt">--graph</span>          <span class="c"># 그래프 형태로</span>
+</code></pre></div></div> <h4 id="원격-저장소-연결">원격 저장소 연결</h4> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git remote add origin &lt;repository-URL&gt;
+git remote <span class="nt">-v</span>            <span class="c"># 연결된 원격 저장소 확인</span>
+</code></pre></div></div> <h4 id="푸시-업로드">푸시 (업로드)</h4> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin main     <span class="c"># main 브랜치에 푸시</span>
+git push                 <span class="c"># 기본 브랜치에 푸시</span>
+</code></pre></div></div> <h4 id="풀-다운로드">풀 (다운로드)</h4> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull                 <span class="c"># 원격 저장소의 변경사항 가져오기</span>
+git pull origin main     <span class="c"># 특정 브랜치에서 가져오기</span>
+</code></pre></div></div> <hr /> <h2 id="git-워크플로우">Git 워크플로우</h2> <h3 id="1-프로젝트-시작하기">1. 프로젝트 시작하기</h3> <h4 id="방법-a-새-프로젝트-시작">방법 A: 새 프로젝트 시작</h4> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. 프로젝트 폴더 생성</span>
+<span class="nb">mkdir </span>my-project
+<span class="nb">cd </span>my-project
+
+<span class="c"># 2. Git 저장소 초기화</span>
+git init
+
+<span class="c"># 3. 파일 생성 및 작업</span>
+<span class="nb">echo</span> <span class="s2">"# My Project"</span> <span class="o">&gt;</span> README.md
+
+<span class="c"># 4. 변경사항 추가 및 커밋</span>
+git add <span class="nb">.</span>
+git commit <span class="nt">-m</span> <span class="s2">"Initial commit"</span>
+
+<span class="c"># 5. 원격 저장소 연결 (GitHub에서 먼저 생성)</span>
+git remote add origin https://github.com/username/my-project.git
+
+<span class="c"># 6. 푸시</span>
+git push <span class="nt">-u</span> origin main
+</code></pre></div></div> <h4 id="방법-b-기존-프로젝트-복제">방법 B: 기존 프로젝트 복제</h4> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/username/project.git
+<span class="nb">cd </span>project
+</code></pre></div></div> <h3 id="2-일반적인-작업-흐름">2. 일반적인 작업 흐름</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. 최신 코드 가져오기</span>
+git pull
+
+<span class="c"># 2. 파일 수정 작업</span>
+
+<span class="c"># 3. 변경사항 확인</span>
+git status
+
+<span class="c"># 4. 변경사항 스테이징</span>
+git add <span class="nb">.</span>
+
+<span class="c"># 5. 커밋</span>
+git commit <span class="nt">-m</span> <span class="s2">"기능 추가: 로그인 페이지"</span>
+
+<span class="c"># 6. 원격 저장소에 푸시</span>
+git push
+</code></pre></div></div> <h3 id="3-협업-시-워크플로우">3. 협업 시 워크플로우</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 작업 시작 전</span>
+git pull                 <span class="c"># 최신 코드 받아오기</span>
+
+<span class="c"># 작업 수행</span>
+<span class="c"># ... 코드 수정 ...</span>
+
+<span class="c"># 커밋 및 푸시</span>
+git add <span class="nb">.</span>
+git commit <span class="nt">-m</span> <span class="s2">"변경사항 설명"</span>
+git push
+</code></pre></div></div> <hr /> <h2 id="브랜치-관리">브랜치 관리</h2> <h3 id="브랜치란">브랜치란?</h3> <p>독립적인 작업 공간으로, 새로운 기능을 개발하거나 버그를 수정할 때 사용합니다.</p> <h3 id="브랜치-기본-명령어">브랜치 기본 명령어</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 브랜치 목록 확인</span>
+git branch
+
+<span class="c"># 새 브랜치 생성</span>
+git branch feature/login
+
+<span class="c"># 브랜치 이동</span>
+git checkout feature/login
+
+<span class="c"># 브랜치 생성 + 이동 (한번에)</span>
+git checkout <span class="nt">-b</span> feature/login
+
+<span class="c"># 최신 Git에서는 switch 사용 권장</span>
+git switch feature/login
+git switch <span class="nt">-c</span> feature/new-feature
+</code></pre></div></div> <h3 id="브랜치-작업-흐름">브랜치 작업 흐름</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. 새 기능 브랜치 생성</span>
+git checkout <span class="nt">-b</span> feature/user-profile
+
+<span class="c"># 2. 작업 수행 및 커밋</span>
+git add <span class="nb">.</span>
+git commit <span class="nt">-m</span> <span class="s2">"사용자 프로필 페이지 추가"</span>
+
+<span class="c"># 3. 원격에 브랜치 푸시</span>
+git push <span class="nt">-u</span> origin feature/user-profile
+
+<span class="c"># 4. main 브랜치로 이동</span>
+git checkout main
+
+<span class="c"># 5. 브랜치 병합</span>
+git merge feature/user-profile
+
+<span class="c"># 6. 원격에 병합 결과 푸시</span>
+git push
+
+<span class="c"># 7. 브랜치 삭제 (선택사항)</span>
+git branch <span class="nt">-d</span> feature/user-profile
+git push origin <span class="nt">--delete</span> feature/user-profile
+</code></pre></div></div> <hr /> <h2 id="충돌-해결">충돌 해결</h2> <h3 id="충돌이-발생하는-경우">충돌이 발생하는 경우</h3> <ul> <li>같은 파일의 같은 부분을 여러 사람이 수정했을 때</li> <li>내가 수정한 파일을 다른 사람도 수정해서 푸시했을 때</li> </ul> <h3 id="충돌-해결-과정">충돌 해결 과정</h3> <h4 id="시나리오-내가-수정-중인데-원격에도-변경사항이-있는-경우">시나리오: 내가 수정 중인데 원격에도 변경사항이 있는 경우</h4> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. 현재 작업 임시 저장</span>
+git stash
+<span class="c"># 또는</span>
+git stash save <span class="s2">"작업 중인 내용"</span>
+
+<span class="c"># 2. 원격 변경사항 가져오기</span>
+git pull
+<span class="c"># 또는 (rebase 사용 시)</span>
+git pull <span class="nt">--rebase</span>
+
+<span class="c"># 3. 임시 저장한 작업 다시 적용</span>
+git stash pop
+
+<span class="c"># 4. 충돌 발생 시 - 충돌 파일 확인</span>
+git status
+
+<span class="c"># 5. 충돌 파일 수동 수정</span>
+<span class="c"># 에디터에서 다음과 같은 마커를 찾아 수정</span>
+<span class="c"># &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span>
+<span class="c"># 현재 브랜치의 내용</span>
+<span class="c"># =======</span>
+<span class="c"># 가져온 브랜치의 내용</span>
+<span class="c"># &gt;&gt;&gt;&gt;&gt;&gt;&gt; branch-name</span>
+
+<span class="c"># 6. 충돌 해결 후 스테이징</span>
+git add <span class="nb">.</span>
+
+<span class="c"># 7. 커밋</span>
+git commit <span class="nt">-m</span> <span class="s2">"충돌 해결"</span>
+<span class="c"># rebase 사용 시</span>
+git rebase <span class="nt">--continue</span>
+
+<span class="c"># 8. 푸시</span>
+git push
+</code></pre></div></div> <h3 id="충돌-해결-팁">충돌 해결 팁</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 충돌 파일 목록 확인</span>
+git diff <span class="nt">--name-only</span> <span class="nt">--diff-filter</span><span class="o">=</span>U
+
+<span class="c"># 충돌 내용 상세 확인</span>
+git diff
+
+<span class="c"># 충돌 해결 중 취소하고 싶을 때</span>
+git merge <span class="nt">--abort</span>      <span class="c"># merge 취소</span>
+git rebase <span class="nt">--abort</span>     <span class="c"># rebase 취소</span>
+
+<span class="c"># stash 목록 확인</span>
+git stash list
+
+<span class="c"># 특정 stash 적용</span>
+git stash apply stash@<span class="o">{</span>0<span class="o">}</span>
+
+<span class="c"># stash 삭제</span>
+git stash drop
+git stash clear        <span class="c"># 모든 stash 삭제</span>
+</code></pre></div></div> <hr /> <h2 id="유용한-팁">유용한 팁</h2> <h3 id="자주-사용하는-명령어">자주 사용하는 명령어</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 마지막 커밋 메시지 수정</span>
+git commit <span class="nt">--amend</span> <span class="nt">-m</span> <span class="s2">"새로운 커밋 메시지"</span>
+
+<span class="c"># 파일을 스테이징에서 제거 (작업 내용은 유지)</span>
+git reset HEAD &lt;파일명&gt;
+
+<span class="c"># 특정 파일의 변경사항 취소</span>
+git checkout <span class="nt">--</span> &lt;파일명&gt;
+
+<span class="c"># 마지막 커밋 취소 (작업 내용은 유지)</span>
+git reset <span class="nt">--soft</span> HEAD~1
+
+<span class="c"># 마지막 커밋 취소 (작업 내용도 삭제)</span>
+git reset <span class="nt">--hard</span> HEAD~1
+
+<span class="c"># 특정 커밋으로 되돌리기</span>
+git reset <span class="nt">--hard</span> &lt;커밋해시&gt;
+
+<span class="c"># 원격 브랜치 목록 확인</span>
+git branch <span class="nt">-r</span>
+
+<span class="c"># 모든 브랜치 확인 (로컬 + 원격)</span>
+git branch <span class="nt">-a</span>
+</code></pre></div></div> <h3 id="gitignore-파일">.gitignore 파일</h3> <p>특정 파일이나 폴더를 Git에서 무시하도록 설정</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># .gitignore 파일 생성</span>
+<span class="nb">touch</span> .gitignore
+</code></pre></div></div> <p><strong>.gitignore 예시</strong></p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 의존성 폴더
+node_modules/
+venv/
+
+# 환경 변수 파일
+.env
+.env.local
+
+# 빌드 결과물
+dist/
+build/
+*.log
+
+# IDE 설정
+.vscode/
+.idea/
+
+# OS 파일
+.DS_Store
+Thumbs.db
+</code></pre></div></div> <h3 id="커밋-메시지-컨벤션">커밋 메시지 컨벤션</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 기능 추가</span>
+git commit <span class="nt">-m</span> <span class="s2">"feat: 로그인 기능 추가"</span>
+
+<span class="c"># 버그 수정</span>
+git commit <span class="nt">-m</span> <span class="s2">"fix: 로그인 버튼 클릭 안되는 버그 수정"</span>
+
+<span class="c"># 문서 수정</span>
+git commit <span class="nt">-m</span> <span class="s2">"docs: README 파일 업데이트"</span>
+
+<span class="c"># 스타일 변경</span>
+git commit <span class="nt">-m</span> <span class="s2">"style: 코드 포맷팅 적용"</span>
+
+<span class="c"># 리팩토링</span>
+git commit <span class="nt">-m</span> <span class="s2">"refactor: 사용자 인증 로직 개선"</span>
+
+<span class="c"># 테스트 추가</span>
+git commit <span class="nt">-m</span> <span class="s2">"test: 로그인 기능 테스트 추가"</span>
+</code></pre></div></div> <h3 id="유용한-별칭-alias-설정">유용한 별칭 (Alias) 설정</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 자주 사용하는 명령어를 짧게 설정</span>
+git config <span class="nt">--global</span> alias.co checkout
+git config <span class="nt">--global</span> alias.br branch
+git config <span class="nt">--global</span> alias.ci commit
+git config <span class="nt">--global</span> alias.st status
+git config <span class="nt">--global</span> alias.lg <span class="s2">"log --oneline --graph --all"</span>
+
+<span class="c"># 사용 예시</span>
+git co main         <span class="c"># git checkout main</span>
+git st              <span class="c"># git status</span>
+git lg              <span class="c"># git log --oneline --graph --all</span>
+</code></pre></div></div> <hr /> <h2 id="문제-해결">문제 해결</h2> <h3 id="push가-거부될-때">push가 거부될 때</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 원인: 원격 저장소에 새로운 커밋이 있음</span>
+<span class="c"># 해결:</span>
+git pull <span class="nt">--rebase</span>
+git push
+</code></pre></div></div> <h3 id="실수로-커밋한-파일-제거">실수로 커밋한 파일 제거</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 파일 삭제하고 커밋</span>
+git <span class="nb">rm</span> &lt;파일명&gt;
+git commit <span class="nt">-m</span> <span class="s2">"불필요한 파일 삭제"</span>
+git push
+
+<span class="c"># 파일은 유지하고 Git에서만 제거</span>
+git <span class="nb">rm</span> <span class="nt">--cached</span> &lt;파일명&gt;
+git commit <span class="nt">-m</span> <span class="s2">"Git 추적에서 제거"</span>
+git push
+</code></pre></div></div> <h3 id="원격-브랜치와-동기화">원격 브랜치와 동기화</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 원격에서 삭제된 브랜치를 로컬에서도 제거</span>
+git fetch <span class="nt">--prune</span>
+
+<span class="c"># 원격 브랜치 최신 정보 가져오기</span>
+git fetch
+</code></pre></div></div> <hr /> <h2 id="요약-치트시트">요약 치트시트</h2> <table> <thead> <tr> <th>명령어</th> <th>설명</th> </tr> </thead> <tbody> <tr> <td><code class="language-plaintext highlighter-rouge">git init</code></td> <td>저장소 초기화</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">git clone &lt;URL&gt;</code></td> <td>저장소 복제</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">git status</code></td> <td>상태 확인</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">git add .</code></td> <td>모든 변경사항 스테이징</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">git commit -m "메시지"</code></td> <td>커밋</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">git push</code></td> <td>원격에 푸시</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">git pull</code></td> <td>원격에서 풀</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">git branch</code></td> <td>브랜치 목록</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">git checkout -b &lt;브랜치명&gt;</code></td> <td>브랜치 생성 및 이동</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">git merge &lt;브랜치명&gt;</code></td> <td>브랜치 병합</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">git stash</code></td> <td>작업 임시 저장</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">git stash pop</code></td> <td>임시 저장 복원</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">git log</code></td> <td>커밋 이력</td> </tr> </tbody> </table> <hr /> <p><strong>작성일</strong>: 2025</p> <br /><!--&lt;!&ndash; Load Facebook SDK for JavaScript &ndash;&gt;--> <!--<div id="fb-root"></div>--> <!--<script>--> <!-- (function(d, s, id) {--> <!-- var js,--> <!-- fjs = d.getElementsByTagName(s)[0];--> <!-- if (d.getElementById(id)) return;--> <!-- js = d.createElement(s);--> <!-- js.id = id;--> <!-- js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";--> <!-- fjs.parentNode.insertBefore(js, fjs);--> <!-- })(document, "script", "facebook-jssdk");--> <!--</script>--> <!-- <script--> <!-- async--> <!-- src="https://platform.twitter.com/widgets.js"--> <!-- charset="utf-8"--> <!--&gt;</script>--> <!--<div class="share-page">--> <!-- <p class="share-text">Share this on &rarr;</p>--> <!-- <a--> <!-- href="https://twitter.com/share?ref_src=twsrc%5Etfw"--> <!-- class="twitter-share-button"--> <!-- data-size="large"--> <!-- data-show-count="false"--> <!-- style="margin-top:5px;"--> <!-- >Tweet</a--> <!-- >--> <!-- <a--> <!-- class="fb-share-button"--> <!-- data-href="http://localhost:4000/blog/how_to_use_git/"--> <!-- data-size="large"--> <!-- data-layout="button"--> <!-- >Share</a>--> <!--</div>--><!-- Author box --> </div> <div class="comments"> <script src="https://giscus.app/client.js" data-repo="sujaykundu777/devlopr-jekyll" data-repo-id="MDEwOlJlcG9zaXRvcnkxMzk1NzQ1NTY=" data-category="General" data-category-id="MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMyODk4MTky" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async> </script> </div><!-- Incomment incase you want to use Disqus <div id="disqus_thread"></div> --> </article> <script> var disqus_config = function () { this.page.url = "http://localhost:4000/blog/how_to_use_git/"; /* Replace PAGE_URL with your page's canonical URL variable */ this.page.identifier = "/blog/git사용방법정리"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */ }; (function () { /* DON'T EDIT BELOW THIS LINE */ var d = document, s = d.createElement('script'); s.src = 'https://.disqus.com/embed.js'; s.setAttribute('data-timestamp', +new Date()); (d.head || d.body).appendChild(s); })(); </script> <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a> </noscript></div> </div> <div class="row"> <div class="col-md-4"> <div class="card"> <div class="card-header">About Keonhee</div> <div class="card-body"> <p class="author_bio">안녕하세요 여기는 제로투딥 AI 공부방 입니다. :D</p><!-- Place this tag where you want the github button to render. --> <a class="github-button" href="https://github.com/Lee-keonhee/zero_to_deep_kh.github.io" data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star sujaykundu777/devlopr-jekyll on GitHub">Star</a> </div> </div> </div> <div class="col-md-4"> <div class="card"> <div class="card-header">Categories</div> <div class="card-body text-dark"> <!-- --> <!-- <div id="#프레임워크"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/프레임워크">프레임워크</a>--> <!-- </li>--> <!-- <a name="프레임워크"></a>--> <!-- --> <!-- <div id="#딥러닝기초"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/딥러닝기초">딥러닝기초</a>--> <!-- </li>--> <!-- <a name="딥러닝기초"></a>--> <!-- --> <!-- <div id="#잡동사니"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/잡동사니">잡동사니</a>--> <!-- </li>--> <!-- <a name="잡동사니"></a>--> <!-- --> <!-- <div id="#순전파_역전파"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/순전파_역전파">순전파_역전파</a>--> <!-- </li>--> <!-- <a name="순전파_역전파"></a>--> <!-- --> <!-- <div id="#코테"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/코테">코테</a>--> <!-- </li>--> <!-- <a name="코테"></a>--> <!-- --> <!-- <div id="#Deeplearning, CNN"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/Deeplearning, CNN">Deeplearning, CNN</a>--> <!-- </li>--> <!-- <a name="Deeplearning, CNN"></a>--> <!-- --> <!-- <div id="#Deeplearning, Object detection"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/Deeplearning, Object detection">Deeplearning, Object detection</a>--> <!-- </li>--> <!-- <a name="Deeplearning, Object detection"></a>--> <!-- --> <!-- <div id="#Deeplearning, NLP"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/Deeplearning, NLP">Deeplearning, NLP</a>--> <!-- </li>--> <!-- <a name="Deeplearning, NLP"></a>--> <!-- --> <!-- <div id="#Deeplearning, Transformer,NLP"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/Deeplearning, Transformer,NLP">Deeplearning, Transformer,NLP</a>--> <!-- </li>--> <!-- <a name="Deeplearning, Transformer,NLP"></a>--> <!-- --> <!-- <div id="#Deeplearning, NLP, RAG"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/Deeplearning, NLP, RAG">Deeplearning, NLP, RAG</a>--> <!-- </li>--> <!-- <a name="Deeplearning, NLP, RAG"></a>--> <!-- --> <!-- <div id="#Docker"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/Docker">Docker</a>--> <!-- </li>--> <!-- <a name="Docker"></a>--> <!-- --> <!-- <div id="#경량화"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/경량화">경량화</a>--> <!-- </li>--> <!-- <a name="경량화"></a>--> <!-- --> <!-- <div id="#웹 프레임워크"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/웹 프레임워크">웹 프레임워크</a>--> <!-- </li>--> <!-- <a name="웹 프레임워크"></a>--> <!-- --> <!-- <div id="#MCP"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/MCP">MCP</a>--> <!-- </li>--> <!-- <a name="MCP"></a>--> <!-- --> <!-- <div id="#FastAPI"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/FastAPI">FastAPI</a>--> <!-- </li>--> <!-- <a name="FastAPI"></a>--> <!-- --> <!-- <div id="#LLM"></div>--> <!-- <li class="tag-head">--> <!-- <a href="/zero_to_deep_kh//blog/categories/LLM">LLM</a>--> <!-- </li>--> <!-- <a name="LLM"></a>--> <!-- --> <ul> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/프레임워크">프레임워크</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/딥러닝기초">딥러닝기초</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/잡동사니">잡동사니</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/순전파_역전파">순전파_역전파</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/코테">코테</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/Deeplearning, CNN">Deeplearning, CNN</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/Deeplearning, Object detection">Deeplearning, Object detection</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/Deeplearning, NLP">Deeplearning, NLP</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/Deeplearning, Transformer,NLP">Deeplearning, Transformer,NLP</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/Deeplearning, NLP, RAG">Deeplearning, NLP, RAG</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/Docker">Docker</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/경량화">경량화</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/웹 프레임워크">웹 프레임워크</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/MCP">MCP</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/FastAPI">FastAPI</a> </li> <li class="tag-head"> <a href="/zero_to_deep_kh//blog/categories/LLM">LLM</a> </li> </ul></div> </div> </div> <div class="col-md-4"> <div class="card"> <div class="card-header">Useful Links</div> <div class="card-body text-dark"> <li> <a href="http://localhost:4000/zero_to_deep_kh/">Home</a> </li> <li> <a href="http://localhost:4000/zero_to_deep_kh/about">About</a> </li> <li> <a href="http://localhost:4000/zero_to_deep_kh/blog">Blog</a> </li> </div> </div> </div> </div> </div> <div class="col-lg-12" id="newsletter_footer"><!--&lt;!&ndash; Mailchimp Newletters &ndash;&gt;--> <!--<form action=""method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>--> <!--<div id="mc_embed_signup_scroll_footer">--> <!-- <label for="mce-EMAIL_footer"> Signup for Weekly Email Newsletters :D</label>--> <!-- <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL_footer" placeholder="email address" required>--> <!-- &lt;!&ndash; real people should not fill this in and expect good things - do not remove this or risk form bot signups&ndash;&gt;--> <!-- <div style="position: absolute; left: -5000px;" aria-hidden="true">--> <!-- <input type="text" name="b_50bab1c85eae24ecfb0f68361_3a2dd721d0" tabindex="-1" value="">--> <!-- </div><br />--> <!-- <div class="clear">--> <!-- <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe_footer" class="btn btn-lg btn-success">--> <!-- </div>--> <!--</div>--> </div><footer> <p> Powered by<a href="https://github.com/sujaykundu777/devlopr-jekyll"> devlopr jekyll</a>. Hosted with <a href="https://pages.github.com">Github Pages</a>. Subscribe via <a href="/zero_to_deep_kh /feed.xml ">RSS</a> </p> </footer> <script> var options = { classname: 'progressline', id: 'my-id' }; var nanobar = new Nanobar( options ); nanobar.go( 30 ); nanobar.go( 76 ); nanobar.go(100); </script> <div hidden id="snipcart" data-api-key="Y2I1NTAyNWYtMTNkMy00ODg0LWE4NDItNTZhYzUxNzJkZTI5NjM3MDI4NTUzNzYyMjQ4NzU0"></div> <script src="https://cdn.snipcart.com/themes/v3.0.0-beta.3/default/snipcart.js" defer></script> <script> if (window.netlifyIdentity) { window.netlifyIdentity.on("init", user => { if (!user) { window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; }); } }); } </script> </body> </html>

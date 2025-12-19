@@ -1,0 +1,95 @@
+title: ZtoD
+subtitle: 안녕하세요 제로투딥 블로그입니다.
+description: >-
+  AI의 기초부터 응용까지 함께 배우는 딥러닝 블로그입니다.
+
+url: "https://lee-keonhee.github.io"
+baseurl: "/zero_to_deep_kh"
+
+# Navigation
+urls:
+    - text: Home
+      url: /
+    - text: About
+      url: /about
+    - text: Blog
+      url: /blog
+
+# Author details
+author_logo: page_logo.png
+author: Keonhee
+author_bio: 안녕하세요 여기는 제로투딥 AI 공부방 입니다. :D
+author_email: "dlrjsgml0315@gmail.com"
+author_location: Korea
+author_website_url: "https://lee-keonhee.github.io"
+typewrite-text: AI의 기초부터 응용까지
+hero_cover_img: sample_cover.jpg
+
+# Social links
+github_username: Lee-keonhee
+instagram_username: lkh_8943
+
+# Wakatime username (coding activity)
+wakatime_username: keonhee
+
+# Syntax highlighter
+markdown: kramdown
+kramdown:
+  math_engine: mathjax
+highlighter: rouge
+permalink: pretty
+
+# Display settings
+show_author_work_experiences: false
+show_author_education_details: false
+show_author_project_details: false
+
+# Pagination
+paginate: 4
+per_page: 4
+paginate_path: "/blog/page/:num/"
+
+# Collections
+collections:
+  authors:
+    output: true
+
+# Defaults
+defaults:
+  -
+    scope:
+      path: ""
+      type: authors
+    values:
+      layout: author
+      permalink: /blog/authors/:slug
+
+# Plugins
+plugins:
+  - jekyll-paginate
+  - jekyll-gist
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+# Plugin settings
+plugins_dir: _plugins
+
+# SASS
+sass:
+  sass_dir: _sass
+  style: compressed
+
+# Exclude files
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/
+  - README.md
+  - LICENSE
+
+destination: ./build

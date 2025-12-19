@@ -1,0 +1,7 @@
+<ul>
+    {% for author in site.authors %}
+        <li>
+            <a href="{{'/' | relative_url}}/blog/authors/{{ author.username }}">{{ author.name }}</a>
+        </li>
+    {% endfor %}
+ </ul>

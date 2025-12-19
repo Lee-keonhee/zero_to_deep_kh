@@ -1,0 +1,42 @@
+---
+layout: default
+---
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <div class="card">
+        <h1 class="card-title">카테고리: {{ page.category }}</h1>
+        <p class="text-muted">{{ page.category }} 카테고리의 모든 포스트</p>
+        
+        <hr>
+        
+        <div class="post-list">
+          {% assign posts = site.categories[page.category] %}
+          {% for post in posts %}
+            <article class="post-item">
+              <h3>
+                <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+              </h3>
+              <p class="post-meta">
+                <time datetime="{{ post.date | date_to_xmlschema }}">
+                  {{ post.date | date: "%Y년 %m월 %d일" }}
+                </time>
+                {% if post.author %}
+                  · {{ post.author }}
+                {% endif %}
+              </p>
+              {% if post.summary %}
+                <p class="post-summary">{{ post.summary }}</p>
+              {% endif %}
+              {% if post.thumbnail %}
+                <img src="{{ site.baseurl }}{{ post.thumbnail }}" alt="{{ post.title }}" class="img-thumbnail">
+              {% endif %}
+              <hr>
+            </article>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

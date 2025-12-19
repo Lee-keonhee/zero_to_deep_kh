@@ -1,0 +1,62 @@
+---
+layout: default
+title: 태그
+permalink: /tags/
+---
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <div class="card">
+        <h1 class="card-title">모든 태그</h1>
+        <p class="text-muted">태그별로 포스트를 탐색해보세요</p>
+        
+        <hr>
+        
+        <div class="tag-cloud mb-4">
+          {% assign tags = site.tags | sort %}
+          {% for tag in tags %}
+            {% assign tag_name = tag[0] %}
+            {% assign posts = tag[1] %}
+            <a href="{{ site.baseurl }}/tag/{{ tag_name | slugify }}/" 
+               class="badge badge-primary" 
+               style="font-size: {{ posts.size | times: 0.2 | plus: 1 }}rem;">
+              {{ tag_name }} ({{ posts.size }})
+            </a>
+          {% endfor %}
+        </div>
+        
+        <hr>
+        
+        {% for tag in tags %}
+          {% assign tag_name = tag[0] %}
+          {% assign posts = tag[1] %}
+          
+          <div class="tag-box mb-4">
+            <h3>
+              <a href="{{ site.baseurl }}/tag/{{ tag_name | slugify }}/">
+                #{{ tag_name }}
+              </a>
+              <span class="badge badge-info">{{ posts | size }}</span>
+            </h3>
+            
+            <ul class="post-list-simple">
+              {% for post in posts limit:3 %}
+                <li>
+                  <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+                  <span class="text-muted"> - {{ post.date | date: "%Y.%m.%d" }}</span>
+                </li>
+              {% endfor %}
+            </ul>
+            
+            {% if posts.size > 3 %}
+              <a href="{{ site.baseurl }}/tag/{{ tag_name | slugify }}/" class="btn btn-sm btn-outline-info">
+                더 보기 ({{ posts.size | minus: 3 }}개)
+              </a>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

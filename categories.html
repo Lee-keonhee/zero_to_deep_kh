@@ -1,0 +1,48 @@
+---
+layout: default
+title: 카테고리
+permalink: /categories/
+---
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <div class="card">
+        <h1 class="card-title">모든 카테고리</h1>
+        <p class="text-muted">카테고리별로 포스트를 탐색해보세요</p>
+        
+        <hr>
+        
+        {% assign categories = site.categories | sort %}
+        {% for category in categories %}
+          {% assign category_name = category[0] %}
+          {% assign posts = category[1] %}
+          
+          <div class="category-box mb-4">
+            <h3>
+              <a href="{{ site.baseurl }}/category/{{ category_name | slugify }}/">
+                {{ category_name }}
+              </a>
+              <span class="badge badge-secondary">{{ posts | size }}</span>
+            </h3>
+            
+            <ul class="post-list-simple">
+              {% for post in posts limit:5 %}
+                <li>
+                  <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+                  <span class="text-muted"> - {{ post.date | date: "%Y.%m.%d" }}</span>
+                </li>
+              {% endfor %}
+            </ul>
+            
+            {% if posts.size > 5 %}
+              <a href="{{ site.baseurl }}/category/{{ category_name | slugify }}/" class="btn btn-sm btn-outline-primary">
+                더 보기 ({{ posts.size | minus: 5 }}개)
+              </a>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+
+<!--            {% for tag in site.categories %} {% capture tag_name %}{{ tag | first }}{% endcapture %}-->
+<!--            <div id="#{{ tag_name | slugize }}"></div>-->
+<!--            <li class="tag-head">-->
+<!--                <a href="{{ '/' | relative_url }}/blog/categories/{{ tag_name | slugize }}">{{ tag_name }}</a>-->
+<!--            </li>-->
+<!--            <a name="{{ tag_name | slugize }}"></a>-->
+
+<!--            {% endfor %}-->
+<ul>
+    {% for tag in site.categories %}
+        {% capture tag_name %}{{ tag | first }}{% endcapture %}
+        <li class="tag-head">
+            <a href="{{ '/' | relative_url }}/blog/categories/{{ tag_name | slugize }}">{{ tag_name }}</a>
+        </li>
+    {% endfor %}
+</ul>
