@@ -14,3 +14,5 @@ _site/
 vendor/
 
 .DS_Store
+
+*.zip
