@@ -26,7 +26,7 @@ imageNameKey: MCP
 7. [문제 해결](#문제-해결)
 
 ---
-![dddd](../assets/img/posts/MCP-20251223074727.png)
+![aaaa](assets/img/posts/MCP-20251223075432.png)
 ## 프로젝트 개요
 
 ### 무엇을 만들까요?
@@ -448,105 +448,11 @@ pip install googletrans==4.0.0rc1
 - 방화벽 설정 확인
 - VPN 사용 시 끄고 재시도
 
-'' ### 5. LLM이 도구를 안 씀
-
-**해결:**
-- 7B 이상 모델 사용 (Qwen2.5-7B-Instruct)
-- 히스토리 제거 (현재 메시지만 사용)
-- 프롬프트에 명시적 지시 추가 %%
-
+ 
 ---
 
-%% ## 추가 개선 아이디어
+## **다음 프로젝트:**
 
-### 1. 더 많은 API 추가
-
-- **환율 API**: 실시간 환율 조회
-- **주식 API**: 주가 정보
-- **지도 API**: 위치 검색, 거리 계산
-- **유튜브 API**: 영상 검색
-
-### 2. 에러 처리 강화
-
-```python
-# 재시도 로직
-max_retries = 3
-for attempt in range(max_retries):
-    try:
-        result = requests.get(url)
-        break
-    except requests.exceptions.Timeout:
-        if attempt == max_retries - 1:
-            return {"error": "타임아웃"}
-        time.sleep(1)
-```
-
-### 3. 캐싱 추가
-
-```python
-# 중복 요청 방지
-cache = {}
-
-def get_weather_cached(city):
-    if city in cache:
-        cached_time, data = cache[city]
-        if time.time() - cached_time < 600:  # 10분
-            return data
-    
-    data = get_weather_from_api(city)
-    cache[city] = (time.time(), data)
-    return data
-```
-
-### 4. 로깅 추가
-
-```python
-import logging
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
-logger.info(f"API 호출: {url}")
-logger.error(f"오류 발생: {e}")
-```
-
----
-
-## 다음 단계
-
-1. **API 키 발급 및 설정**
-   - OpenWeatherMap
-   - NewsAPI
-
-2. **서버 테스트**
-   ```bash
-   python servers/weather_api_server.py
-   python servers/translator_server.py
-   python servers/news_api_server.py
-   ```
-
-3. **통합 실행**
-   ```bash
-   python hf_client_fixed.py
-   ```
-
-4. **실전 활용**
-   - 날씨 조회
-   - 번역 요청
-   - 뉴스 검색
-   - 복합 작업
- ''
----
-
-## 요약
-
-**이제 여러분은:**
-- ✅ 실제 REST API를 MCP 서버로 통합할 수 있어요
-- ✅ API 키를 안전하게 관리할 수 있어요
-- ✅ 여러 API 서버를 동시에 운영할 수 있어요
-- ✅ LLM이 실시간 데이터를 활용하게 만들 수 있어요
-
-**다음 프로젝트:**
 - RAG 시스템과 MCP 통합
 - 데이터베이스 MCP 서버
 - 사내 시스템 API 연동
