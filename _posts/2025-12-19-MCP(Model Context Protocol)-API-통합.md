@@ -26,8 +26,13 @@ imageNameKey: MCP
 7. [문제 해결](#문제-해결)
 
 ---
+1
+
 
 ![aaaa](/assets/img/posts/MCP-20251223075432.png)
+
+
+
 
 ## 프로젝트 개요
 
