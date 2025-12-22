@@ -274,7 +274,7 @@ await client.call_mcp_tool(
 
 ### 메인 클라이언트 수정
 
-`hf_client_fixed.py`의 `main()` 함수:
+`hf_client.py`의 `main()` 함수:
 
 ```python
 async def main():
@@ -448,16 +448,16 @@ pip install googletrans==4.0.0rc1
 - 방화벽 설정 확인
 - VPN 사용 시 끄고 재시도
 
-### 5. LLM이 도구를 안 씀
+%% ### 5. LLM이 도구를 안 씀
 
 **해결:**
 - 7B 이상 모델 사용 (Qwen2.5-7B-Instruct)
 - 히스토리 제거 (현재 메시지만 사용)
-- 프롬프트에 명시적 지시 추가
+- 프롬프트에 명시적 지시 추가 %%
 
 ---
 
-## 추가 개선 아이디어
+%% ## 추가 개선 아이디어
 
 ### 1. 더 많은 API 추가
 
@@ -535,7 +535,7 @@ logger.error(f"오류 발생: {e}")
    - 번역 요청
    - 뉴스 검색
    - 복합 작업
-
+ %%
 ---
 
 ## 요약
