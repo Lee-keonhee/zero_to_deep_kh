@@ -9,6 +9,7 @@ keywords: MCP
 permalink: /blog/MCP_5/
 usemathjax: true
 thumbnail: /assets/img/posts/overview_of_NLP_1.png
+imageNameKey: MCP
 ---
 
 # 실제 API를 활용한 MCP 서버 구축
@@ -25,7 +26,7 @@ thumbnail: /assets/img/posts/overview_of_NLP_1.png
 7. [문제 해결](#문제-해결)
 
 ---
-
+![](../assets/img/posts/MCP-20251223074727.png)
 ## 프로젝트 개요
 
 ### 무엇을 만들까요?
