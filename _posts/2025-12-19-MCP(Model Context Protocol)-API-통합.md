@@ -13,7 +13,6 @@ thumbnail: /assets/img/posts/overview_of_NLP_1.png
 
 # 실제 API를 활용한 MCP 서버 구축
 
-![[../assets/img/posts/2025-12-19-MCP(Model Context Protocol)-API-통합-20251223073337.png]]
 
 실제 외부 API를 MCP 서버로 통합하여 LLM이 실시간 데이터에 접근할 수 있도록 만드는 프로젝트입니다.
 ## 📋 목차
