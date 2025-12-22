@@ -26,7 +26,7 @@ imageNameKey: MCP
 7. [문제 해결](#문제-해결)
 
 ---
-![](../assets/img/posts/MCP-20251223074727.png)
+![dddd](../assets/img/posts/MCP-20251223074727.png)
 ## 프로젝트 개요
 
 ### 무엇을 만들까요?
