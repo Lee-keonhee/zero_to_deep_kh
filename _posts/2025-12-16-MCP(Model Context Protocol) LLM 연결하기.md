@@ -783,9 +783,8 @@ MODEL_NAME = select_model()
 
 ## 다음 단계
 
-이제 마지막 단계입니다: **실전 프로젝트 - RAG 시스템을 MCP로 만들기!**
 
-**다음: [05-실전-프로젝트-RAG](https://lee-keonhee.github.io/zero_to_deep_kh/blog/MCP_5/#/)**
+**다음: [05. MCP(Model Context Protocol)-API-통합](https://lee-keonhee.github.io/zero_to_deep_kh/blog/MCP_5/#/)**
 
 여러분이 LangGraph로 만들었던 RAG를 MCP 서버로 전환하고, Hugging Face LLM과 연결해봅시다!
 

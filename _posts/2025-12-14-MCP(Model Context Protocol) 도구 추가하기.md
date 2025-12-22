@@ -486,7 +486,7 @@ for filepath in MEMO_DIR.glob("*.json"):
 - 파일이 없으면 에러 메시지 반환
 - 삭제 성공 시 확인 메시지 반환
 
-<details> <summary>힌트 보기</summary>
+**정답**
 
 ```python
 ## 도구 정의
@@ -514,7 +514,7 @@ elif name == "delete_memo":
     return [TextContent(type="text", text=f"🗑️ 메모 삭제 완료: {memo_id}")]
 ```
 
-</details>
+
 
 ###### 문제 2: 메모 수정 기능
 
