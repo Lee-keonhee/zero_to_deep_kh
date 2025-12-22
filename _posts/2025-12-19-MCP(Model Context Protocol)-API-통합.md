@@ -29,7 +29,7 @@ imageNameKey: MCP
 1
 
 
-![aaaa](/assets/img/posts/MCP-20251223075432.png)
+![aaaa](assets/img/posts/MCP-20251223075432.png)
 
 
 
