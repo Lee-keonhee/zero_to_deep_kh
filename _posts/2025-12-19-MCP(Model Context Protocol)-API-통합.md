@@ -26,17 +26,13 @@ imageNameKey: MCP
 7. [문제 해결](#문제-해결)
 
 ---
-1
 
 
-![aaaa](../assets/img/posts/MCP-20251223075432.png)
-
-
-
+![aaaa]({{site.baseurl}}/assets/img/posts/MCP-20251223075432.png)
 
 ## 프로젝트 개요
 
-### 1무엇을 만들까요?
+### 무엇을 만들까요?
 
 LLM이 실시간 정보에 접근할 수 있도록 3가지 API 기반 MCP 서버를 구축합니다:
 
