@@ -11,7 +11,7 @@ usemathjax: true
 thumbnail: /assets/img/posts/overview_of_NLP_1.png
 imageNameKey: MCP
 ---
-
+![](assets/img/posts/MCP-20251224223928.png)
 # 실제 API를 활용한 MCP 서버 구축
 
 
