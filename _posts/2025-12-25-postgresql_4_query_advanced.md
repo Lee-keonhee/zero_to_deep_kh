@@ -8,7 +8,8 @@ category: Database
 keywords: PostgreSQL, Query, WHERE, GROUP BY, Aggregate Functions, Subquery
 permalink: /blog/postgresql_query_advanced/
 usemathjax: false
-thumbnail: /assets/img/posts/postgresql_query.png
+thumbnail: /assets/img/posts/postgresql.png
+imageNameKey: postgresql
 ---
 
 

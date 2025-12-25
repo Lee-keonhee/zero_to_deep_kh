@@ -9,6 +9,7 @@ keywords: PostgreSQL, Performance, Index, EXPLAIN, Query Optimization, Tuning
 permalink: /blog/postgresql_performance/
 usemathjax: false
 thumbnail: /assets/img/posts/postgresql_performance.png
+imageNameKey: postgresql
 ---
 
 # PostgreSQL 3단계: 데이터 조작 (CRUD)

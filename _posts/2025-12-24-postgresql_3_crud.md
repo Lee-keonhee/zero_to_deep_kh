@@ -8,7 +8,8 @@ category: Database
 keywords: PostgreSQL, CRUD, INSERT, SELECT, UPDATE, DELETE, UPSERT
 permalink: /blog/postgresql_crud/
 usemathjax: false
-thumbnail: /assets/img/posts/postgresql_crud.png
+thumbnail: /assets/img/posts/postgresql.png
+imageNameKey: postgresql
 ---
 
 

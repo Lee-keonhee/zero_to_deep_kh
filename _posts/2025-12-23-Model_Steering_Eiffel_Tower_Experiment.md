@@ -9,7 +9,9 @@ keywords: Model Steering, Activation Steering, SAE, Representation Engineering
 permalink: /blog/model_steering_eiffel_tower/
 usemathjax: true
 thumbnail: /assets/img/posts/model_steering.png
+imageNameKey: model_steering
 ---
+
 
 # AI의 생각을 조종하는 기술 - 모델 스티어링(Model Steering)
 

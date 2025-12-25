@@ -8,7 +8,8 @@ category: Database
 keywords: PostgreSQL, Database, SQL, psql, 설치, 기초
 permalink: /blog/postgresql_basics/
 usemathjax: false
-thumbnail: /assets/img/posts/postgresql_basics.png
+thumbnail: /assets/img/posts/postgresql.png
+imageNameKey: postgresql
 ---
 # PostgreSQL 1단계: 기초
 

@@ -8,7 +8,8 @@ category: Database
 keywords: PostgreSQL, Database Management, User Permissions, Data Types, ALTER TABLE
 permalink: /blog/postgresql_database_basics/
 usemathjax: false
-thumbnail: /assets/img/posts/postgresql_database.png
+thumbnail: /assets/img/posts/postgresql.png
+imageNameKey: postgresql
 ---
 
 
