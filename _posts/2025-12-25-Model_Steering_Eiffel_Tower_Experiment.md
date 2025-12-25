@@ -3,7 +3,7 @@ layout: post
 title: AI의 생각을 조종하는 기술 - 모델 스티어링(Model Steering)
 summary: Activation Steering과 SAE를 활용한 LLM 행동 제어 - 에펠탑 벡터 실험
 author: keonhee
-date: 2025-12-25 00:00:00 +0900
+date: 2025-12-25 09:00:00 +0900
 category: AI
 keywords: Model Steering, Activation Steering, SAE, Representation Engineering
 permalink: /blog/model_steering_eiffel_tower/
@@ -1429,16 +1429,3 @@ huggingface-cli download goodfire/llama-3-1-8b-sae
 모델 스티어링은 비싼 재학습 없이도 **모델 내면의 선한 개념들을 강화**해 근본적으로 더 진실하고 윤리적인 AI를 만드는 현실적인 대안이 될 수 있습니다.
 
 ---
-
-## 관련 포스트
-
-- [01. Transformer 아키텍처 이해하기](#)
-- [02. LLM 파인 튜닝 가이드](#)
-- [03. RAG 시스템 구축하기](#)
-- [04. AI 안전성과 정렬(Alignment)](#)
-
----
-
-**작성일:** 2025년 12월 25일  
-**최종 수정:** 2025년 12월 25일  
-**키워드:** Model Steering, Activation Steering, Representation Engineering, SAE, LLM Control
