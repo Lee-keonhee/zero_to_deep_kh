@@ -8,7 +8,7 @@ category: Database
 keywords: PostgreSQL, JOIN, Foreign Key, Constraints, Relational Database
 permalink: /blog/postgresql_relationships/
 usemathjax: false
-thumbnail: /assets/img/posts/postgresql_join.png
+thumbnail: /assets/img/posts/postgresql.png
 imageNameKey: postgresql
 ---
 
