@@ -106,13 +106,13 @@ PostgreSQL은 세계에서 가장 진보된 오픈소스 관계형 데이터베�
    ```
 
 2. EDB 설치 프로그램 다운로드
-   - 최신 버전 선택 (예: PostgreSQL 16)
+   - 최신 버전 선택 (예: PostgreSQL 18)
    - Windows x86-64 선택
 
 3. 설치 진행
    ```
    단계 1: 설치 디렉토리 선택
-   예: C:\Program Files\PostgreSQL\16
+   예: C:\Program Files\PostgreSQL\18
    
    단계 2: 구성요소 선택
    ✅ PostgreSQL Server
@@ -121,7 +121,7 @@ PostgreSQL은 세계에서 가장 진보된 오픈소스 관계형 데이터베�
    ✅ Command Line Tools
    
    단계 3: 데이터 디렉토리 선택
-   예: C:\Program Files\PostgreSQL\16\data
+   예: C:\Program Files\PostgreSQL\18\data
    
    단계 4: 슈퍼유저 비밀번호 설정
    postgres 사용자의 비밀번호 입력
@@ -161,19 +161,19 @@ scoop install postgresql
 brew --version
 
 # PostgreSQL 설치
-brew install postgresql@16
+brew install postgresql@18
 
 # 설치 확인
 postgres --version
 
 # 서비스 시작
-brew services start postgresql@16
+brew services start postgresql@18
 
 # 서비스 중지
-brew services stop postgresql@16
+brew services stop postgresql@18
 
 # 서비스 재시작
-brew services restart postgresql@16
+brew services restart postgresql@18
 ```
 
 **방법 2: Postgres.app**
@@ -213,17 +213,17 @@ psql --version
 # PostgreSQL 저장소 추가
 sudo dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 
-# PostgreSQL 16 설치
-sudo dnf install -y postgresql16-server postgresql16
+# PostgreSQL 18 설치
+sudo dnf install -y postgresql18-server postgresql18
 
 # 데이터베이스 초기화
-sudo /usr/pgsql-16/bin/postgresql-16-setup initdb
+sudo /usr/pgsql-18/bin/postgresql-18-setup initdb
 
 # 서비스 시작
-sudo systemctl start postgresql-16
+sudo systemctl start postgresql-18
 
 # 서비스 활성화
-sudo systemctl enable postgresql-16
+sudo systemctl enable postgresql-18
 ```
 
 ### Docker를 이용한 설치
