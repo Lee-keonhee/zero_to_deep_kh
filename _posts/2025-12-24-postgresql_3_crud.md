@@ -1,4 +1,16 @@
-# PostgreSQL 3단계: 데이터 조작 (CRUD)
+---
+layout: post
+title: PostgreSQL 완전 정복 3단계 - 데이터 조작 마스터하기
+summary: INSERT, SELECT, UPDATE, DELETE부터 UPSERT까지 모든 데이터 조작 기법
+author: keonhee
+date: 2025-12-24 09:00:00 +0900
+category: Database
+keywords: PostgreSQL, CRUD, INSERT, SELECT, UPDATE, DELETE, UPSERT
+permalink: /blog/postgresql_crud/
+usemathjax: false
+thumbnail: /assets/img/posts/postgresql_crud.png
+---
+
 
 ## 목차
 1. [INSERT - 데이터 삽입](#1-insert---데이터-삽입)

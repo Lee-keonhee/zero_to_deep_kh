@@ -1,3 +1,17 @@
+---
+layout: post
+title: PostgreSQL 완전 정복 4단계 - 쿼리 심화 기법
+summary: WHERE 조건, 정렬, 집계함수, GROUP BY, 서브쿼리까지 고급 쿼리 작성법
+author: keonhee
+date: 2025-12-25 09:00:00 +0900
+category: Database
+keywords: PostgreSQL, Query, WHERE, GROUP BY, Aggregate Functions, Subquery
+permalink: /blog/postgresql_query_advanced/
+usemathjax: false
+thumbnail: /assets/img/posts/postgresql_query.png
+---
+
+
 # PostgreSQL 4단계: 데이터 조회 심화
 
 ## 목차

@@ -1,16 +1,15 @@
 ---
 layout: post
-title: AI의 생각을 조종하는 기술 - 모델 스티어링(Model Steering)
-summary: Activation Steering과 SAE를 활용한 LLM 행동 제어 - 에펠탑 벡터 실험
+title: PostgreSQL 완전 정복 1단계 - 기초부터 시작하기
+summary: PostgreSQL 설치부터 기본 개념, psql 명령어까지 완벽 가이드
 author: keonhee
 date: 2025-12-24 09:00:00 +0900
-category: AI
-keywords: Model Steering, Activation Steering, SAE, Representation Engineering
-permalink: /blog/model_steering_eiffel_tower/
-usemathjax: true
-thumbnail: /assets/img/posts/model_steering.png
+category: Database
+keywords: PostgreSQL, Database, SQL, psql, 설치, 기초
+permalink: /blog/postgresql_basics/
+usemathjax: false
+thumbnail: /assets/img/posts/postgresql_basics.png
 ---
-
 # PostgreSQL 1단계: 기초
 
 ## 목차

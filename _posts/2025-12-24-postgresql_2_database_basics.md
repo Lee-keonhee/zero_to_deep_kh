@@ -1,3 +1,18 @@
+---
+layout: post
+title: PostgreSQL 완전 정복 2단계 - 데이터베이스 기본 작업
+summary: 데이터베이스 생성/관리, 사용자 권한, 테이블 생성 및 데이터 타입 완벽 가이드
+author: keonhee
+date: 2025-12-24 09:00:00 +0900
+category: Database
+keywords: PostgreSQL, Database Management, User Permissions, Data Types, ALTER TABLE
+permalink: /blog/postgresql_database_basics/
+usemathjax: false
+thumbnail: /assets/img/posts/postgresql_database.png
+---
+
+
+
 # PostgreSQL 2단계: 데이터베이스 기본 작업
 
 ## 목차

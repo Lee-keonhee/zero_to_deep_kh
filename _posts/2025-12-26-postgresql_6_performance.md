@@ -1,3 +1,18 @@
+---
+layout: post
+title: PostgreSQL 완전 정복 6단계 - 성능 최적화 완벽 가이드
+summary: 인덱스 전략, EXPLAIN 분석, 쿼리 튜닝으로 PostgreSQL 성능 극대화하기
+author: keonhee
+date: 2025-12-26 09:00:00 +0900
+category: Database
+keywords: PostgreSQL, Performance, Index, EXPLAIN, Query Optimization, Tuning
+permalink: /blog/postgresql_performance/
+usemathjax: false
+thumbnail: /assets/img/posts/postgresql_performance.png
+---
+
+# PostgreSQL 3단계: 데이터 조작 (CRUD)
+
 # PostgreSQL 6단계: 성능 최적화
 
 ## 목차

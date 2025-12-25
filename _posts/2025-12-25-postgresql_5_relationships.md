@@ -1,3 +1,17 @@
+---
+layout: post
+title: PostgreSQL 완전 정복 5단계 - 관계형 데이터베이스 설계
+summary: 모든 JOIN 타입, SELF JOIN, 외래키 제약조건까지 관계형 DB 완벽 이해
+author: keonhee
+date: 2025-12-25 09:00:00 +0900
+category: Database
+keywords: PostgreSQL, JOIN, Foreign Key, Constraints, Relational Database
+permalink: /blog/postgresql_relationships/
+usemathjax: false
+thumbnail: /assets/img/posts/postgresql_join.png
+---
+
+
 # PostgreSQL 5단계: 관계형 데이터베이스
 
 ## 목차
