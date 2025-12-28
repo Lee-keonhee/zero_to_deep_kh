@@ -644,19 +644,23 @@ If you need a tool, respond with ONLY this JSON format:
         "arguments": {"arg1": "value1"}
     }
 }
+```
+
+""" 
+return tools_desc
+
 ````
 
-""" return tools_desc
 
+```
 # 사용 예시
 
-if **name** == "**main**": mcp_servers = { "weather-api": { "command": "python", "args": ["weather_api.py"] } }
-
-```
-client = MCPClient(mcp_servers)
-print(client.get_tools_description())
-```
-
+if **name** == "**main**": 
+	mcp_servers = { 
+		"weather-api": { "command": "python", "args": ["weather_api.py"] } 
+	}
+	client = MCPClient(mcp_servers)
+	print(client.get_tools_description())
 ```
 
 ### 로그 출력 예시
@@ -964,20 +968,3 @@ class TestSchemaResolver(unittest.TestCase):
 if __name__ == '__main__':
     unittest.main()
 ```
-
----
-
-## 참고 자료
-
-- [JSON Schema Specification - $ref](https://json-schema.org/understanding-json-schema/structuring.html#ref)
-- [JSON Schema - $defs](https://json-schema.org/understanding-json-schema/structuring.html#defs)
-- [Pydantic JSON Schema](https://docs.pydantic.dev/latest/concepts/json_schema/)
-- [FastMCP Documentation](https://github.com/jlowin/fastmcp)
-- [Model Context Protocol Spec](https://spec.modelcontextprotocol.io/)
-
----
-
-**작성일**: 2025-12-28  
-**최종 수정**: 2025-12-28  
-**카테고리**: MCP, LLM Integration  
-**태그**: #MCP #Pydantic #BaseModel #JSONSchema #Ref #FastMCP #defs #properties
