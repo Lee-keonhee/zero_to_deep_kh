@@ -78,7 +78,7 @@ user_proxy = ConversableAgent(
 
 assistant = ConversableAgent(
     name="Assistant",
-    llm_config={"model": "gpt-4", "api_key": "your-key"}
+    llm_config={"model": "gpt-5-mini", "api_key": "your-key"}
 )
 
 user_proxy.initiate_chat(
@@ -366,7 +366,7 @@ collector_executor = ConversableAgent(
 cleaner_coder = ConversableAgent(
     name="정제_코더",
     system_message="당신은 데이터 정제 전문가입니다. 결측치, 중복 제거 등 데이터를 정제하세요.",
-    llm_config={"model": "gpt-4", "api_key": "your-key"},
+    llm_config={"model": "gpt-5-mini", "api_key": "your-key"},
     max_consecutive_auto_reply=7
 )
 
@@ -381,7 +381,7 @@ cleaner_executor = ConversableAgent(
 analyzer_coder = ConversableAgent(
     name="분석_코더",
     system_message="당신은 데이터 분석 전문가입니다. 통계 분석과 시각화를 수행하세요.",
-    llm_config={"model": "gpt-4", "api_key": "your-key"},
+    llm_config={"model": "gpt-5-mini", "api_key": "your-key"},
     max_consecutive_auto_reply=7
 )
 
@@ -451,7 +451,7 @@ scraper_coder = ConversableAgent(
     system_message="""당신은 웹 스크래핑 전문가입니다.
 BeautifulSoup과 requests를 사용하여 뉴스 헤드라인을 수집하세요.
 결과를 'headlines.json'으로 저장하고 'TERMINATE'로 응답하세요.""",
-    llm_config={"model": "gpt-4", "api_key": "your-key"}
+    llm_config={"model": "gpt-5-mini", "api_key": "your-key"}
 )
 
 scraper_executor = ConversableAgent(
@@ -466,7 +466,7 @@ preprocessor_coder = ConversableAgent(
     name="전처리기",
     system_message="""당신은 텍스트 전처리 전문가입니다.
 'headlines.json'을 읽어서 텍스트를 정제하고 'processed_headlines.json'으로 저장하세요.""",
-    llm_config={"model": "gpt-4", "api_key": "your-key"}
+    llm_config={"model": "gpt-5-mini", "api_key": "your-key"}
 )
 
 preprocessor_executor = ConversableAgent(
@@ -482,7 +482,7 @@ sentiment_coder = ConversableAgent(
     system_message="""당신은 감성 분석 전문가입니다.
 'processed_headlines.json'의 각 헤드라인에 대해 긍정/부정/중립을 분류하세요.
 결과를 'sentiment_results.csv'로 저장하세요.""",
-    llm_config={"model": "gpt-4", "api_key": "your-key"}
+    llm_config={"model": "gpt-5-mini", "api_key": "your-key"}
 )
 
 sentiment_executor = ConversableAgent(
@@ -549,19 +549,19 @@ from autogen import ConversableAgent, GroupChat, GroupChatManager
 collector = ConversableAgent(
     name="데이터수집가",
     system_message="당신은 데이터 수집 전문가입니다. 데이터 출처나 수집 문제에 대해 답변하세요.",
-    llm_config={"model": "gpt-4", "api_key": "your-key"}
+    llm_config={"model": "gpt-5-mini", "api_key": "your-key"}
 )
 
 cleaner = ConversableAgent(
     name="데이터정제가",
     system_message="당신은 데이터 정제 전문가입니다. 이상한 패턴을 발견하면 데이터수집가에게 물어보세요.",
-    llm_config={"model": "gpt-4", "api_key": "your-key"}
+    llm_config={"model": "gpt-5-mini", "api_key": "your-key"}
 )
 
 analyzer = ConversableAgent(
     name="데이터분석가",
     system_message="당신은 데이터 분석 전문가입니다. 데이터가 이상하면 데이터정제가에게 확인하세요.",
-    llm_config={"model": "gpt-4", "api_key": "your-key"}
+    llm_config={"model": "gpt-5-mini", "api_key": "your-key"}
 )
 
 # GroupChat 생성
@@ -574,7 +574,7 @@ group_chat = GroupChat(
 # Manager 생성
 manager = GroupChatManager(
     groupchat=group_chat,
-    llm_config={"model": "gpt-4", "api_key": "your-key"}
+    llm_config={"model": "gpt-5-mini", "api_key": "your-key"}
 )
 
 # 대화 시작
@@ -669,7 +669,7 @@ data_engineer = ConversableAgent(
     system_message="""당신은 데이터 엔지니어입니다.
 데이터 수집, 저장, 파이프라인 구축을 담당합니다.
 데이터 품질 문제가 있으면 설명하세요.""",
-    llm_config={"model": "gpt-4", "api_key": "your-key"},
+    llm_config={"model": "gpt-5-mini", "api_key": "your-key"},
     max_consecutive_auto_reply=5
 )
 
@@ -679,7 +679,7 @@ data_scientist = ConversableAgent(
     system_message="""당신은 데이터 과학자입니다.
 통계 분석, 머신러닝, 인사이트 도출을 담당합니다.
 데이터가 이상하면 엔지니어에게 확인하세요.""",
-    llm_config={"model": "gpt-4", "api_key": "your-key"},
+    llm_config={"model": "gpt-5-mini", "api_key": "your-key"},
     max_consecutive_auto_reply=5
 )
 
@@ -689,7 +689,7 @@ business_analyst = ConversableAgent(
     system_message="""당신은 비즈니스 분석가입니다.
 비즈니스 관점에서 데이터를 해석하고 의사결정을 지원합니다.
 기술적 세부사항은 과학자에게 물어보세요.""",
-    llm_config={"model": "gpt-4", "api_key": "your-key"},
+    llm_config={"model": "gpt-5-mini", "api_key": "your-key"},
     max_consecutive_auto_reply=5
 )
 
@@ -703,7 +703,7 @@ group_chat = GroupChat(
 
 manager = GroupChatManager(
     groupchat=group_chat,
-    llm_config={"model": "gpt-4", "api_key": "your-key"}
+    llm_config={"model": "gpt-5-mini", "api_key": "your-key"}
 )
 
 # 협업 시작
