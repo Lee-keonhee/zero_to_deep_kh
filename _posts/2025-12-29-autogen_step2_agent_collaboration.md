@@ -867,19 +867,3 @@ Step 2를 완료했습니다! 이제 다음을 할 수 있습니다:
 ✅ Sequential Workflow 설계
 ✅ GroupChat으로 복잡한 협업 구현
 
-**다음 학습 옵션**:
-
-**Step 3A - 실전 프로젝트**
-- 웹 스크래핑 + 분석 자동화
-- 보고서 생성 파이프라인
-- 멀티모달 데이터 처리
-
-**Step 3B - 고급 기능**
-- Function Calling
-- RAG (Retrieval-Augmented Generation)
-- Tool 통합
-
-**Step 3C - 프로덕션 배포**
-- 에러 처리
-- 로깅 및 모니터링
-- 비용 최적화
