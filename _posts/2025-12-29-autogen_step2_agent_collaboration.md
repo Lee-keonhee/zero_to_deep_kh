@@ -35,14 +35,14 @@ from autogen import ConversableAgent
 # Agent A: 최대 10번 자동 응답
 agent_a = ConversableAgent(
     name="AgentA",
-    llm_config={"model": "gpt-4", "api_key": "your-key"},
+    llm_config={"model": "gpt-5-mini", "api_key": "your-key"},
     max_consecutive_auto_reply=10
 )
 
 # Agent B: 최대 5번 자동 응답
 agent_b = ConversableAgent(
     name="AgentB",
-    llm_config={"model": "gpt-4", "api_key": "your-key"},
+    llm_config={"model": "gpt-5-mini", "api_key": "your-key"},
     max_consecutive_auto_reply=5
 )
 
@@ -147,7 +147,7 @@ from autogen import ConversableAgent
 chatbot = ConversableAgent(
     name="챗봇",
     system_message="당신은 친절한 대화 상대입니다.",
-    llm_config={"model": "gpt-4", "api_key": "your-key"},
+    llm_config={"model": "gpt-5-mini", "api_key": "your-key"},
     max_consecutive_auto_reply=3
 )
 
@@ -186,7 +186,7 @@ coder = ConversableAgent(
     name="코더",
     system_message="""당신은 파이썬 프로그래머입니다. 깔끔하고 실행 가능한 코드를 작성하세요.
 실행 결과를 받은 후 결과가 올바르면 'TERMINATE'로 응답하세요.""",
-    llm_config={"model": "gpt-4", "api_key": "your-key"},
+    llm_config={"model": "gpt-5-mini", "api_key": "your-key"},
     max_consecutive_auto_reply=7
 )
 
@@ -281,7 +281,7 @@ analyst = ConversableAgent(
 1. 데이터를 로드하고 분석하는 코드를 작성하세요
 2. 시각화가 필요하면 matplotlib를 사용하세요
 3. 분석이 완료되고 결과를 확인하면 'TERMINATE'로 응답하세요""",
-    llm_config={"model": "gpt-4", "api_key": "your-key"},
+    llm_config={"model": "gpt-5-mini", "api_key": "your-key"},
     max_consecutive_auto_reply=10
 )
 
@@ -351,7 +351,7 @@ from autogen import ConversableAgent
 collector_coder = ConversableAgent(
     name="수집_코더",
     system_message="당신은 데이터 수집 전문가입니다. 데이터를 수집하고 저장하는 코드를 작성하세요.",
-    llm_config={"model": "gpt-4", "api_key": "your-key"},
+    llm_config={"model": "gpt-5-mini", "api_key": "your-key"},
     max_consecutive_auto_reply=7
 )
 
