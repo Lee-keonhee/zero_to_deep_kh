@@ -8,9 +8,8 @@ category: Agent system
 keywords: Agent
 permalink: /blog/agent_system_planing/
 usemathjax: false
-thumbnail: /assets/img/posts/autogen-20260422172644.png
-imageNameKey: autogen
+thumbnail: /assets/img/posts/agent_system_tree.png
+imageNameKey: Agent System
 ---
 ![](assets/img/posts/agent_tree_planing.png)
-![](assets/img/posts/autogen-20260422173248.png)
 # Agent 시스템
