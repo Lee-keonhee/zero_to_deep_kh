@@ -1,17 +1,17 @@
 ---
 layout: post
-title: Agent 시스템 개요
+title: Agent 시스템 (Perception)
 summary: agent 시스템의 주요 요소
 author: keonhee
-date: 2025-03-30 12:00:00 +0900
+date: 2025-04-01 12:00:00 +0900
 category: Agent system
 keywords: Agent
-permalink: /blog/agent_system/
+permalink: /blog/agent_system_perception/
 usemathjax: false
 thumbnail: /assets/img/posts/agent_system_tree.png
 imageNameKey: Agent System
 ---
-![](assets/img/posts/agent_system_tree.png)
+![](assets/img/posts/agent_system_perception.png)
 # Agent 시스템
 
 ### 1. Agent는 왜 필요할까?
