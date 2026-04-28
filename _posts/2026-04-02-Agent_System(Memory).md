@@ -48,7 +48,7 @@ Context Window는 LLM이 한 번에 처리할 수 있는 **최대 입력 길이*
     - **Sliding Window** : 가장 최근 N개의 토큰만 유지하며 오래된 정보를 순차적으로 제거하는 방식임. 구현이 단순하나 초반 맥락이 손실될 수 있음.
     - **Compression** : 오래된 대화나 맥락을 요약하여 토큰 수를 줄이면서도 핵심 정보를 보존하는 방식임.
 
-[예시 코드 보러 가기]({% post_url 2026-04-02-Agent_System(Memory)_code})
+[예시 코드 보러 가기](2026-04-02-Agent_System(Memory)_code)
 #### 2-2. Working Memory
 
 Working Memory는 Agent가 현재 작업을 수행하는 동안 **중간 결과와 상태를 임시로 저장**하는 메모리임. 단순히 대화 맥락을 유지하는 Context Window와 달리, 추론 과정에서 생성되는 중간 산출물을 다룸.
@@ -56,6 +56,14 @@ Working Memory는 Agent가 현재 작업을 수행하는 동안 **중간 결과�
 - **Temporary Storage** : 작업 수행 중 생성되는 중간 결과를 임시로 저장하는 공간임.
     - **Variable Binding** : 추론 과정에서 생성된 중간 값을 변수에 바인딩하여 이후 단계에서 재사용할 수 있게 함.
     - **State Tracking** : 작업의 현재 진행 상태를 추적하여, 다음 단계에서 어디서부터 이어갈지 판단할 수 있게 함.
+    
+	실제 구현 방식은 목적에 따라 세 가지로 나뉨.
+
+|방식|설명|적합한 상황|
+|---|---|---|
+|**Scratchpad**|LLM이 텍스트로 중간 과정을 직접 써내려가는 방식. Claude의 thinking 태그, Chain-of-Thought가 대표적|추론 흐름이 동적으로 바뀌는 작업|
+|**State Schema**|미리 구조를 정의하고 노드 간에 상태를 넘기는 방식. LangGraph가 대표적|작업 구조가 미리 정해진 멀티 스텝 작업|
+|**External Store**|Redis / DB 같은 외부 저장소에 중간 상태를 저장하는 방식|세션이 끊겨도 작업을 이어가야 하는 장기 작업|
 - **Attention Mechanism** : Working Memory 내에서 현재 처리 중인 정보가 저장된 정보 중 **어느 부분에 집중할지** 결정하는 메커니즘임.
     - **Self-attention** : 현재 입력 내의 토큰들이 서로 간의 연관성을 계산하여 중요한 부분에 집중함.
     - **Cross-attention** : 현재 처리 중인 정보가 Working Memory에 저장된 다른 정보와의 연관성을 계산하여 필요한 정보를 선택적으로 참조함.
