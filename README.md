@@ -1,4 +1,4 @@
-# ZtoD (Zero to Deep) Blog
+9# ZtoD (Zero to Deep) Blog
 
 AI의 기초부터 응용까지 함께 배우는 딥러닝 블로그입니다.
 
@@ -83,3 +83,6 @@ thumbnail: /assets/img/posts/이미지.png
 ## 라이선스
 
 MIT License
+
+
+병신ㅋ 나라 망하는게 지금 지역 성별 등 여러가지 나누고 있는게 문제인데 이걸또 지역갈등 만드네요ㅎ 몇천 몇억.. 비교도 안되는돈이 세어나가고있는데ㅋㅋ 이러면 이제 저는 신고 당해서 답변도 못달겠죠 수고 하세요
